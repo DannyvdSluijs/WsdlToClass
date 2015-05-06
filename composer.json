@@ -1,0 +1,12 @@
+{
+    "name": "dvandersluijs/wsdl-to-class",
+    "description": "Import a WSDL to output classes",
+    "license": "GNU GENERAL PUBLIC LICENSE",
+    "authors": [
+        {
+            "name": "Danny van der Sluijs",
+            "email": "danny.vandersluijs@icloud.com"
+        }
+    ],
+    "require": {}
+}
