@@ -8,5 +8,10 @@
             "email": "danny.vandersluijs@icloud.com"
         }
     ],
-    "require": {}
+    "require": {
+        "cilex/cilex": "dev-master"
+    },
+    "autoload": {
+        "psr-0": { "WsdlToClass": "src/" }
+    }
 }
