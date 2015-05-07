@@ -11,6 +11,10 @@
     "require": {
         "cilex/cilex": "dev-master"
     },
+    "require-dev": {
+        "phpunit/phpunit": "~4.5",
+        "phpunit/phpunit-mock-objects": "2.3.0"
+    },
     "autoload": {
         "psr-0": { "WsdlToClass": "src/" }
     }
