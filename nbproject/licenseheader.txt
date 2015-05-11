@@ -1,0 +1,13 @@
+<#if licenseFirst??>
+${licenseFirst}
+</#if>
+${licensePrefix}wsdlToClass
+${licensePrefix}
+${licensePrefix}PHP Version 5.3
+${licensePrefix}
+${licensePrefix}@copyright 2015 Danny van der Sluijs <dammy.vandersluijs@icloud.com>
+${licensePrefix}@license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU-GPL
+${licensePrefix}@link      http://dannyvandersluijs.nl
+<#if licenseLast??>
+${licenseLast}
+</#if>

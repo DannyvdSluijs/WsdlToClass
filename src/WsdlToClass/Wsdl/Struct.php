@@ -1,11 +1,19 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * wsdlToClass
+ *
+ * PHP Version 5.3
+ *
+ * @copyright 2015 Danny van der Sluijs <dammy.vandersluijs@icloud.com>
+ * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU-GPL
+ * @link      http://dannyvandersluijs.nl
  */
+
 namespace WsdlToClass\Wsdl;
+
+use WsdlToClass\Generator\IModelGenerator;
+
 /**
  * Description of Struct
  *
@@ -54,5 +62,10 @@ class Struct
     public function hasProperty($name)
     {
         return array_key_exists($name, $this->properties);
+    }
+
+    public function visit(IModelGenerator $generator)
+    {
+        return $generator->generate($this);
     }
 }

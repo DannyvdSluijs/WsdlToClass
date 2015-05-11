@@ -1,6 +1,6 @@
 <?php
 
-/**
+/*
  * wsdlToClass
  *
  * PHP Version 5.3
@@ -10,15 +10,15 @@
  * @link      http://dannyvandersluijs.nl
  */
 
-namespace WsdlToClass\Parser;
+namespace WsdlToClass\Generator;
+
+use WsdlToClass\Wsdl\Wsdl;
 
 /**
  *
  * @author dannyvandersluijs
  */
-interface IParser
+interface IServiceGenerator
 {
-    public function parseType($input);
-
-    public function parsefunction($input);
+    public function generate(Wsdl $wsdl);
 }

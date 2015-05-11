@@ -10,15 +10,14 @@
  * @link      http://dannyvandersluijs.nl
  */
 
-namespace WsdlToClass\Parser;
+namespace WsdlToClass\Wsdl;
 
 /**
+ * Description of Response
  *
  * @author dannyvandersluijs
  */
-interface IParser
+class Response
 {
-    public function parseType($input);
-
-    public function parsefunction($input);
+    //put your code here
 }

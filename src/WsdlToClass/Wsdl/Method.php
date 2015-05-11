@@ -10,15 +10,14 @@
  * @link      http://dannyvandersluijs.nl
  */
 
-namespace WsdlToClass\Parser;
+namespace WsdlToClass\Wsdl;
 
 /**
+ * Description of Mathod
  *
  * @author dannyvandersluijs
  */
-interface IParser
+class Mathod
 {
-    public function parseType($input);
-
-    public function parsefunction($input);
+    //put your code here
 }

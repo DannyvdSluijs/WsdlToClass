@@ -10,15 +10,14 @@
  * @link      http://dannyvandersluijs.nl
  */
 
-namespace WsdlToClass\Parser;
+namespace WsdlToClass\Generator;
 
+use WsdlToClass\Wsdl\Struct;
 /**
  *
  * @author dannyvandersluijs
  */
-interface IParser
+interface IModelGenerator
 {
-    public function parseType($input);
-
-    public function parsefunction($input);
+    public function generate(Struct $struct);
 }

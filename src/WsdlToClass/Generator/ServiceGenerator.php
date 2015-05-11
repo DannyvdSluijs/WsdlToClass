@@ -10,15 +10,24 @@
  * @link      http://dannyvandersluijs.nl
  */
 
-namespace WsdlToClass\Parser;
+namespace WsdlToClass\Generator;
 
 /**
+ * Description of ServiceGenerator
  *
  * @author dannyvandersluijs
  */
-interface IParser
+class ServiceGenerator implements IServiceGenerator
 {
-    public function parseType($input);
+    public function generate(\WsdlToClass\Wsdl\Wsdl $wsdl)
+    {
+        return <<<EOT
+namespace Todo;
 
-    public function parsefunction($input);
+class Service {
+    
+}
+EOT;
+    }
+
 }

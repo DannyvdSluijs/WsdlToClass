@@ -1,4 +1,13 @@
 <?php
+/**
+ * wsdlToClass
+ *
+ * PHP Version 5.3
+ *
+ * @copyright 2015 Danny van der Sluijs <dammy.vandersluijs@icloud.com>
+ * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU-GPL
+ * @link      http://dannyvandersluijs.nl
+ */
 
 namespace WsdlToClass\Commands;
 
@@ -16,8 +25,10 @@ class ImportCommand extends Command {
         $this->setName("wsdltoclass:import")
              ->setDescription("Import a WSDL to output classes")
              ->setDefinition(array(
-                      new InputOption('wsdl', 'w', InputOption::VALUE_REQUIRED, 'The wsdl to import', $start),
-                ))
+                new InputOption('wsdl', 'w', InputOption::VALUE_REQUIRED, 'The wsdl to import', null),
+                new InputOption('output', 'o', InputOption::VALUE_REQUIRED, 'The output directory', getcwd()),
+                new InputOption('namespace', 'ns', InputOption::VALUE_OPTIONAL, 'An optional namespace', getcwd()),
+            ))
              ->setHelp(<<<EOT
 Usage:
 
@@ -28,9 +39,16 @@ EOT
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $parser = new \WsdlToClass\Parser\PhpInternalStructParser();
+        if (!is_readable($input->getOption('output'))) {
+            throw new \Exception(sprintf('Unable to read output directory [%s]', $input->getOption('output')));
+        }
 
-        var_dump($parser instanceof \WsdlToClass\Parser\IParser);
-        return;
+        $wsdlToClass = new \WsdlToClass\WsdlToClass(
+            new \WsdlToClass\Wsdl\Wsdl($input->getOption('wsdl')),
+            $input->getOption('output'),
+            $input->getOption('namespace'),
+            new \WsdlToClass\Parser\PhpSoapTypeParser()
+        );
+        $wsdlToClass->execute();
     }
 }
