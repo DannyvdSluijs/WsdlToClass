@@ -28,8 +28,6 @@ EOT
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        //$client = new \SoapClient('https://senioralarm.telekom.sk/soap/wsdl/');
-
         $parser = new \WsdlToClass\Parser\PhpInternalStructParser();
 
         var_dump($parser instanceof \WsdlToClass\Parser\IParser);
