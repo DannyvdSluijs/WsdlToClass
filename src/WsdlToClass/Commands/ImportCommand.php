@@ -18,6 +18,10 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 
+use WsdlToClass\WsdlToClass;
+use WsdlToClass\Wsdl\Wsdl;
+use WsdlToClass\Parser\RegexParser;
+
 class ImportCommand extends Command {
 
     protected function configure()
@@ -25,7 +29,7 @@ class ImportCommand extends Command {
         $this->setName("wsdltoclass:import")
              ->setDescription("Import a WSDL to output classes")
              ->setDefinition(array(
-                new InputOption('wsdl', 'w', InputOption::VALUE_REQUIRED, 'The wsdl to import', null),
+                new InputArgument('wsdl', InputArgument::REQUIRED, 'The wsdl to import', null),
                 new InputOption('output', 'o', InputOption::VALUE_REQUIRED, 'The output directory', getcwd()),
                 new InputOption('namespace', 'ns', InputOption::VALUE_OPTIONAL, 'An optional namespace', getcwd()),
             ))
@@ -43,11 +47,11 @@ EOT
             throw new \Exception(sprintf('Unable to read output directory [%s]', $input->getOption('output')));
         }
 
-        $wsdlToClass = new \WsdlToClass\WsdlToClass(
-            new \WsdlToClass\Wsdl\Wsdl($input->getOption('wsdl')),
+        $wsdlToClass = new WsdlToClass(
+            new Wsdl($input->getArgument('wsdl')),
             $input->getOption('output'),
             $input->getOption('namespace'),
-            new \WsdlToClass\Parser\PhpSoapTypeParser()
+            new RegexParser()
         );
         $wsdlToClass->execute();
     }

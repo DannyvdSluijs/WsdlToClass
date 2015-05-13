@@ -13,7 +13,6 @@
 namespace WsdlToClass\Wsdl;
 
 use WsdlToClass\Generator\IServiceGenerator;
-use WsdlToClass\Wsdl;
 
 /**
  * Description of Wsdl

@@ -5,7 +5,20 @@ if (PHP_SAPI !== 'cli') {
     echo 'Warning: Composer should be invoked via the CLI version of PHP, not the '.PHP_SAPI.' SAPI'.PHP_EOL;
 }
 
-if (!$loader = include __DIR__ . '/vendor/autoload.php' || !$loader = include __DIR__ . '/../../autoload.php') {
+$autoLoaderFiles = array(
+    __DIR__ . '/vendor/autoload.php',
+    __DIR__ . '/../../autoload.php',
+    __DIR__ . '/../autoload.php'
+);
+
+foreach ($autoLoaderFiles as $autoLoaderFile) {
+    if (is_readable($autoLoaderFile)) {
+        $loader = include $autoLoaderFile;
+        break;
+    }
+}
+
+if (!$loader) {
     die('You must set up the project dependencies.');
 }
 

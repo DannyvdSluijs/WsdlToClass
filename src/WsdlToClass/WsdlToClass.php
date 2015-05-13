@@ -106,7 +106,7 @@ class WsdlToClass
         $client = new \SoapClient((string) $this->wsdl);
 
         foreach ($client->__getTypes() as $rawType) {
-            $struct = $this->parser->parse($rawType);
+            $struct = $this->parser->parseType($rawType);
             $this->wsdl->addModel($struct->getName(), $struct);
         }
 
