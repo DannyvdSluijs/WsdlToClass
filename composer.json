@@ -15,6 +15,9 @@
         "phpunit/phpunit": "~4.5",
         "phpunit/phpunit-mock-objects": "2.3.0"
     },
+    "bin": [
+        "wsdltoclass"
+    ],
     "autoload": {
         "psr-0": { "WsdlToClass": "src/" }
     }
