@@ -17,17 +17,33 @@ namespace WsdlToClass\Generator;
  *
  * @author dannyvandersluijs
  */
-class ServiceGenerator implements IServiceGenerator
+class ServiceGenerator extends AbstractGenerator implements IServiceGenerator
 {
     public function generate(\WsdlToClass\Wsdl\Wsdl $wsdl)
     {
         return <<<EOT
-namespace Todo;
+<?php
 
-class Service {
-    
+namespace {$this->getNamespace()};
+
+class Service\n{\n
+    {$this->generateMethods($wsdl)}
 }
 EOT;
     }
 
+    protected function generateMethods(\WsdlToClass\Wsdl\Wsdl $wsdl)
+    {
+        if (count($wsdl->getMethods()) == 0) {
+            return '';
+        }
+
+        $methods = '';
+
+        foreach ($wsdl->getMethods() as $name => $property) {
+            $methods .= "\t/**\n\t *\n\t**/\n\tpublic function {$name}()\n\t{\n\t\treturn ;\n\t}\n\n";
+        }
+
+        return trim($methods);
+    }
 }

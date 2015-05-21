@@ -1,6 +1,6 @@
 <?php
 
-/**
+/*
  * wsdlToClass
  *
  * PHP Version 5.3
@@ -9,32 +9,25 @@
  * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU-GPL
  * @link      http://dannyvandersluijs.nl
  */
-
-namespace WsdlToClass\Wsdl;
-
-use WsdlToClass\Generator\IModelGenerator;
+namespace WsdlToClass\Generator;
 
 /**
- * Description of Mathod
+ * Description of AbstractGenerator
  *
  * @author dannyvandersluijs
  */
-class Method
+class AbstractGenerator
 {
-    private $name;
+    private $namespace;
 
-    public function getName()
+    public function getNamespace()
     {
-        return $this->name;
+        return $this->namespace;
     }
 
-    public function setName($name)
+    public function setNamespace($namespace)
     {
-        $this->name = $name;
+        $this->namespace = $namespace;
         return $this;
-    }
-
-    public function visit(IModelGenerator $generator)
-    {
     }
 }

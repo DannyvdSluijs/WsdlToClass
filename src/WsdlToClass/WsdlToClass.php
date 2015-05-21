@@ -111,7 +111,8 @@ class WsdlToClass
         }
 
         foreach ($client->__getFunctions() as $rawFunction) {
-            var_dump($rawFunction);
+            $method = $this->parser->parseFunction($rawFunction);
+            $this->wsdl->addMethod($method->getName(), $method);
         }
 
         return $this;
@@ -143,6 +144,13 @@ class WsdlToClass
 
     protected function generateService()
     {
+        $serviceGenerator = new Generator\ServiceGenerator();
+        $serviceGenerator->setNamespace($this->getNamespacePrefix());
+        $filename = $this->output . DIRECTORY_SEPARATOR . 'Service.php';
+
+        $handle = fopen($filename, 'w');
+        fwrite($handle, $this->wsdl->visit($serviceGenerator));
+        fclose($handle);
         return $this;
     }
 

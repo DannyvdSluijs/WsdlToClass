@@ -116,8 +116,8 @@ class Wsdl
         return $this->source;
     }
 
-    public function generate(IServiceGenerator $generator)
+    public function visit(IServiceGenerator $generator)
     {
-        return $generator->genrate($this);
+        return $generator->generate($this);
     }
 }

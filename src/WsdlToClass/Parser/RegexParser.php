@@ -14,7 +14,8 @@ namespace WsdlToClass\Parser;
 
 class RegexParser implements IParser
 {
-    const _FUNCTION = '/^(?P<response>\w*) (?P<name>\w*)}((?P<request>)$/';
+    //const _FUNCTION = '/^(?P<response>\w*) (?P<name>\w*)}\((?P<request>\w*) \$\w*\)/';
+    const _FUNCTION = '/^(?P<response>\w*) (?P<name>\w*)\((?P<type>\w*) \$(?P<parameterName>\w*)\)$/';
 
     const STRUCT = '/^struct (?P<name>\w*) {(?P<properties>(\n\s\w*\s\w*;)*)\n}$/';
     const PROPERTY = '/(?P<type>\w*)\s(?P<name>\w*);/';
@@ -45,11 +46,14 @@ class RegexParser implements IParser
         }
     }
 
-    public function parsefunction($input)
+    public function parseFunction($input)
     {
         $matches = $properties = array();
-        if (\preg_match(self::_STRUCT, trim($input), $matches)) {
-            $method = new Method($name);
+        if (\preg_match(self::_FUNCTION, trim($input), $matches)) {
+            $method = new \WsdlToClass\Wsdl\Method();
+            $method->setName($matches['name']);
+
+            return $method;
         } else {
             throw new \Exception(sprintf('Unable to parse input [%s]', $input));
         }
