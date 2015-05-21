@@ -18,14 +18,14 @@ use WsdlToClass\Wsdl\Struct;
  *
  * @author dannyvandersluijs
  */
-class ModelGenerator implements IModelGenerator
+class ModelGenerator extends AbstractGenerator implements IModelGenerator
 {
     public function generate(Struct $struct)
     {
         return <<<EOT
 <?php
 
-namespace Todo;
+namespace {$this->getNamespace()}\Model;
 
 class {$struct->getName()}
 {
@@ -45,7 +45,7 @@ EOT;
         $propertiesString = '';
 
         foreach ($struct->getProperties() as $name => $property) {
-            $propertiesString .= "\tprivate \${$property->getName()} = null;\n\n";
+            $propertiesString .= "\t/**\n\t * @var {$property->getType()}\n\t */\n\tprivate \${$property->getName()} = null;\n\n";
         }
 
         return trim($propertiesString);
@@ -60,7 +60,7 @@ EOT;
         $gettersSettersString = '';
 
         foreach ($struct->getProperties() as $name => $property) {
-            $gettersSettersString .= "\tpublic function get{$property->getName()}\n\t{\n\t\treturn \$this->{$property->getName()};\n\t}\n\n";
+            $gettersSettersString .= "\tpublic function get{$property->getName()}()\n\t{\n\t\treturn \$this->{$property->getName()};\n\t}\n\n";
         }
 
         return trim($gettersSettersString);

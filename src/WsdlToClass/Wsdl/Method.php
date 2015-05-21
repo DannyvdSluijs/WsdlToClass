@@ -23,6 +23,8 @@ class Method
 {
     private $name;
 
+    private $return;
+
     public function getName()
     {
         return $this->name;
@@ -31,6 +33,17 @@ class Method
     public function setName($name)
     {
         $this->name = $name;
+        return $this;
+    }
+
+    public function getReturn()
+    {
+        return $this->return;
+    }
+
+    public function setReturn($return)
+    {
+        $this->return = $return;
         return $this;
     }
 

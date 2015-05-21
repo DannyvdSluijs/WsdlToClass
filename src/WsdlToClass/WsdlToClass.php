@@ -121,6 +121,7 @@ class WsdlToClass
     protected function generateModels()
     {
         $modelGenerator = new Generator\ModelGenerator();
+        $modelGenerator->setNamespace($this->getNamespacePrefix());
         foreach ($this->wsdl->getModels() as $name => $model) {
             $filename = $this->output . DIRECTORY_SEPARATOR . 'Model' . DIRECTORY_SEPARATOR . ucfirst($name) . '.php';
 

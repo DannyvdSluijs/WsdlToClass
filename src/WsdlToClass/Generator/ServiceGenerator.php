@@ -40,8 +40,18 @@ EOT;
 
         $methods = '';
 
-        foreach ($wsdl->getMethods() as $name => $property) {
-            $methods .= "\t/**\n\t *\n\t**/\n\tpublic function {$name}()\n\t{\n\t\treturn ;\n\t}\n\n";
+        foreach ($wsdl->getMethods() as $name => $method) {
+            $methods .= <<<EOM
+    /**
+     * Calls the soap method {$name}
+     * @return {$method->getReturn()}
+     **/
+    public function {$name}()
+    {
+        return new {$method->getReturn()}();
+    }
+
+EOM;
         }
 
         return trim($methods);
