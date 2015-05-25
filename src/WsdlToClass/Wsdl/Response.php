@@ -12,6 +12,8 @@
 
 namespace WsdlToClass\Wsdl;
 
+use WsdlToClass\Generator\IModelGenerator;
+
 /**
  * Description of Response
  *
@@ -19,5 +21,8 @@ namespace WsdlToClass\Wsdl;
  */
 class Response
 {
-    //put your code here
+    public function visit(IModelGenerator $generator)
+    {
+        return $generator->generate($this);
+    }
 }

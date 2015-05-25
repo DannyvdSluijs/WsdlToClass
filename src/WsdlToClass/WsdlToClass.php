@@ -84,6 +84,7 @@ class WsdlToClass
             ->generateModels()
             ->generateRequests()
             ->generateResponses()
+            ->generateMethods()
             ->generateService()
             ->generateClassMap();
     }
@@ -123,6 +124,11 @@ class WsdlToClass
         $modelGenerator = new Generator\ModelGenerator();
         $modelGenerator->setNamespace($this->getNamespacePrefix());
         foreach ($this->wsdl->getModels() as $name => $model) {
+            /* Request & response are generated in generateResponses */
+            if ($this->wsdl->hasResponse($name) || $this->wsdl->hasRequest($name)) {
+                continue;
+            }
+
             $filename = $this->output . DIRECTORY_SEPARATOR . 'Model' . DIRECTORY_SEPARATOR . ucfirst($name) . '.php';
 
             $handle = fopen($filename, 'w');
@@ -135,11 +141,43 @@ class WsdlToClass
 
     protected function generateRequests()
     {
+        $modelGenerator = new Generator\ModelGenerator();
+        $modelGenerator->setNamespace($this->getNamespacePrefix());
+        foreach ($this->wsdl->getRequests() as $name => $request) {
+            $filename = $this->output . DIRECTORY_SEPARATOR . 'Request' . DIRECTORY_SEPARATOR . ucfirst($name) . '.php';
+            $handle = fopen($filename, 'w');
+            fwrite($handle, $request->visit($modelGenerator));
+            fclose($handle);
+
+        }
         return $this;
     }
 
     protected function generateResponses()
     {
+        $modelGenerator = new Generator\ModelGenerator();
+        $modelGenerator->setNamespace($this->getNamespacePrefix());
+        foreach ($this->wsdl->getResponses() as $name => $response) {
+            $filename = $this->output . DIRECTORY_SEPARATOR . 'Response' . DIRECTORY_SEPARATOR . ucfirst($name) . '.php';
+            $handle = fopen($filename, 'w');
+            fwrite($handle, $response->visit($modelGenerator));
+            fclose($handle);
+
+        }
+        return $this;
+    }
+
+    protected function generateMethods()
+    {
+        $modelGenerator = new Generator\ModelGenerator();
+        $modelGenerator->setNamespace($this->getNamespacePrefix());
+        foreach ($this->wsdl->getMethods() as $name => $method) {
+            $filename = $this->output . DIRECTORY_SEPARATOR . 'Method' . DIRECTORY_SEPARATOR . ucfirst($name) . '.php';
+            $handle = fopen($filename, 'w');
+            fwrite($handle, $method->visit($modelGenerator));
+            fclose($handle);
+
+        }
         return $this;
     }
 

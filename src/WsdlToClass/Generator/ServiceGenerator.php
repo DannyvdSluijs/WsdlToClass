@@ -19,6 +19,11 @@ namespace WsdlToClass\Generator;
  */
 class ServiceGenerator extends AbstractGenerator implements IServiceGenerator
 {
+    /**
+     *
+     * @param \WsdlToClass\Wsdl\Wsdl $wsdl
+     * @return type
+     */
     public function generate(\WsdlToClass\Wsdl\Wsdl $wsdl)
     {
         return <<<EOT
@@ -44,11 +49,14 @@ EOT;
             $methods .= <<<EOM
     /**
      * Calls the soap method {$name}
-     * @return {$method->getReturn()}
+     * @param Request\\{$method->getRequest()} \$request
+     * @return {$method->getResponse()}
      **/
-    public function {$name}()
+    public function {$name}(Request\\{$method->getRequest()} \$request)
     {
-        return new {$method->getReturn()}();
+        \$method = new Method\\{$method->getName()}(\$request);
+
+        return new Response\\{$method->getResponse()}(\$method->apply());
     }
 
 EOM;

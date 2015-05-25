@@ -23,7 +23,9 @@ class Method
 {
     private $name;
 
-    private $return;
+    private $request;
+
+    private $response;
 
     public function getName()
     {
@@ -36,16 +38,28 @@ class Method
         return $this;
     }
 
-    public function getReturn()
+    public function getRequest()
     {
-        return $this->return;
+        return $this->request;
     }
 
-    public function setReturn($return)
+    public function setRequest($request)
     {
-        $this->return = $return;
+        $this->request = $request;
         return $this;
     }
+
+    public function getResponse()
+    {
+        return $this->response;
+    }
+
+    public function setResponse($response)
+    {
+        $this->response = $response;
+        return $this;
+    }
+
 
     public function visit(IModelGenerator $generator)
     {

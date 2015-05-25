@@ -71,6 +71,24 @@ class Wsdl
         return $this;
     }
 
+    private function has($which, $key)
+    {
+        if (!isset($this->$which)) {
+            throw new \Exception(sprintf('Invalid property [%s]', $which));
+        }
+
+        return array_key_exists($key, $this->{$which});
+    }
+
+    private function get($which, $key)
+    {
+        if (!isset($this->$which)) {
+            throw new \Exception(sprintf('Invalid property [%s]', $which));
+        }
+
+        return array_key_exists($key, $this->{$which}) ? $this->{$which}[$key] : null;
+    }
+
     public function addModel($key, $value)
     {
         return $this->add('models', $key, $value);
@@ -81,9 +99,22 @@ class Wsdl
         return $this->models;
     }
 
-    public function addMethod($key, $value)
+    public function getModel($key)
     {
-        return $this->add('methods', $key, $value);
+        return $this->get('models', $key);
+    }
+
+    public function addMethod($key, Method $method)
+    {
+        if (!$this->hasResponse($method->getResponse())) {
+            $this->addResponse($method->getResponse(), $this->getModel($method->getName()));
+        }
+
+        if (!$this->hasRequest($method->getRequest())) {
+            $this->addRequest($method->getRequest(), $this->getModel($method->getRequest()));
+        }
+
+        return $this->add('methods', $key, $method);
     }
 
     public function getMethods()
@@ -101,14 +132,24 @@ class Wsdl
         return $this->requests;
     }
 
-    public function addResponse($key, $value)
+    public function hasRequest($key)
     {
-        $this->add('responses', $key, $value);
+        return $this->has('requests', $key);
+    }
+
+    public function addResponse($key, $response)
+    {
+        $this->add('responses', $key, $response);
     }
 
     public function getResponses()
     {
         return $this->responses;
+    }
+
+    public function hasResponse($key)
+    {
+        return $this->has('responses', $key);
     }
 
     public function __toString()
