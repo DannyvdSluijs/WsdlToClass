@@ -25,7 +25,7 @@ class ModelGenerator extends AbstractGenerator implements IModelGenerator
         return <<<EOT
 <?php
 
-namespace {$this->getNamespace()}\Model;
+namespace {$this->getNamespace()};
 
 class {$struct->getName()}
 {

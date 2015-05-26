@@ -32,7 +32,7 @@ class RegexParserTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WsdlToClass\Parser\PhpInternalStructParser::parseType
+     * @covers WsdlToClass\Parser\RegexParser::parseType
      */
     public function testParseType()
     {
@@ -54,7 +54,7 @@ EOT
     }
 
     /**
-     * @covers WsdlToClass\Parser\PhpInternalStructParser::parseFunction
+     * @covers WsdlToClass\Parser\RegexParser::parseFunction
      */
     public function testParseFunction()
     {

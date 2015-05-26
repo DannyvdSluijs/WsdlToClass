@@ -49,14 +49,14 @@ EOT;
             $methods .= <<<EOM
     /**
      * Calls the soap method {$name}
-     * @param Request\\{$method->getRequest()} \$request
      * @return {$method->getResponse()}
      **/
-    public function {$name}(Request\\{$method->getRequest()} \$request)
+    public function {$name}()
     {
+        \$request = new Request\\{$method->getRequest()}();
         \$method = new Method\\{$method->getName()}(\$request);
 
-        return new Response\\{$method->getResponse()}(\$method->apply());
+        return new Response\\{$method->getResponse()}(\$method->execute());
     }
 
 EOM;
