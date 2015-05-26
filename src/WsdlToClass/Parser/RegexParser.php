@@ -47,7 +47,7 @@ class RegexParser implements IParser
 
     public function parseFunction($input)
     {
-        $matches = $properties = array();
+        $matches = array();
         if (\preg_match(self::_FUNCTION, trim($input), $matches)) {
             $method = new \WsdlToClass\Wsdl\Method();
             $method
