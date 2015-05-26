@@ -36,6 +36,10 @@ class WsdlToClass
      */
     private $parser;
 
+    /**
+     * @param Wsdl\Wsdl $wsdl
+     * @param Parser\RegexParser $parser
+     */
     public function __construct($wsdl, $output, $namespacePrefix, $parser)
     {
         $this->wsdl = $wsdl;
