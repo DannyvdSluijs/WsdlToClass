@@ -32,6 +32,9 @@ class Method
         return $this->name;
     }
 
+    /**
+     * @param string $name
+     */
     public function setName($name)
     {
         $this->name = $name;
@@ -43,6 +46,9 @@ class Method
         return $this->request;
     }
 
+    /**
+     * @param string $request
+     */
     public function setRequest($request)
     {
         $this->request = $request;
@@ -54,6 +60,9 @@ class Method
         return $this->response;
     }
 
+    /**
+     * @param string $response
+     */
     public function setResponse($response)
     {
         $this->response = $response;
