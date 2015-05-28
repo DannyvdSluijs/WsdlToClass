@@ -159,6 +159,6 @@ class Wsdl
 
     public function visit(IServiceGenerator $generator)
     {
-        return $generator->generate($this);
+        return $generator->generateService($this);
     }
 }

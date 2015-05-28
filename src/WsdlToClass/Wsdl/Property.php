@@ -22,10 +22,10 @@ class Property
 
     private $type;
 
-    public function __construct($name, $type)
+    public function __construct($name = null, $type = null)
     {
-        $this->name = (string) $name;
-        $this->type = (string) $type;
+        $this->name = !is_null($name) ? (string) $name : null;
+        $this->type = !is_null($type) ? (string) $type : null;
     }
 
     public function getName()

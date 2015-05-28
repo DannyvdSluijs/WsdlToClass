@@ -20,7 +20,7 @@ use WsdlToClass\Wsdl\Struct;
  */
 class ModelGenerator extends AbstractGenerator implements IModelGenerator
 {
-    public function generate(Struct $struct)
+    public function generateModel(Struct $struct)
     {
         return <<<EOT
 <?php

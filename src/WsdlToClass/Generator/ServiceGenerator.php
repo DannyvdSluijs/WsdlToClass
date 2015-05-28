@@ -24,7 +24,7 @@ class ServiceGenerator extends AbstractGenerator implements IServiceGenerator
      * @param \WsdlToClass\Wsdl\Wsdl $wsdl
      * @return type
      */
-    public function generate(\WsdlToClass\Wsdl\Wsdl $wsdl)
+    public function generateService(\WsdlToClass\Wsdl\Wsdl $wsdl)
     {
         return <<<EOT
 <?php

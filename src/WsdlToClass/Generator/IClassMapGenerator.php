@@ -18,7 +18,7 @@ use WsdlToClass\Wsdl\Wsdl;
  *
  * @author dannyvandersluijs
  */
-interface IServiceGenerator
+interface IClassMapGenerator
 {
-    public function generateService(Wsdl $wsdl);
+    public function generateClassMap(Wsdl $wsdl);
 }

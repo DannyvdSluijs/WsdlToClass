@@ -21,18 +21,35 @@ use WsdlToClass\Generator\IModelGenerator;
  */
 class Struct
 {
+    /**
+     *
+     * @var string
+     */
     private $name;
 
-    private $properties;
+    /**
+     *
+     * @var Property[]
+     */
+    private $properties = array();
 
+    /**
+     *
+     * @return string
+     */
     public function getName()
     {
         return $this->name;
     }
 
+    /**
+     *
+     * @param string $name
+     * @return \WsdlToClass\Wsdl\Struct
+     */
     public function setName($name)
     {
-        $this->name = $name;
+        $this->name = (string) $name;
         return $this;
     }
 
@@ -41,7 +58,7 @@ class Struct
         return $this->properties;
     }
 
-    public function setProperties($properties)
+    public function setProperties(array $properties)
     {
         $this->properties = $properties;
         return $this;
@@ -50,6 +67,7 @@ class Struct
     public function addProperty(Property $property)
     {
         $this->properties[$property->getName()] = $property;
+        return $this;
     }
 
     public function getProperty($name)
@@ -66,6 +84,6 @@ class Struct
 
     public function visit(IModelGenerator $generator)
     {
-        return $generator->generate($this);
+        return $generator->generateModel($this);
     }
 }
