@@ -26,7 +26,8 @@ class ImportCommand extends Command {
 
     protected function configure()
     {
-        $this->setName("wsdltoclass:import")
+        $this
+            ->setName("wsdltoclass:import")
              ->setDescription("Import a WSDL to output classes")
              ->setDefinition(array(
                 new InputArgument('wsdl', InputArgument::REQUIRED, 'The wsdl to import', null),

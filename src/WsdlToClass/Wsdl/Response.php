@@ -23,6 +23,6 @@ class Response
 {
     public function visit(IModelGenerator $generator)
     {
-        return $generator->generate($this);
+        return $generator->generateModel($this);
     }
 }
