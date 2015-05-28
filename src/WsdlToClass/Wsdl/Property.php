@@ -18,32 +18,63 @@ namespace WsdlToClass\Wsdl;
  */
 class Property
 {
+    /**
+     *
+     * @var string
+     */
     private $name;
 
+    /**
+     *
+     * @var string
+     */
     private $type;
 
+    /**
+     *
+     * @param string $name
+     * @param string $type
+     */
     public function __construct($name = null, $type = null)
     {
         $this->name = !is_null($name) ? (string) $name : null;
         $this->type = !is_null($type) ? (string) $type : null;
     }
 
+    /**
+     *
+     * @return string
+     */
     public function getName()
     {
         return $this->name;
     }
 
+    /**
+     *
+     * @param string $name
+     * @return \WsdlToClass\Wsdl\Property
+     */
     public function setName($name)
     {
         $this->name = (string) $name;
         return $this;
     }
 
+    /**
+     *
+     * @return string
+     */
     public function getType()
     {
         return $this->type;
     }
 
+    /**
+     *
+     * @param string $type
+     * @return \WsdlToClass\Wsdl\Property
+     */
     public function setType($type)
     {
         $this->type = (string) $type;

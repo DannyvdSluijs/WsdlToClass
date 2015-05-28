@@ -22,7 +22,7 @@ use \WsdlToClass\Wsdl\Wsdl;
 class ClassMapGenerator extends AbstractGenerator implements IClassMapGenerator
 {
     /**
-     *
+     * Generate a class map
      * @param \WsdlToClass\Wsdl\Wsdl $wsdl
      * @return type
      */

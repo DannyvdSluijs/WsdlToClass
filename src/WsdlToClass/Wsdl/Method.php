@@ -21,12 +21,28 @@ use WsdlToClass\Generator\IModelGenerator;
  */
 class Method
 {
+    /**
+     *
+     * @var string
+     */
     private $name;
 
+    /**
+     *
+     * @var Request
+     */
     private $request;
 
+    /**
+     *
+     * @var Response
+     */
     private $response;
 
+    /**
+     *
+     * @return string
+     */
     public function getName()
     {
         return $this->name;
@@ -37,39 +53,50 @@ class Method
      */
     public function setName($name)
     {
-        $this->name = $name;
+        $this->name = (string) $name;
         return $this;
     }
 
+    /**
+     *
+     * @return Request
+     */
     public function getRequest()
     {
         return $this->request;
     }
 
     /**
-     * @param string $request
+     * @param Request $request
      */
-    public function setRequest($request)
+    public function setRequest(Request $request)
     {
         $this->request = $request;
         return $this;
     }
 
+    /**
+     *
+     * @return Response
+     */
     public function getResponse()
     {
         return $this->response;
     }
 
     /**
-     * @param string $response
+     * @param Response $response
      */
-    public function setResponse($response)
+    public function setResponse(Response $response)
     {
         $this->response = $response;
         return $this;
     }
 
-
+    /**
+     *
+     * @param IModelGenerator $generator
+     */
     public function visit(IModelGenerator $generator)
     {
     }

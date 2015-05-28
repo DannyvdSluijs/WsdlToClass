@@ -53,23 +53,42 @@ class Struct
         return $this;
     }
 
+    /**
+     *
+     * @return type
+     */
     public function getProperties()
     {
         return $this->properties;
     }
 
+    /**
+     *
+     * @param array $properties
+     * @return \WsdlToClass\Wsdl\Struct
+     */
     public function setProperties(array $properties)
     {
         $this->properties = $properties;
         return $this;
     }
 
+    /**
+     *
+     * @param \WsdlToClass\Wsdl\Property $property
+     * @return \WsdlToClass\Wsdl\Struct
+     */
     public function addProperty(Property $property)
     {
         $this->properties[$property->getName()] = $property;
         return $this;
     }
 
+    /**
+     *
+     * @param type $name
+     * @return type
+     */
     public function getProperty($name)
     {
         if ($this->hasProperty($name)) {
@@ -77,11 +96,21 @@ class Struct
         }
     }
 
+    /**
+     *
+     * @param type $name
+     * @return type
+     */
     public function hasProperty($name)
     {
         return array_key_exists($name, $this->properties);
     }
 
+    /**
+     *
+     * @param IModelGenerator $generator
+     * @return type
+     */
     public function visit(IModelGenerator $generator)
     {
         return $generator->generateModel($this);

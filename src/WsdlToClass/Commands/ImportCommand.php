@@ -22,8 +22,11 @@ use WsdlToClass\WsdlToClass;
 use WsdlToClass\Wsdl\Wsdl;
 use WsdlToClass\Parser\RegexParser;
 
-class ImportCommand extends Command {
-
+class ImportCommand extends Command
+{
+    /**
+     * Configure the import command
+     */
     protected function configure()
     {
         $this
@@ -42,6 +45,12 @@ EOT
 );
     }
 
+    /**
+     * Execute the import command
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @throws \Exception
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         if (!is_readable($input->getOption('output'))) {

@@ -20,5 +20,9 @@ use WsdlToClass\Wsdl\Wsdl;
  */
 interface IClassMapGenerator
 {
+    /**
+     * Generate a class map from an WSDL object
+     * @param Wsdl $wsdl
+     */
     public function generateClassMap(Wsdl $wsdl);
 }

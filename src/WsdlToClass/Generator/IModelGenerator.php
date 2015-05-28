@@ -19,5 +19,9 @@ use WsdlToClass\Wsdl\Struct;
  */
 interface IModelGenerator
 {
+    /**
+     * Generate a model from a struct
+     * @param Struct $struct
+     */
     public function generateModel(Struct $struct);
 }

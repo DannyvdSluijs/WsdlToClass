@@ -21,6 +21,11 @@ use WsdlToClass\Generator\IModelGenerator;
  */
 class Response
 {
+    /**
+     *
+     * @param IModelGenerator $generator
+     * @return string
+     */
     public function visit(IModelGenerator $generator)
     {
         return $generator->generateModel($this);

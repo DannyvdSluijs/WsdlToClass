@@ -21,7 +21,7 @@ class RegexParser implements IParser
 
     /**
      *
-     * @param type $input
+     * @param string $input
      */
     public function parseType($input)
     {
@@ -45,6 +45,12 @@ class RegexParser implements IParser
         }
     }
 
+    /**
+     *
+     * @param string $input
+     * @return \WsdlToClass\Wsdl\Method
+     * @throws \Exception
+     */
     public function parseFunction($input)
     {
         $matches = array();

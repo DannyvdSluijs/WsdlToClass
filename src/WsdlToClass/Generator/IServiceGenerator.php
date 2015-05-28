@@ -20,5 +20,9 @@ use WsdlToClass\Wsdl\Wsdl;
  */
 interface IServiceGenerator
 {
+    /**
+     * Generate a service class from a WSDL object
+     * @param Wsdl $wsdl
+     */
     public function generateService(Wsdl $wsdl);
 }

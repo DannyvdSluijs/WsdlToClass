@@ -20,6 +20,11 @@ use WsdlToClass\Wsdl\Struct;
  */
 class ModelGenerator extends AbstractGenerator implements IModelGenerator
 {
+    /**
+     * Generate the struct in a model representation
+     * @param Struct $struct
+     * @return tstring
+     */
     public function generateModel(Struct $struct)
     {
         return <<<EOT
@@ -36,6 +41,11 @@ class {$struct->getName()}
 EOT;
     }
 
+    /**
+     * Generate the properties for a strcut
+     * @param Struct $struct
+     * @return string
+     */
     protected function generateProperties(Struct $struct)
     {
         if (count($struct->getProperties()) == 0) {
@@ -51,6 +61,11 @@ EOT;
         return trim($propertiesString);
     }
 
+    /**
+     * Generate the getters and setters for a struct
+     * @param Struct $struct
+     * @return string
+     */
     protected function generateGettersSetters(Struct $struct)
     {
         if (count($struct->getProperties()) == 0) {

@@ -12,6 +12,7 @@
 
 namespace WsdlToClass\Generator;
 
+use WsdlToClass\Wsdl\Wsdl;
 /**
  * Description of ServiceGenerator
  *
@@ -20,11 +21,11 @@ namespace WsdlToClass\Generator;
 class ServiceGenerator extends AbstractGenerator implements IServiceGenerator
 {
     /**
-     *
+     * Generate the service class for an WSDL
      * @param \WsdlToClass\Wsdl\Wsdl $wsdl
      * @return type
      */
-    public function generateService(\WsdlToClass\Wsdl\Wsdl $wsdl)
+    public function generateService(Wsdl $wsdl)
     {
         return <<<EOT
 <?php
@@ -37,7 +38,12 @@ class Service\n{\n
 EOT;
     }
 
-    protected function generateMethods(\WsdlToClass\Wsdl\Wsdl $wsdl)
+    /**
+     * Generate the methods of a WSDL.
+     * @param Wsdl $wsdl
+     * @return string
+     */
+    protected function generateMethods(Wsdl $wsdl)
     {
         if (count($wsdl->getMethods()) == 0) {
             return '';

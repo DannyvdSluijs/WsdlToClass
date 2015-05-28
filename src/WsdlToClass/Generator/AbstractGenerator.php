@@ -18,16 +18,29 @@ namespace WsdlToClass\Generator;
  */
 class AbstractGenerator
 {
+    /**
+     * The namespace to be used when calling a generate command.
+     * @var string
+     */
     private $namespace;
 
+    /**
+     * Get the namespace
+     * @return string
+     */
     public function getNamespace()
     {
         return $this->namespace;
     }
 
+    /**
+     * Set the namespace
+     * @param string $namespace
+     * @return \WsdlToClass\Generator\AbstractGenerator
+     */
     public function setNamespace($namespace)
     {
-        $this->namespace = $namespace;
+        $this->namespace = (string) $namespace;
         return $this;
     }
 }

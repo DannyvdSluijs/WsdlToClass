@@ -18,7 +18,17 @@ namespace WsdlToClass\Parser;
  */
 interface IParser
 {
+    /**
+     * Parse a SOAP type into a Property
+     * @param string $input
+     * @return \WsdlToClass\Wsdl\Property
+     */
     public function parseType($input);
 
+    /**
+     * Parse a SOAP function into a Method
+     * @param string $input
+     * @return \WsdlToClass\Wsdl\Method
+     */
     public function parsefunction($input);
 }
