@@ -29,13 +29,13 @@ class Method
 
     /**
      *
-     * @var Request
+     * @var string
      */
     private $request;
 
     /**
      *
-     * @var Response
+     * @var string
      */
     private $response;
 
@@ -59,7 +59,7 @@ class Method
 
     /**
      *
-     * @return Request
+     * @return string
      */
     public function getRequest()
     {
@@ -67,17 +67,17 @@ class Method
     }
 
     /**
-     * @param Request $request
+     * @param string $request
      */
-    public function setRequest(Request $request)
+    public function setRequest($request)
     {
-        $this->request = $request;
+        $this->request = (string) $request;
         return $this;
     }
 
     /**
      *
-     * @return Response
+     * @return string
      */
     public function getResponse()
     {
@@ -85,11 +85,11 @@ class Method
     }
 
     /**
-     * @param Response $response
+     * @param string $response
      */
-    public function setResponse(Response $response)
+    public function setResponse($response)
     {
-        $this->response = $response;
+        $this->response = (string) $response;
         return $this;
     }
 
