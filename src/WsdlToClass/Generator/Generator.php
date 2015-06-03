@@ -16,7 +16,7 @@ namespace WsdlToClass\Generator;
  *
  * @author dannyvandersluijs
  */
-class Generator extends AbstractGenerator implements IClassMapGenerator, IModelGenerator,  IServiceGenerator
+class Generator extends AbstractGenerator implements IClassMapGenerator, IModelGenerator, IServiceGenerator
 {
     public function generateClassMap(\WsdlToClass\Wsdl\Wsdl $wsdl)
     {
