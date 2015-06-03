@@ -63,7 +63,7 @@ class Wsdl
      *
      * @param  string                 $which
      * @param  string                 $key
-     * @param  \Object                $value
+     * @param  Model|Method|Request|Response                $value
      * @return \WsdlToClass\Wsdl\Wsdl
      * @throws \Exception
      */
@@ -113,12 +113,12 @@ class Wsdl
     /**
      *
      * @param string $key
-     * @param Property $value
+     * @param Model $model
      * @return Wsdl
      */
-    public function addModel($key, $value)
+    public function addModel($key, Model $model)
     {
-        return $this->add('models', $key, $value);
+        return $this->add('models', $key, $model);
     }
 
     /**
@@ -171,12 +171,12 @@ class Wsdl
     /**
      *
      * @param string $key
-     * @param Request $value
+     * @param Request $request
      * @return Wsdl
      */
-    public function addRequest($key, $value)
+    public function addRequest($key, $request)
     {
-        return $this->add('requests', $key, $value);
+        return $this->add('requests', $key, $request);
     }
 
     /**

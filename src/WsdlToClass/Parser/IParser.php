@@ -20,7 +20,7 @@ interface IParser
     /**
      * Parse a SOAP type into a Property
      * @param  string                     $input
-     * @return \WsdlToClass\Wsdl\Property
+     * @return \WsdlToClass\Wsdl\Struct
      */
     public function parseType($input);
 

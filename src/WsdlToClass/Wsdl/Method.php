@@ -11,10 +11,10 @@
  */
 namespace WsdlToClass\Wsdl;
 
-use WsdlToClass\Generator\IModelGenerator;
+use WsdlToClass\Generator\IMethodGenerator;
 
 /**
- * Description of Mathod
+ * A method represents an function available from a WSDL.
  *
  * @author dannyvandersluijs
  */
@@ -101,10 +101,12 @@ class Method
     }
 
     /**
-     * Visit the method with an IModelGenerator
-     * @param IModelGenerator $generator
+     * Visit the method with an IMethodGenerator
+     * @param IMethodGenerator $generator
+     * @return string
      */
-    public function visit(IModelGenerator $generator)
+    public function visit(IMethodGenerator $generator)
     {
+        return $generator->generateMethod($this);
     }
 }
