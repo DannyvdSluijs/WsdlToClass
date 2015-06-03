@@ -102,7 +102,7 @@ class Wsdl
      * @return \Object
      * @throws \Exception
      */
-    private function get($which, \Object $key)
+    private function get($which, $key)
     {
         if (!isset($this->$which)) {
             throw new \Exception(sprintf('Invalid property [%s]', $which));
@@ -150,7 +150,7 @@ class Wsdl
     public function addMethod($key, Method $method)
     {
         if (!$this->hasResponse($method->getResponse())) {
-            $this->addResponse($method->getResponse(), $this->getModel($method->getName()));
+            $this->addResponse($method->getResponse(), $this->getModel($method->getResponse()));
         }
 
         if (!$this->hasRequest($method->getRequest())) {
@@ -175,7 +175,7 @@ class Wsdl
      * @param Request $value
      * @return type
      */
-    public function addRequest($key, Request $value)
+    public function addRequest($key, $value)
     {
         return $this->add('requests', $key, $value);
     }
@@ -204,7 +204,7 @@ class Wsdl
      * @param string $key
      * @param Response $response
      */
-    public function addResponse($key, Response $response)
+    public function addResponse($key, $response)
     {
         $this->add('responses', $key, $response);
     }

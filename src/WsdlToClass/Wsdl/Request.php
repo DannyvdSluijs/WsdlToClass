@@ -17,7 +17,7 @@ namespace WsdlToClass\Wsdl;
  *
  * @author dannyvandersluijs
  */
-class Request
+class Request extends Struct
 {
     //put your code here
 }

@@ -202,12 +202,12 @@ class WsdlToClass
 
     protected function generateClassMap()
     {
-        $generator = new Generator\ClassMapGenerator();
+        $generator = new Generator\Generator();
         $generator->setNamespace($this->getNamespacePrefix());
         $filename = $this->output . DIRECTORY_SEPARATOR . 'ClassMap.php';
 
         $handle = fopen($filename, 'w');
-        fwrite($handle, $this->wsdl->visit($generator));
+        fwrite($handle, $generator->generateClassMap($this->wsdl));
         fclose($handle);
         return $this;
     }

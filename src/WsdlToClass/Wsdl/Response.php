@@ -19,7 +19,7 @@ use WsdlToClass\Generator\IModelGenerator;
  *
  * @author dannyvandersluijs
  */
-class Response
+class Response extends Struct
 {
     /**
      *
