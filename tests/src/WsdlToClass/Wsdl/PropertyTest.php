@@ -19,7 +19,7 @@ class PropertyTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->object = new Property;
+        $this->object = new Property();
     }
 
     /**
@@ -28,7 +28,6 @@ class PropertyTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-
     }
 
     /**
@@ -68,5 +67,4 @@ class PropertyTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($this->object, $this->object->setType('integer'));
         $this->assertAttributeSame('integer', 'type', $this->object);
     }
-
 }

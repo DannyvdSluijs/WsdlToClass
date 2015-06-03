@@ -8,7 +8,6 @@
  * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU-GPL
  * @link      http://dannyvandersluijs.nl
  */
-
 namespace WsdlToClass\Commands;
 
 use Symfony\Component\Console\Command\Command;
@@ -16,8 +15,6 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Formatter\OutputFormatterStyle;
-
 use WsdlToClass\WsdlToClass;
 use WsdlToClass\Wsdl\Wsdl;
 use WsdlToClass\Parser\RegexParser;
@@ -47,8 +44,8 @@ EOT
 
     /**
      * Execute the import command
-     * @param InputInterface $input
-     * @param OutputInterface $output
+     * @param  InputInterface  $input
+     * @param  OutputInterface $output
      * @throws \Exception
      */
     protected function execute(InputInterface $input, OutputInterface $output)

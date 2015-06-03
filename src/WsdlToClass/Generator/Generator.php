@@ -52,12 +52,10 @@ EOT;
 
     public function generateModel(\WsdlToClass\Wsdl\Struct $struct)
     {
-
     }
 
     public function generateService(\WsdlToClass\Wsdl\Wsdl $wsdl)
     {
-
     }
 
 //put your code here

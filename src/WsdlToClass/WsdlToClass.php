@@ -9,10 +9,8 @@
  * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU-GPL
  * @link      http://dannyvandersluijs.nl
  */
-
 namespace WsdlToClass;
 
-use WsdlToClass\Wsdl;
 /**
  * Description of WsdlToClass
  *
@@ -37,7 +35,7 @@ class WsdlToClass
     private $parser;
 
     /**
-     * @param Wsdl\Wsdl $wsdl
+     * @param Wsdl\Wsdl          $wsdl
      * @param Parser\RegexParser $parser
      */
     public function __construct($wsdl, $output, $namespacePrefix, $parser)
@@ -48,7 +46,7 @@ class WsdlToClass
         $this->parser = $parser;
     }
 
-        public function getWsdl()
+    public function getWsdl()
     {
         return $this->wsdl;
     }
@@ -56,6 +54,7 @@ class WsdlToClass
     public function setWsdl(Wsdl\Wsdl $wsdl)
     {
         $this->wsdl = $wsdl;
+
         return $this;
     }
 
@@ -67,6 +66,7 @@ class WsdlToClass
     public function setOutput($output)
     {
         $this->output = $output;
+
         return $this;
     }
 
@@ -78,6 +78,7 @@ class WsdlToClass
     public function setNamespacePrefix($namespacePrefix)
     {
         $this->namespacePrefix = $namespacePrefix;
+
         return $this;
     }
 
@@ -98,8 +99,8 @@ class WsdlToClass
         $subDirectories = array('Method', 'Model', 'Request', 'Response');
 
         foreach ($subDirectories as $subDir) {
-            if (!is_dir($this->getOutput() . DIRECTORY_SEPARATOR . $subDir)) {
-                mkdir($this->getOutput() . DIRECTORY_SEPARATOR . $subDir);
+            if (!is_dir($this->getOutput().DIRECTORY_SEPARATOR.$subDir)) {
+                mkdir($this->getOutput().DIRECTORY_SEPARATOR.$subDir);
             }
         }
 
@@ -126,7 +127,7 @@ class WsdlToClass
     protected function generateModels()
     {
         $generator = new Generator\ModelGenerator();
-        $generator->setNamespace($this->getNamespacePrefix() . '\Model');
+        $generator->setNamespace($this->getNamespacePrefix().'\Model');
 
         foreach ($this->wsdl->getModels() as $name => $model) {
             /* Request & response are generated in generateResponses */
@@ -134,43 +135,43 @@ class WsdlToClass
                 continue;
             }
 
-            $filename = $this->output . DIRECTORY_SEPARATOR . 'Model' . DIRECTORY_SEPARATOR . ucfirst($name) . '.php';
+            $filename = $this->output.DIRECTORY_SEPARATOR.'Model'.DIRECTORY_SEPARATOR.ucfirst($name).'.php';
 
             $handle = fopen($filename, 'w');
             fwrite($handle, $model->visit($generator));
             fclose($handle);
-
         }
+
         return $this;
     }
 
     protected function generateRequests()
     {
         $generator = new Generator\ModelGenerator();
-        $generator->setNamespace($this->getNamespacePrefix() . '\Request');
+        $generator->setNamespace($this->getNamespacePrefix().'\Request');
 
         foreach ($this->wsdl->getRequests() as $name => $request) {
-            $filename = $this->output . DIRECTORY_SEPARATOR . 'Request' . DIRECTORY_SEPARATOR . ucfirst($name) . '.php';
+            $filename = $this->output.DIRECTORY_SEPARATOR.'Request'.DIRECTORY_SEPARATOR.ucfirst($name).'.php';
             $handle = fopen($filename, 'w');
             fwrite($handle, $request->visit($generator));
             fclose($handle);
-
         }
+
         return $this;
     }
 
     protected function generateResponses()
     {
         $generator = new Generator\ModelGenerator();
-        $generator->setNamespace($this->getNamespacePrefix() . '\Response');
+        $generator->setNamespace($this->getNamespacePrefix().'\Response');
 
         foreach ($this->wsdl->getResponses() as $name => $response) {
-            $filename = $this->output . DIRECTORY_SEPARATOR . 'Response' . DIRECTORY_SEPARATOR . ucfirst($name) . '.php';
+            $filename = $this->output.DIRECTORY_SEPARATOR.'Response'.DIRECTORY_SEPARATOR.ucfirst($name).'.php';
             $handle = fopen($filename, 'w');
             fwrite($handle, $response->visit($generator));
             fclose($handle);
-
         }
+
         return $this;
     }
 
@@ -179,12 +180,12 @@ class WsdlToClass
         $modelGenerator = new Generator\ModelGenerator();
         $modelGenerator->setNamespace($this->getNamespacePrefix());
         foreach ($this->wsdl->getMethods() as $name => $method) {
-            $filename = $this->output . DIRECTORY_SEPARATOR . 'Method' . DIRECTORY_SEPARATOR . ucfirst($name) . '.php';
+            $filename = $this->output.DIRECTORY_SEPARATOR.'Method'.DIRECTORY_SEPARATOR.ucfirst($name).'.php';
             $handle = fopen($filename, 'w');
             fwrite($handle, $method->visit($modelGenerator));
             fclose($handle);
-
         }
+
         return $this;
     }
 
@@ -192,11 +193,12 @@ class WsdlToClass
     {
         $serviceGenerator = new Generator\ServiceGenerator();
         $serviceGenerator->setNamespace($this->getNamespacePrefix());
-        $filename = $this->output . DIRECTORY_SEPARATOR . 'Service.php';
+        $filename = $this->output.DIRECTORY_SEPARATOR.'Service.php';
 
         $handle = fopen($filename, 'w');
         fwrite($handle, $this->wsdl->visit($serviceGenerator));
         fclose($handle);
+
         return $this;
     }
 
@@ -204,11 +206,12 @@ class WsdlToClass
     {
         $generator = new Generator\Generator();
         $generator->setNamespace($this->getNamespacePrefix());
-        $filename = $this->output . DIRECTORY_SEPARATOR . 'ClassMap.php';
+        $filename = $this->output.DIRECTORY_SEPARATOR.'ClassMap.php';
 
         $handle = fopen($filename, 'w');
         fwrite($handle, $generator->generateClassMap($this->wsdl));
         fclose($handle);
+
         return $this;
     }
 }

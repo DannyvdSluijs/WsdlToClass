@@ -9,7 +9,6 @@
  * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU-GPL
  * @link      http://dannyvandersluijs.nl
  */
-
 namespace WsdlToClass\Wsdl;
 
 use WsdlToClass\Generator\IServiceGenerator;
@@ -62,9 +61,9 @@ class Wsdl
 
     /**
      *
-     * @param string $which
-     * @param string $key
-     * @param \Object $value
+     * @param  string                 $which
+     * @param  string                 $key
+     * @param  \Object                $value
      * @return \WsdlToClass\Wsdl\Wsdl
      * @throws \Exception
      */
@@ -81,8 +80,8 @@ class Wsdl
 
     /**
      *
-     * @param string $which
-     * @param string $key
+     * @param  string     $which
+     * @param  string     $key
      * @return \Object
      * @throws \Exception
      */
@@ -97,8 +96,8 @@ class Wsdl
 
     /**
      *
-     * @param string $which
-     * @param string $key
+     * @param  string     $which
+     * @param  string     $key
      * @return \Object
      * @throws \Exception
      */
@@ -113,8 +112,8 @@ class Wsdl
 
     /**
      *
-     * @param type $key
-     * @param type $value
+     * @param  type $key
+     * @param  type $value
      * @return type
      */
     public function addModel($key, $value)
@@ -133,7 +132,7 @@ class Wsdl
 
     /**
      *
-     * @param string $key
+     * @param  string $key
      * @return Struct
      */
     public function getModel($key)
@@ -143,8 +142,8 @@ class Wsdl
 
     /**
      *
-     * @param string $key
-     * @param \WsdlToClass\Wsdl\Method $method
+     * @param  string                   $key
+     * @param  \WsdlToClass\Wsdl\Method $method
      * @return type
      */
     public function addMethod($key, Method $method)
@@ -171,8 +170,8 @@ class Wsdl
 
     /**
      *
-     * @param string $key
-     * @param Request $value
+     * @param  string  $key
+     * @param  Request $value
      * @return type
      */
     public function addRequest($key, $value)
@@ -191,7 +190,7 @@ class Wsdl
 
     /**
      *
-     * @param string $key
+     * @param  string  $key
      * @return boolean
      */
     public function hasRequest($key)
@@ -201,7 +200,7 @@ class Wsdl
 
     /**
      *
-     * @param string $key
+     * @param string   $key
      * @param Response $response
      */
     public function addResponse($key, $response)
@@ -220,7 +219,7 @@ class Wsdl
 
     /**
      *
-     * @param string $key
+     * @param  string  $key
      * @return boolean
      */
     public function hasResponse($key)
@@ -239,7 +238,7 @@ class Wsdl
 
     /**
      *
-     * @param IServiceGenerator $generator
+     * @param  IServiceGenerator $generator
      * @return string
      */
     public function visit(IServiceGenerator $generator)

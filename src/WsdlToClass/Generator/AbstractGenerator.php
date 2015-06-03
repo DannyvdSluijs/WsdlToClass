@@ -35,12 +35,13 @@ class AbstractGenerator
 
     /**
      * Set the namespace
-     * @param string $namespace
+     * @param  string                                   $namespace
      * @return \WsdlToClass\Generator\AbstractGenerator
      */
     public function setNamespace($namespace)
     {
         $this->namespace = (string) $namespace;
+
         return $this;
     }
 }

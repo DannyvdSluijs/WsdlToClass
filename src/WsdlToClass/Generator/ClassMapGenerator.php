@@ -9,10 +9,9 @@
  * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU-GPL
  * @link      http://dannyvandersluijs.nl
  */
-
 namespace WsdlToClass\Generator;
 
-use \WsdlToClass\Wsdl\Wsdl;
+use WsdlToClass\Wsdl\Wsdl;
 
 /**
  * Description of ServiceGenerator
@@ -23,7 +22,7 @@ class ClassMapGenerator extends AbstractGenerator implements IClassMapGenerator
 {
     /**
      * Generate a class map
-     * @param \WsdlToClass\Wsdl\Wsdl $wsdl
+     * @param  \WsdlToClass\Wsdl\Wsdl $wsdl
      * @return type
      */
     public function generateClassMap(Wsdl $wsdl)
@@ -42,5 +41,4 @@ class ClassMap\n{\n
 }
 EOT;
     }
-
 }

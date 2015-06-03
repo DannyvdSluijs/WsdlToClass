@@ -9,7 +9,6 @@
  * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU-GPL
  * @link      http://dannyvandersluijs.nl
  */
-
 namespace WsdlToClass\Generator;
 
 use WsdlToClass\Wsdl\Wsdl;
@@ -22,7 +21,7 @@ class ServiceGenerator extends AbstractGenerator implements IServiceGenerator
 {
     /**
      * Generate the service class for an WSDL
-     * @param \WsdlToClass\Wsdl\Wsdl $wsdl
+     * @param  \WsdlToClass\Wsdl\Wsdl $wsdl
      * @return type
      */
     public function generateService(Wsdl $wsdl)
@@ -40,7 +39,7 @@ EOT;
 
     /**
      * Generate the methods of a WSDL.
-     * @param Wsdl $wsdl
+     * @param  Wsdl   $wsdl
      * @return string
      */
     protected function generateMethods(Wsdl $wsdl)

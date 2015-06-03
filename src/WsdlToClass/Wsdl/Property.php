@@ -9,8 +9,8 @@
  * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU-GPL
  * @link      http://dannyvandersluijs.nl
  */
-
 namespace WsdlToClass\Wsdl;
+
 /**
  * Description of Struct
  *
@@ -52,12 +52,13 @@ class Property
 
     /**
      *
-     * @param string $name
+     * @param  string                     $name
      * @return \WsdlToClass\Wsdl\Property
      */
     public function setName($name)
     {
         $this->name = (string) $name;
+
         return $this;
     }
 
@@ -72,12 +73,13 @@ class Property
 
     /**
      *
-     * @param string $type
+     * @param  string                     $type
      * @return \WsdlToClass\Wsdl\Property
      */
     public function setType($type)
     {
         $this->type = (string) $type;
+
         return $this;
     }
 }

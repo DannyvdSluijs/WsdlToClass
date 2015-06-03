@@ -19,7 +19,7 @@ class RegexParserTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->object = new RegexParser;
+        $this->object = new RegexParser();
     }
 
     /**
@@ -28,7 +28,6 @@ class RegexParserTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-
     }
 
     /**
@@ -64,5 +63,4 @@ EOT
         $this->assertSame('Postcode', $result->getRequest());
         $this->assertSame('Address', $result->getResponse());
     }
-
 }

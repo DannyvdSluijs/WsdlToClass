@@ -9,7 +9,6 @@
  * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU-GPL
  * @link      http://dannyvandersluijs.nl
  */
-
 namespace WsdlToClass\Wsdl;
 
 use WsdlToClass\Generator\IModelGenerator;
@@ -23,7 +22,7 @@ class Response extends Struct
 {
     /**
      *
-     * @param IModelGenerator $generator
+     * @param  IModelGenerator $generator
      * @return string
      */
     public function visit(IModelGenerator $generator)

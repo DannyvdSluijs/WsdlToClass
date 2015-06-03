@@ -19,7 +19,7 @@ class StructTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->object = new Struct;
+        $this->object = new Struct();
     }
 
     /**
@@ -28,7 +28,6 @@ class StructTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-
     }
 
     /**
@@ -118,5 +117,4 @@ class StructTest extends \PHPUnit_Framework_TestCase
                 'This test has not been implemented yet.'
         );
     }
-
 }

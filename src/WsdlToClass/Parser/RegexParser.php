@@ -9,7 +9,6 @@
  * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU-GPL
  * @link      http://dannyvandersluijs.nl
  */
-
 namespace WsdlToClass\Parser;
 
 class RegexParser implements IParser
@@ -39,7 +38,6 @@ class RegexParser implements IParser
             }
 
             return $struct;
-
         } else {
             throw new \Exception(sprintf('Unable to parse input [%s]', $input));
         }
@@ -47,7 +45,7 @@ class RegexParser implements IParser
 
     /**
      *
-     * @param string $input
+     * @param  string                   $input
      * @return \WsdlToClass\Wsdl\Method
      * @throws \Exception
      */
@@ -66,5 +64,4 @@ class RegexParser implements IParser
             throw new \Exception(sprintf('Unable to parse input [%s]', $input));
         }
     }
-
 }

@@ -9,7 +9,6 @@
  * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU-GPL
  * @link      http://dannyvandersluijs.nl
  */
-
 namespace WsdlToClass\Generator;
 
 use WsdlToClass\Wsdl\Struct;
@@ -22,7 +21,7 @@ class ModelGenerator extends AbstractGenerator implements IModelGenerator
 {
     /**
      * Generate the struct in a model representation
-     * @param Struct $struct
+     * @param  Struct  $struct
      * @return tstring
      */
     public function generateModel(Struct $struct)
@@ -43,7 +42,7 @@ EOT;
 
     /**
      * Generate the properties for a strcut
-     * @param Struct $struct
+     * @param  Struct $struct
      * @return string
      */
     protected function generateProperties(Struct $struct)
@@ -63,7 +62,7 @@ EOT;
 
     /**
      * Generate the getters and setters for a struct
-     * @param Struct $struct
+     * @param  Struct $struct
      * @return string
      */
     protected function generateGettersSetters(Struct $struct)

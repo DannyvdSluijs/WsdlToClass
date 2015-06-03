@@ -9,7 +9,6 @@
  * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU-GPL
  * @link      http://dannyvandersluijs.nl
  */
-
 namespace WsdlToClass\Wsdl;
 
 use WsdlToClass\Generator\IModelGenerator;
@@ -44,12 +43,13 @@ class Struct
 
     /**
      *
-     * @param string $name
+     * @param  string                   $name
      * @return \WsdlToClass\Wsdl\Struct
      */
     public function setName($name)
     {
         $this->name = (string) $name;
+
         return $this;
     }
 
@@ -64,29 +64,31 @@ class Struct
 
     /**
      *
-     * @param array $properties
+     * @param  array                    $properties
      * @return \WsdlToClass\Wsdl\Struct
      */
     public function setProperties(array $properties)
     {
         $this->properties = $properties;
+
         return $this;
     }
 
     /**
      *
-     * @param \WsdlToClass\Wsdl\Property $property
+     * @param  \WsdlToClass\Wsdl\Property $property
      * @return \WsdlToClass\Wsdl\Struct
      */
     public function addProperty(Property $property)
     {
         $this->properties[$property->getName()] = $property;
+
         return $this;
     }
 
     /**
      *
-     * @param type $name
+     * @param  type $name
      * @return type
      */
     public function getProperty($name)
@@ -98,7 +100,7 @@ class Struct
 
     /**
      *
-     * @param type $name
+     * @param  type $name
      * @return type
      */
     public function hasProperty($name)
@@ -108,7 +110,7 @@ class Struct
 
     /**
      *
-     * @param IModelGenerator $generator
+     * @param  IModelGenerator $generator
      * @return type
      */
     public function visit(IModelGenerator $generator)

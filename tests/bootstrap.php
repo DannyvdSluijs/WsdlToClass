@@ -9,7 +9,6 @@
 /**
  * @author dannyvandersluijs
  */
-
 if (PHP_SAPI !== 'cli') {
     echo 'Warning: Composer should be invoked via the CLI version of PHP, not the '.PHP_SAPI.' SAPI'.PHP_EOL;
 }
