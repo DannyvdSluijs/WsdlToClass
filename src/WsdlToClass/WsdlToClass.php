@@ -70,6 +70,9 @@ class WsdlToClass
         return $this;
     }
 
+    /**
+     * @return string
+     */
     public function getNamespacePrefix()
     {
         return $this->namespacePrefix;

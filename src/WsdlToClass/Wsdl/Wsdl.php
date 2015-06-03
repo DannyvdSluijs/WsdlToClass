@@ -82,7 +82,7 @@ class Wsdl
      *
      * @param  string     $which
      * @param  string     $key
-     * @return \Object
+     * @return boolean
      * @throws \Exception
      */
     private function has($which, $key)
@@ -112,9 +112,9 @@ class Wsdl
 
     /**
      *
-     * @param  type $key
-     * @param  type $value
-     * @return type
+     * @param string $key
+     * @param Property $value
+     * @return Wsdl
      */
     public function addModel($key, $value)
     {
@@ -123,7 +123,7 @@ class Wsdl
 
     /**
      *
-     * @return type
+     * @return Wsdl\Model[]
      */
     public function getModels()
     {
@@ -142,9 +142,9 @@ class Wsdl
 
     /**
      *
-     * @param  string                   $key
-     * @param  \WsdlToClass\Wsdl\Method $method
-     * @return type
+     * @param string $key
+     * @param \WsdlToClass\Wsdl\Method $method
+     * @return Wsdl
      */
     public function addMethod($key, Method $method)
     {
@@ -161,7 +161,7 @@ class Wsdl
 
     /**
      *
-     * @return Method[]
+     * @return Wsdl\Method[]
      */
     public function getMethods()
     {
@@ -170,9 +170,9 @@ class Wsdl
 
     /**
      *
-     * @param  string  $key
-     * @param  Request $value
-     * @return type
+     * @param string $key
+     * @param Request $value
+     * @return Wsdl
      */
     public function addRequest($key, $value)
     {
@@ -181,7 +181,7 @@ class Wsdl
 
     /**
      *
-     * @return Request[]
+     * @return Wsdl\Request[]
      */
     public function getRequests()
     {
@@ -210,7 +210,7 @@ class Wsdl
 
     /**
      *
-     * @return Reponse[]
+     * @return Wsdl\Response[]
      */
     public function getResponses()
     {
