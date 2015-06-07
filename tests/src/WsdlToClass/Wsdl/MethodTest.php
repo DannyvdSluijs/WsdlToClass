@@ -90,14 +90,12 @@ class MethodTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers WsdlToClass\Wsdl\Method::visit
-     * @todo   Implement testVisit().
      */
     public function testVisit()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $mock = $this->getMock('WsdlToClass\Generator\IMethodGenerator');
+        $mock->expects($this->once())->method('generateMethod')->with($this->object)->willReturn('<?php echo "Hello world!"; ');
+        $this->assertSame('<?php echo "Hello world!"; ', $this->object->visit($mock));
     }
 
 }
