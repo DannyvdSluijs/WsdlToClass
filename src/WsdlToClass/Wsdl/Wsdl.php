@@ -123,7 +123,7 @@ class Wsdl
 
     /**
      *
-     * @return Wsdl\Struct[]
+     * @return Wsdl\Structs[]
      */
     public function getStructures()
     {
