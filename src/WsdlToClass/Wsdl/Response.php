@@ -11,7 +11,7 @@
  */
 namespace WsdlToClass\Wsdl;
 
-use WsdlToClass\Generator\IModelGenerator;
+use WsdlToClass\Generator\IStructureGenerator;
 
 /**
  * Description of Response
@@ -22,11 +22,11 @@ class Response extends Struct
 {
     /**
      *
-     * @param  IModelGenerator $generator
+     * @param  IStructureGenerator $generator
      * @return string
      */
-    public function visit(IModelGenerator $generator)
+    public function visit(IStructureGenerator $generator)
     {
-        return $generator->generateModel($this);
+        return $generator->generateStruct($this);
     }
 }

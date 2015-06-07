@@ -11,18 +11,21 @@
  */
 namespace WsdlToClass\Generator;
 
+use WsdlToClass\Wsdl\Wsdl;
+use WsdlToClass\Wsdl\Struct;
+
 /**
  * Description of Generator
  *
  * @author dannyvandersluijs
  */
-class Generator extends AbstractGenerator implements IClassMapGenerator, IModelGenerator, IServiceGenerator
+class Generator extends AbstractGenerator implements IClassMapGenerator, IStructureGenerator, IServiceGenerator, IMethodGenerator
 {
-    public function generateClassMap(\WsdlToClass\Wsdl\Wsdl $wsdl)
+    public function generateClassMap(Wsdl $wsdl)
     {
-        $mappingItems = "/* Models */\n";
-        foreach ($wsdl->getModels() as $name => $model) {
-            $mappingItems .= "\t\t\t'{$name}' => '{$this->getNamespace()}\Model\\{$model->getName()}',\n";
+        $mappingItems = "/* Structs */\n";
+        foreach ($wsdl->getStructures() as $name => $structure) {
+            $mappingItems .= "\t\t\t'{$name}' => '{$this->getNamespace()}\Structure\\{$structure->getName()}',\n";
         }
         $mappingItems .= "\t\t\t/* Responses */\n";
         foreach ($wsdl->getResponses() as $name => $response) {
@@ -50,13 +53,75 @@ class ClassMap\n{\n
 EOT;
     }
 
-    public function generateModel(\WsdlToClass\Wsdl\Struct $struct)
+    /**
+     * Generate a struct
+     * @param  Struct  $struct
+     * @return string
+     */
+
+    public function generateStruct(Struct $struct)
     {
+        return <<<EOT
+<?php
+
+namespace {$this->getNamespace()};
+
+class {$struct->getName()}
+{
+\t{$this->generateProperties($struct)}
+
+\t{$this->generateGettersSetters($struct)}
+}
+EOT;
+    }
+
+    /**
+     * Generate the properties for a strcut
+     * @param  Struct $struct
+     * @return string
+     */
+    protected function generateProperties(Struct $struct)
+    {
+        if (count($struct->getProperties()) == 0) {
+            return '';
+        }
+
+        $propertiesString = '';
+
+        foreach ($struct->getProperties() as $name => $property) {
+            $propertiesString .= "\t/**\n\t * @var {$property->getType()}\n\t */\n\tprivate \${$property->getName()} = null;\n\n";
+        }
+
+        return trim($propertiesString);
+    }
+
+    /**
+     * Generate the getters and setters for a struct
+     * @param  Struct $struct
+     * @return string
+     */
+    protected function generateGettersSetters(Struct $struct)
+    {
+        if (count($struct->getProperties()) == 0) {
+            return '';
+        }
+
+        $gettersSettersString = '';
+
+        foreach ($struct->getProperties() as $name => $property) {
+            $gettersSettersString .= "\tpublic function get{$property->getName()}()\n\t{\n\t\treturn \$this->{$property->getName()};\n\t}\n\n";
+        }
+
+        return trim($gettersSettersString);
     }
 
     public function generateService(\WsdlToClass\Wsdl\Wsdl $wsdl)
     {
     }
 
-//put your code here
+    public function generateMethod(\WsdlToClass\Wsdl\Method $method)
+    {
+
+    }
+
 }

@@ -16,11 +16,11 @@ use WsdlToClass\Wsdl\Struct;
  *
  * @author dannyvandersluijs
  */
-interface IModelGenerator
+interface IStructureGenerator
 {
     /**
-     * Generate a model from a struct
+     * Generate a struct
      * @param Struct $struct
      */
-    public function generateModel(Struct $struct);
+    public function generateStruct(Struct $struct);
 }

@@ -33,10 +33,10 @@ class Wsdl
     private $methods = array();
 
     /**
-     * The models(complex types) that are used in the web service.
-     * @var Wsdl\Model[]
+     * The structures(complex types) that are used in the web service.
+     * @var Wsdl\Structs[]
      */
-    private $models = array();
+    private $structures = array();
 
     /**
      * The requests(complex types) that are used in the webservice
@@ -63,7 +63,7 @@ class Wsdl
      *
      * @param  string                 $which
      * @param  string                 $key
-     * @param  Model|Method|Request|Response                $value
+     * @param  Strcut|Method|Request|Response                $value
      * @return \WsdlToClass\Wsdl\Wsdl
      * @throws \Exception
      */
@@ -113,21 +113,21 @@ class Wsdl
     /**
      *
      * @param string $key
-     * @param Model $model
+     * @param Struct $struct
      * @return Wsdl
      */
-    public function addModel($key, Model $model)
+    public function addStruct($key, Struct $struct)
     {
-        return $this->add('models', $key, $model);
+        return $this->add('structures', $key, $struct);
     }
 
     /**
      *
-     * @return Wsdl\Model[]
+     * @return Wsdl\Struct[]
      */
-    public function getModels()
+    public function getStructures()
     {
-        return $this->models;
+        return $this->structures;
     }
 
     /**
@@ -135,9 +135,9 @@ class Wsdl
      * @param  string $key
      * @return Struct
      */
-    public function getModel($key)
+    public function getStruct($key)
     {
-        return $this->get('models', $key);
+        return $this->get('structures', $key);
     }
 
     /**
@@ -149,11 +149,11 @@ class Wsdl
     public function addMethod($key, Method $method)
     {
         if (!$this->hasResponse($method->getResponse())) {
-            $this->addResponse($method->getResponse(), $this->getModel($method->getResponse()));
+            $this->addResponse($method->getResponse(), $this->getStruct($method->getResponse()));
         }
 
         if (!$this->hasRequest($method->getRequest())) {
-            $this->addRequest($method->getRequest(), $this->getModel($method->getRequest()));
+            $this->addRequest($method->getRequest(), $this->getStruct($method->getRequest()));
         }
 
         return $this->add('methods', $key, $method);
