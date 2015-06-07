@@ -53,6 +53,15 @@ EOT
     }
 
     /**
+     * @covers WsdlToClass\Parser\RegexParser::parseType
+     */
+    public function testParseTypeInvalidInput()
+    {
+        $this->setExpectedException('Exception');
+        $this->object->parseType('');
+    }
+
+    /**
      * @covers WsdlToClass\Parser\RegexParser::parseFunction
      */
     public function testParseFunction()
@@ -62,5 +71,14 @@ EOT
         $this->assertSame('getAddress', $result->getName());
         $this->assertSame('Postcode', $result->getRequest());
         $this->assertSame('Address', $result->getResponse());
+    }
+
+    /**
+     * @covers WsdlToClass\Parser\RegexParser::parseFunction
+     */
+    public function testParseFunctionInvalidInput()
+    {
+        $this->setExpectedException('Exception');
+        $this->object->parseFunction('');
     }
 }
