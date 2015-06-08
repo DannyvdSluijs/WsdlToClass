@@ -52,10 +52,10 @@ class WsdlToClass
 
     /**
      * Constructor
-     * @param Wsdl $wsdl
+     * @param Wsdl\Wsdl $wsdl
      * @param string $destination
      * @param type $namespacePrefix
-     * @param type $parser
+     * @param Parser\RegexParser $parser
      */
     public function __construct(Wsdl $wsdl, $destination, $namespacePrefix, IParser $parser)
     {
