@@ -54,7 +54,7 @@ class WsdlToClass
 
     /**
      * Constructor
-     * @param Wsdl $wsdl
+     * @param Wsdl\Wsdl $wsdl
      * @param string $destination
      * @param string $namespacePrefix
      * @param IParser $parser
