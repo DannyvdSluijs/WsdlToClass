@@ -31,6 +31,16 @@ class PropertyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers WsdlToClass\Wsdl\Property::__construct
+     */
+    public function testConstructor()
+    {
+        $this->object = new Property('location', 'string');
+        $this->assertSame('location', $this->object->getName());
+        $this->assertSame('string', $this->object->getType());
+    }
+
+    /**
      * @covers WsdlToClass\Wsdl\Property::getName
      */
     public function testGetName()
