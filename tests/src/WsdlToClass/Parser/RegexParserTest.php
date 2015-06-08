@@ -55,6 +55,18 @@ EOT
     /**
      * @covers WsdlToClass\Parser\RegexParser::parseType
      */
+    public function testParseTypeArrayOfComplexType()
+    {
+        $result = $this->object->parseType('Message ArrayOfMessage[]');
+        $this->assertInstanceOf('WsdlToClass\Wsdl\Struct', $result);
+        $this->assertSame('ArrayOfMessage', $result->getName());
+        $this->assertTrue($result->hasProperty('Message'));
+        $this->assertSame('Message[]', $result->getProperty('Message')->getType());
+    }
+
+    /**
+     * @covers WsdlToClass\Parser\RegexParser::parseType
+     */
     public function testParseTypeInvalidInput()
     {
         $this->setExpectedException('Exception');

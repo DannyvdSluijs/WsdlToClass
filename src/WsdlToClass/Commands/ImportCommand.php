@@ -31,8 +31,8 @@ class ImportCommand extends Command
              ->setDescription("Import a WSDL to output classes")
              ->setDefinition(array(
                 new InputArgument('wsdl', InputArgument::REQUIRED, 'The wsdl to import', null),
-                new InputOption('output', 'o', InputOption::VALUE_REQUIRED, 'The output directory', getcwd()),
-                new InputOption('namespace', 'ns', InputOption::VALUE_OPTIONAL, 'An optional namespace', getcwd()),
+                new InputOption('destination', 'd', InputOption::VALUE_REQUIRED, 'The destination directory', getcwd()),
+                new InputOption('namespace', null, InputOption::VALUE_OPTIONAL, 'An optional namespace'),
             ))
              ->setHelp(<<<EOT
 Usage:
@@ -50,16 +50,18 @@ EOT
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        if (!is_readable($input->getOption('output'))) {
-            throw new \Exception(sprintf('Unable to read output directory [%s]', $input->getOption('output')));
+        if (!is_readable($input->getOption('destination'))) {
+            throw new \Exception(sprintf('Unable to read output directory [%s]', $input->getOption('destination')));
         }
 
         $wsdlToClass = new WsdlToClass(
             new Wsdl($input->getArgument('wsdl')),
-            $input->getOption('output'),
+            $input->getOption('destination'),
             $input->getOption('namespace'),
             new RegexParser()
         );
-        $wsdlToClass->execute();
+
+
+        $wsdlToClass->setOutput($output)->execute();
     }
 }
