@@ -1,5 +1,7 @@
 [![Dependency Status](https://www.versioneye.com/user/projects/5575f55b33633400200002a9/badge.svg?style=flat)](https://www.versioneye.com/user/projects/5575f55b33633400200002a9)
 [![Build Status](https://travis-ci.org/DannyvdSluijs/WsdlToClass.svg?branch=master)](https://travis-ci.org/DannyvdSluijs/WsdlToClass)
+[![Latest Stable Version](https://poser.pugx.org/dvandersluijs/wsdl-to-class/v/stable)](https://packagist.org/packages/dvandersluijs/wsdl-to-class)
+[![Latest Unstable Version](https://poser.pugx.org/dvandersluijs/wsdl-to-class/v/unstable)](https://packagist.org/packages/dvandersluijs/wsdl-to-class)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/DannyvdSluijs/WsdlToClass/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/DannyvdSluijs/WsdlToClass/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/DannyvdSluijs/WsdlToClass/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/DannyvdSluijs/WsdlToClass/?branch=master)
 
