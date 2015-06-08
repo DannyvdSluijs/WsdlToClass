@@ -12,11 +12,11 @@
 namespace WsdlToClass\Generator;
 
 /**
- * Description of AbstractGenerator
+ * The abstract generator holds attributes needed, without being to concrete
  *
  * @author Danny van der Sluijs <danny.vandersluijs@icloud.com>
  */
-class AbstractGenerator
+abstract class AbstractGenerator
 {
     /**
      * The namespace to be used when calling a generate command.

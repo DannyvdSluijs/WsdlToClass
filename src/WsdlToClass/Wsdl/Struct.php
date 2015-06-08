@@ -14,26 +14,26 @@ namespace WsdlToClass\Wsdl;
 use WsdlToClass\Generator\IStructureGenerator;
 
 /**
- * Description of Struct
+ * A Struct is a class representation of complex type in the wsdl.
  *
  * @author Danny van der Sluijs <danny.vandersluijs@icloud.com>
  */
 class Struct
 {
     /**
-     *
+     * The name of the Struct
      * @var string
      */
     private $name;
 
     /**
-     *
+     * The properties of the Struct
      * @var Property[]
      */
     private $properties = array();
 
     /**
-     *
+     * Get the name of the Struct
      * @return string
      */
     public function getName()
@@ -42,7 +42,7 @@ class Struct
     }
 
     /**
-     *
+     * Set the name of the struct
      * @param  string                   $name
      * @return \WsdlToClass\Wsdl\Struct
      */
@@ -54,7 +54,7 @@ class Struct
     }
 
     /**
-     *
+     * Get the properties fo the Struct
      * @return type
      */
     public function getProperties()
@@ -63,7 +63,7 @@ class Struct
     }
 
     /**
-     *
+     * Set the properties of the Struct
      * @param  array                    $properties
      * @return \WsdlToClass\Wsdl\Struct
      */
@@ -75,7 +75,7 @@ class Struct
     }
 
     /**
-     *
+     * Add a single Property to the Struct
      * @param  \WsdlToClass\Wsdl\Property $property
      * @return \WsdlToClass\Wsdl\Struct
      */
@@ -87,9 +87,9 @@ class Struct
     }
 
     /**
-     *
-     * @param  type $name
-     * @return type
+     * Get a single property of the Struct
+     * @param  string $name
+     * @return Property
      */
     public function getProperty($name)
     {
@@ -99,9 +99,9 @@ class Struct
     }
 
     /**
-     *
-     * @param  type $name
-     * @return type
+     * Test if the Struct has a named Property
+     * @param  string $name
+     * @return boolean
      */
     public function hasProperty($name)
     {
@@ -109,9 +109,9 @@ class Struct
     }
 
     /**
-     *
+     * Visit the Struct with a IStructureGenerator
      * @param  IStructureGenerator $generator
-     * @return type
+     * @return string
      */
     public function visit(IStructureGenerator $generator)
     {

@@ -12,7 +12,7 @@
 namespace WsdlToClass\Parser;
 
 /**
- *
+ * The IParser interface ensures that types and functions can be parsed.
  * @author Danny van der Sluijs <danny.vandersluijs@icloud.com>
  */
 interface IParser

@@ -12,11 +12,10 @@
 namespace WsdlToClass\Wsdl;
 
 /**
- * Description of Request
+ * The request is a specific type of struct
  *
  * @author Danny van der Sluijs <danny.vandersluijs@icloud.com>
  */
 class Request extends Struct
 {
-    //put your code here
 }

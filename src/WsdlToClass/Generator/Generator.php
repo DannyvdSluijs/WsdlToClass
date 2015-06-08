@@ -15,12 +15,17 @@ use WsdlToClass\Wsdl\Wsdl;
 use WsdlToClass\Wsdl\Struct;
 
 /**
- * Description of Generator
+ * The generator generates the classes based on the Wsdl provided.
  *
  * @author Danny van der Sluijs <danny.vandersluijs@icloud.com>
  */
 class Generator extends AbstractGenerator implements IClassMapGenerator, IStructureGenerator, IServiceGenerator, IMethodGenerator
 {
+    /**
+     * Generate a class map.
+     * @param Wsdl $wsdl
+     * @return string
+     */
     public function generateClassMap(Wsdl $wsdl)
     {
         $mappingItems = "/* Structs */\n";
@@ -115,10 +120,62 @@ EOT;
         return trim($gettersSettersString);
     }
 
+    /**
+     * Generate a service class
+     * @param Wsdl $wsdl
+     * @return string
+     */
     public function generateService(\WsdlToClass\Wsdl\Wsdl $wsdl)
     {
+        return <<<EOT
+<?php
+
+namespace {$this->getNamespace()};
+
+class Service\n{\n
+    {$this->generateMethods($wsdl)}
+}
+EOT;
     }
 
+    /**
+     * Generate the methods of a WSDL.
+     * @param  Wsdl   $wsdl
+     * @return string
+     */
+    protected function generateMethods(Wsdl $wsdl)
+    {
+        if (count($wsdl->getMethods()) == 0) {
+            return '';
+        }
+
+        $methods = '';
+
+        foreach ($wsdl->getMethods() as $name => $method) {
+            $methods .= <<<EOM
+    /**
+     * Calls the soap method {$name}
+     * @return {$method->getResponse()}
+     **/
+    public function {$name}()
+    {
+        \$request = new Request\\{$method->getRequest()}();
+        \$method = new Method\\{$method->getName()}(\$request);
+
+        return new Response\\{$method->getResponse()}(\$method->execute());
+    }
+
+EOM;
+        }
+
+        return trim($methods);
+    }
+    
+    /**
+     * Generate the method classes
+     * @param \WsdlToClass\Wsdl\Method $method
+     * @return string
+     */
     public function generateMethod(\WsdlToClass\Wsdl\Method $method)
     {
 

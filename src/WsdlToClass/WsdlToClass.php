@@ -14,51 +14,71 @@ namespace WsdlToClass;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Description of WsdlToClass
+ * The WsdlToClass acts as facade class to simplyfy the overall process.
  *
  * @author Danny van der Sluijs <danny.vandersluijs@icloud.com>
  */
 class WsdlToClass
 {
     /**
-     *
+     * The Wsdl class
      * @var \WsdlToClass\Wsdl\Wsdl
      */
     private $wsdl;
 
+    /**
+     * The destination to output generated classes
+     * @var string
+     */
     private $destination;
 
+    /**
+     * A default namespace prefix
+     * @var string
+     */
     private $namespacePrefix;
 
     /**
-     *
+     * The output interface to output progression
      * @var OutputInterface
      */
     private $output;
 
     /**
-     *
+     * The parser to parse PHP internals to WsdlToClass internals
      * @var \WsdlToClass\Parser\IParser
      */
     private $parser;
 
     /**
-     * @param Wsdl\Wsdl          $wsdl
-     * @param Parser\RegexParser $parser
+     * Constructor
+     * @param Wsdl $wsdl
+     * @param string $destination
+     * @param type $namespacePrefix
+     * @param type $parser
      */
-    public function __construct($wsdl, $destination, $namespacePrefix, $parser)
+    public function __construct(Wsdl $wsdl, $destination, $namespacePrefix, IParser $parser)
     {
         $this->wsdl = $wsdl;
-        $this->destination = $destination;
-        $this->namespacePrefix = $namespacePrefix;
+        $this->destination = (string) $destination;
+        $this->namespacePrefix = (string) $namespacePrefix;
         $this->parser = $parser;
     }
 
+    /**
+     * Get the Wsdl
+     * @return Wsdl\Wsdl
+     */
     public function getWsdl()
     {
         return $this->wsdl;
     }
 
+    /**
+     * Set the Wsdl
+     * @param \WsdlToClass\Wsdl\Wsdl $wsdl
+     * @return \WsdlToClass\WsdlToClass
+     */
     public function setWsdl(Wsdl\Wsdl $wsdl)
     {
         $this->wsdl = $wsdl;
@@ -66,19 +86,29 @@ class WsdlToClass
         return $this;
     }
 
+    /**
+     * Get the destination folder
+     * @return string
+     */
     public function getDestination()
     {
         return $this->destination;
     }
 
-    public function setDestination($output)
+    /**
+     * Set the destination folder
+     * @param type $destination
+     * @return \WsdlToClass\WsdlToClass
+     */
+    public function setDestination($destination)
     {
-        $this->destination = $output;
+        $this->destination = (string) $destination;
 
         return $this;
     }
 
     /**
+     * Get the namespace prefix
      * @return string
      */
     public function getNamespacePrefix()
@@ -86,24 +116,42 @@ class WsdlToClass
         return $this->namespacePrefix;
     }
 
+    /**
+     * Set the namespace prefix
+     * @param type $namespacePrefix
+     * @return \WsdlToClass\WsdlToClass
+     */
     public function setNamespacePrefix($namespacePrefix)
     {
-        $this->namespacePrefix = $namespacePrefix;
+        $this->namespacePrefix = (string) $namespacePrefix;
 
         return $this;
     }
 
+    /**
+     * Get the output interface
+     * @return OutputInterface
+     */
     public function getOutput()
     {
         return $this->output;
     }
 
+    /**
+     * Set the output interface
+     * @param OutputInterface $output
+     * @return \WsdlToClass\WsdlToClass
+     */
     public function setOutput(OutputInterface $output)
     {
         $this->output = $output;
         return $this;
     }
 
+    /**
+     * Execte the wsdl to class
+     * @return void
+     */
     public function execute()
     {
         $this->setupDirectoryStructure()
@@ -116,6 +164,10 @@ class WsdlToClass
             ->generateClassMap();
     }
 
+    /**
+     * Create the required directories
+     * @return \WsdlToClass\WsdlToClass
+     */
     protected function setupDirectoryStructure()
     {
         $this->output->writeln("Creating subdirectories.");
@@ -132,6 +184,10 @@ class WsdlToClass
         return $this;
     }
 
+    /**
+     * Parse a  wsdl to the WsdlToClass internals
+     * @return \WsdlToClass\WsdlToClass
+     */
     protected function parseWsdl()
     {
         $this->output->writeln("Parsing WSDL.");
@@ -150,6 +206,10 @@ class WsdlToClass
         return $this;
     }
 
+    /**
+     * Generate the structure classes
+     * @return \WsdlToClass\WsdlToClass
+     */
     protected function generateStructures()
     {
         $this->output->writeln("Generating structures.");
@@ -173,6 +233,10 @@ class WsdlToClass
         return $this;
     }
 
+    /**
+     * Generate the request classes
+     * @return \WsdlToClass\WsdlToClass
+     */
     protected function generateRequests()
     {
         $this->output->writeln("Generating requests.");
@@ -190,6 +254,10 @@ class WsdlToClass
         return $this;
     }
 
+    /**
+     * Generate the response classes
+     * @return \WsdlToClass\WsdlToClass
+     */
     protected function generateResponses()
     {
         $this->output->writeln("Generating responses.");
@@ -207,6 +275,10 @@ class WsdlToClass
         return $this;
     }
 
+    /**
+     * Generate the method classes
+     * @return \WsdlToClass\WsdlToClass
+     */
     protected function generateMethods()
     {
         $this->output->writeln("Generating methods.");
@@ -223,11 +295,15 @@ class WsdlToClass
         return $this;
     }
 
+    /**
+     * Generate the service class
+     * @return \WsdlToClass\WsdlToClass
+     */
     protected function generateService()
     {
         $this->output->writeln("Generating service.");
 
-        $serviceGenerator = new Generator\ServiceGenerator();
+        $serviceGenerator = new Generator\Generator();
         $serviceGenerator->setNamespace($this->getNamespacePrefix());
         $filename = $this->destination . DIRECTORY_SEPARATOR . 'Service.php';
 
@@ -238,6 +314,10 @@ class WsdlToClass
         return $this;
     }
 
+    /**
+     * Generate the class map class
+     * @return \WsdlToClass\WsdlToClass
+     */
     protected function generateClassMap()
     {
         $this->output->writeln("Generating class map.");

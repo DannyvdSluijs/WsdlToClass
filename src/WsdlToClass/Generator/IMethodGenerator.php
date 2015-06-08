@@ -13,13 +13,13 @@ namespace WsdlToClass\Generator;
 
 use WsdlToClass\Wsdl\Method;
 /**
- *
+ * The IMethodGenerator ensures that the method classes can be generated
  * @author Danny van der Sluijs <danny.vandersluijs@icloud.com>
  */
 interface IMethodGenerator
 {
     /**
-     * Generate a method class from a mathod 
+     * Generate a method class from a mathod
      * @param Method $method
      */
     public function generateMethod(Method $method);

@@ -14,7 +14,7 @@ namespace WsdlToClass\Wsdl;
 use WsdlToClass\Generator\IServiceGenerator;
 
 /**
- * Description of Wsdl
+ * The Wsdl is a class representation of an actual WSDL
  *
  * @author Danny van der Sluijs <danny.vandersluijs@icloud.com>
  */
@@ -60,7 +60,7 @@ class Wsdl
     }
 
     /**
-     *
+     * Add an internal item to its stack
      * @param  string                 $which
      * @param  string                 $key
      * @param  Struct|Method|Request|Response                $value
@@ -79,7 +79,7 @@ class Wsdl
     }
 
     /**
-     *
+     * Test if a named item is available on its stack
      * @param  string     $which
      * @param  string     $key
      * @return boolean
@@ -95,7 +95,7 @@ class Wsdl
     }
 
     /**
-     *
+     * Get a named item from its internal stack
      * @param  string     $which
      * @param  string     $key
      * @return \Object
@@ -111,7 +111,7 @@ class Wsdl
     }
 
     /**
-     *
+     * Add a struct to the internal stack
      * @param string $key
      * @param Struct $struct
      * @return Wsdl
@@ -122,7 +122,7 @@ class Wsdl
     }
 
     /**
-     *
+     * Get all structures
      * @return Wsdl\Structs[]
      */
     public function getStructures()
@@ -131,7 +131,7 @@ class Wsdl
     }
 
     /**
-     *
+     * Get a single named struct
      * @param  string $key
      * @return Struct
      */
@@ -141,7 +141,7 @@ class Wsdl
     }
 
     /**
-     *
+     * Add a named method.
      * @param string $key
      * @param \WsdlToClass\Wsdl\Method $method
      * @return Wsdl
@@ -160,7 +160,7 @@ class Wsdl
     }
 
     /**
-     *
+     * Get all methods
      * @return Wsdl\Method[]
      */
     public function getMethods()
@@ -169,7 +169,7 @@ class Wsdl
     }
 
     /**
-     *
+     * Add a named requests.
      * @param string $key
      * @param Request $request
      * @return Wsdl
@@ -180,7 +180,7 @@ class Wsdl
     }
 
     /**
-     *
+     * Get all requests.
      * @return Wsdl\Request[]
      */
     public function getRequests()
@@ -189,7 +189,7 @@ class Wsdl
     }
 
     /**
-     *
+     * Test if a named request is available.
      * @param  string  $key
      * @return boolean
      */
@@ -199,7 +199,7 @@ class Wsdl
     }
 
     /**
-     *
+     * Add a named response.
      * @param string   $key
      * @param Response $response
      */
@@ -209,7 +209,7 @@ class Wsdl
     }
 
     /**
-     *
+     * Get all responses.
      * @return Wsdl\Response[]
      */
     public function getResponses()
@@ -218,7 +218,7 @@ class Wsdl
     }
 
     /**
-     *
+     * Test if a nmed response is avialable.
      * @param  string  $key
      * @return boolean
      */
@@ -228,7 +228,7 @@ class Wsdl
     }
 
     /**
-     *
+     * Cast the wsdl to string. Acts a convenience methof to use the Wsdl as the source for a client.
      * @return string
      */
     public function __toString()
@@ -237,7 +237,7 @@ class Wsdl
     }
 
     /**
-     *
+     * Visit the wsdl with a service generator
      * @param  IServiceGenerator $generator
      * @return string
      */

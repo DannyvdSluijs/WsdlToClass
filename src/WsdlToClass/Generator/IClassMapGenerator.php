@@ -15,7 +15,7 @@ namespace WsdlToClass\Generator;
 use WsdlToClass\Wsdl\Wsdl;
 
 /**
- *
+ * The IClassMapGenerator ensures that a classmap class can be generated.
  * @author Danny van der Sluijs <danny.vandersluijs@icloud.com>
  */
 interface IClassMapGenerator

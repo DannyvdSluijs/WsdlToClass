@@ -14,19 +14,11 @@ namespace WsdlToClass\Wsdl;
 use WsdlToClass\Generator\IStructureGenerator;
 
 /**
- * Description of Response
+ * A Response is a specific form of a Struct
  *
  * @author Danny van der Sluijs <danny.vandersluijs@icloud.com>
  */
 class Response extends Struct
 {
-    /**
-     *
-     * @param  IStructureGenerator $generator
-     * @return string
-     */
-    public function visit(IStructureGenerator $generator)
-    {
-        return $generator->generateStruct($this);
-    }
+
 }

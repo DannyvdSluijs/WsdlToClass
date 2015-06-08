@@ -15,7 +15,11 @@ use WsdlToClass\Wsdl\Struct;
 use WsdlToClass\Wsdl\Property;
 use WsdlToClass\Wsdl\Method;
 
-
+/**
+ * The regex parser uses regex to parse string to Structs or Methods
+ *
+ * @author Danny van der Sluijs <danny.vandersluijs@icloud.com>
+ */
 class RegexParser implements IParser
 {
     const _FUNCTION = '/^(?P<out>\w*) (?P<name>\w*)\((?P<in>\w*) \$(?P<parameterName>\w*)\)$/';
@@ -26,7 +30,7 @@ class RegexParser implements IParser
     const ARRAYOFCOMPLEXTYPE = '/^(?P<type>\w*) (?P<name>\w*)\[\]$/';
 
     /**
-     * Parse a type from string to
+     * Parse a type from a string to a Struct
      * @param string $input
      * @return Struct
      */
@@ -57,7 +61,7 @@ class RegexParser implements IParser
     }
 
     /**
-     *
+     * Parse the input from a string to a function
      * @param  string                   $input
      * @return Method
      * @throws \Exception
