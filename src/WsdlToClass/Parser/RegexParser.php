@@ -11,6 +11,11 @@
  */
 namespace WsdlToClass\Parser;
 
+use WsdlToClass\Wsdl\Struct;
+use WsdlToClass\Wsdl\Property;
+use WsdlToClass\Wsdl\Method;
+
+
 class RegexParser implements IParser
 {
     const _FUNCTION = '/^(?P<out>\w*) (?P<name>\w*)\((?P<in>\w*) \$(?P<parameterName>\w*)\)$/';
@@ -18,9 +23,12 @@ class RegexParser implements IParser
     const STRUCT = '/^struct (?P<name>\w*) {(?P<properties>(\n\s\w*\s\w*;)*)\n}$/';
     const PROPERTY = '/(?P<type>\w*)\s(?P<name>\w*);/';
 
+    const ARRAYOFCOMPLEXTYPE = '/^(?P<type>\w*) (?P<name>\w*)\[\]$/';
+
     /**
      * Parse a type from string to
      * @param string $input
+     * @return Struct
      */
     public function parseType($input)
     {
@@ -30,13 +38,18 @@ class RegexParser implements IParser
             /* Optional parse properties of the struct, could be empty complex types */
             \preg_match_all(self::PROPERTY, $matches['properties'], $properties);
 
-            $struct = new \WsdlToClass\Wsdl\Struct();
+            $struct = new Struct();
             $struct->setName($matches['name']);
 
             for ($x = 0, $max = count($properties['name']); $x < $max; $x++) {
-                $struct->addProperty(new \WsdlToClass\Wsdl\Property($properties['name'][$x], $properties['type'][$x]));
+                $struct->addProperty(new Property($properties['name'][$x], $properties['type'][$x]));
             }
 
+            return $struct;
+        } elseif (\preg_match(self::ARRAYOFCOMPLEXTYPE, trim($input), $matches)) {
+            $struct = new Struct();
+            $struct->setName($matches['name']);
+            $struct->addProperty(new Property($matches['type'], $matches['type'] . '[]'));
             return $struct;
         } else {
             throw new \Exception(sprintf('Unable to parse input [%s]', $input));
@@ -46,14 +59,14 @@ class RegexParser implements IParser
     /**
      *
      * @param  string                   $input
-     * @return \WsdlToClass\Wsdl\Method
+     * @return Method
      * @throws \Exception
      */
     public function parseFunction($input)
     {
         $matches = array();
         if (\preg_match(self::_FUNCTION, trim($input), $matches)) {
-            $method = new \WsdlToClass\Wsdl\Method();
+            $method = new Method();
             $method
                 ->setName($matches['name'])
                 ->setRequest($matches['in'])
