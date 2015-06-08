@@ -60,6 +60,26 @@ class Wsdl
     }
 
     /**
+     * Get the WSDL source
+     * @return string
+     */
+    public function getSource()
+    {
+        return $this->source;
+    }
+
+    /**
+     * Set the WSDL source
+     * @param type $source
+     * @return \WsdlToClass\Wsdl\Wsdl
+     */
+    public function setSource($source)
+    {
+        $this->source = (string) $source;
+        return $this;
+    }
+
+    /**
      * Add an internal item to its stack
      * @param  string                 $which
      * @param  string                 $key

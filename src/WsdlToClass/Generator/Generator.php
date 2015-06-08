@@ -19,7 +19,12 @@ use WsdlToClass\Wsdl\Struct;
  *
  * @author Danny van der Sluijs <danny.vandersluijs@icloud.com>
  */
-class Generator extends AbstractGenerator implements IClassMapGenerator, IStructureGenerator, IServiceGenerator, IMethodGenerator
+class Generator extends AbstractGenerator implements
+    IClassMapGenerator,
+    IStructureGenerator,
+    IServiceGenerator,
+    IClientGenerator,
+    IMethodGenerator
 {
     /**
      * Generate a class map.
@@ -170,7 +175,7 @@ EOM;
 
         return trim($methods);
     }
-    
+
     /**
      * Generate the method classes
      * @param \WsdlToClass\Wsdl\Method $method
@@ -179,6 +184,34 @@ EOM;
     public function generateMethod(\WsdlToClass\Wsdl\Method $method)
     {
 
+    }
+
+    /**
+     * Generate the client class
+     * @param Wsdl $wsdl
+     * @return string
+     */
+    public function generateClient(Wsdl $wsdl)
+    {
+                return <<<EOT
+<?php
+
+namespace {$this->getNamespace()};
+
+use SoapClient;
+use {$this->getNamespace()}\ClassMap;
+
+class Client extends SoapClient\n{\n
+
+    public function __construct()
+    {
+        parent::__construct(
+            '{$wsdl->getSource()}',
+            array('classmap' => ClassMap::get())
+        );
+    }
+}
+EOT;
     }
 
 }

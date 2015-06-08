@@ -163,6 +163,7 @@ class WsdlToClass
             ->generateResponses()
             ->generateMethods()
             ->generateService()
+            ->generateClient()
             ->generateClassMap();
     }
 
@@ -311,6 +312,25 @@ class WsdlToClass
 
         $handle = fopen($filename, 'w');
         fwrite($handle, $this->wsdl->visit($serviceGenerator));
+        fclose($handle);
+
+        return $this;
+    }
+
+    /**
+     * Generate the client class
+     * @return \WsdlToClass\WsdlToClass
+     */
+    protected function generateClient()
+    {
+        $this->output->writeln("Generating client.");
+
+        $generator = new Generator\Generator();
+        $generator->setNamespace($this->getNamespacePrefix());
+        $filename = $this->destination . DIRECTORY_SEPARATOR . 'Client.php';
+
+        $handle = fopen($filename, 'w');
+        fwrite($handle, $generator->generateClient($this->wsdl));
         fclose($handle);
 
         return $this;
