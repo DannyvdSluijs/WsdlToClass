@@ -16,7 +16,7 @@ use WsdlToClass\Generator\IStructureGenerator;
 /**
  * Description of Struct
  *
- * @author dannyvandersluijs
+ * @author Danny van der Sluijs <danny.vandersluijs@icloud.com>
  */
 class Struct
 {

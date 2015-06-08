@@ -16,7 +16,7 @@ use WsdlToClass\Generator\IServiceGenerator;
 /**
  * Description of Wsdl
  *
- * @author dannyvandersluijs
+ * @author Danny van der Sluijs <danny.vandersluijs@icloud.com>
  */
 class Wsdl
 {
@@ -63,7 +63,7 @@ class Wsdl
      *
      * @param  string                 $which
      * @param  string                 $key
-     * @param  Strcut|Method|Request|Response                $value
+     * @param  Struct|Method|Request|Response                $value
      * @return \WsdlToClass\Wsdl\Wsdl
      * @throws \Exception
      */

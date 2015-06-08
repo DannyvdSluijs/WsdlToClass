@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * wsdlToClass
  *
  * PHP Version 5.3
@@ -17,7 +17,7 @@ use WsdlToClass\Wsdl\Struct;
 /**
  * Description of Generator
  *
- * @author dannyvandersluijs
+ * @author Danny van der Sluijs <danny.vandersluijs@icloud.com>
  */
 class Generator extends AbstractGenerator implements IClassMapGenerator, IStructureGenerator, IServiceGenerator, IMethodGenerator
 {

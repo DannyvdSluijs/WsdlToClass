@@ -14,7 +14,7 @@ namespace WsdlToClass\Wsdl;
 /**
  * Description of Request
  *
- * @author dannyvandersluijs
+ * @author Danny van der Sluijs <danny.vandersluijs@icloud.com>
  */
 class Request extends Struct
 {

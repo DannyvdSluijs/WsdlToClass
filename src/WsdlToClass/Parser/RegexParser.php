@@ -19,7 +19,7 @@ class RegexParser implements IParser
     const PROPERTY = '/(?P<type>\w*)\s(?P<name>\w*);/';
 
     /**
-     *
+     * Parse a type from string to
      * @param string $input
      */
     public function parseType($input)

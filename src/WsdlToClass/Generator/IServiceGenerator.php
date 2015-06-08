@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * wsdlToClass
  *
  * PHP Version 5.3
@@ -15,8 +15,8 @@ namespace WsdlToClass\Generator;
 use WsdlToClass\Wsdl\Wsdl;
 
 /**
- *
- * @author dannyvandersluijs
+ * The IServiceGenerator ensures that a service class can be generated
+ * @author Danny van der Sluijs <danny.vandersluijs@icloud.com>
  */
 interface IServiceGenerator
 {

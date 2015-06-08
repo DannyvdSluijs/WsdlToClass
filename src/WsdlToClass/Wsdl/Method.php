@@ -16,7 +16,7 @@ use WsdlToClass\Generator\IMethodGenerator;
 /**
  * A method represents an function available from a WSDL.
  *
- * @author dannyvandersluijs
+ * @author Danny van der Sluijs <danny.vandersluijs@icloud.com>
  */
 class Method
 {

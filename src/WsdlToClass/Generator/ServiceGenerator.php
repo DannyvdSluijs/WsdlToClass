@@ -15,7 +15,7 @@ use WsdlToClass\Wsdl\Wsdl;
 /**
  * Description of ServiceGenerator
  *
- * @author dannyvandersluijs
+ * @author Danny van der Sluijs <danny.vandersluijs@icloud.com>
  */
 class ServiceGenerator extends AbstractGenerator implements IServiceGenerator
 {

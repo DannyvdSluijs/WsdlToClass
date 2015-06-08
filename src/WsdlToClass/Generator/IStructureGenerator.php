@@ -14,7 +14,7 @@ namespace WsdlToClass\Generator;
 use WsdlToClass\Wsdl\Struct;
 /**
  *
- * @author dannyvandersluijs
+ * @author Danny van der Sluijs <danny.vandersluijs@icloud.com>
  */
 interface IStructureGenerator
 {

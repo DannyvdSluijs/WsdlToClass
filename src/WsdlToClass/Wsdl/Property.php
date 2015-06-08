@@ -12,26 +12,26 @@
 namespace WsdlToClass\Wsdl;
 
 /**
- * Description of Struct
+ * A WSDL property is a class representation of an WSDL type both simple as complex.
  *
- * @author dannyvandersluijs
+ * @author Danny van der Sluijs <danny.vandersluijs@icloud.com>
  */
 class Property
 {
     /**
-     *
+     * The name of the property
      * @var string
      */
     private $name;
 
     /**
-     *
+     * The type of the property
      * @var string
      */
     private $type;
 
     /**
-     *
+     * Construct a property, optionally with name and type.
      * @param string $name
      * @param string $type
      */
@@ -42,7 +42,7 @@ class Property
     }
 
     /**
-     *
+     * Get the name of the property
      * @return string
      */
     public function getName()
@@ -51,7 +51,7 @@ class Property
     }
 
     /**
-     *
+     * Set the name of the property
      * @param  string                     $name
      * @return \WsdlToClass\Wsdl\Property
      */
@@ -63,7 +63,7 @@ class Property
     }
 
     /**
-     *
+     * Get the type of the property
      * @return string
      */
     public function getType()
@@ -72,7 +72,7 @@ class Property
     }
 
     /**
-     *
+     * Set the type of the property
      * @param  string                     $type
      * @return \WsdlToClass\Wsdl\Property
      */

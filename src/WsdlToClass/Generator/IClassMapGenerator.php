@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * wsdlToClass
  *
  * PHP Version 5.3
@@ -16,7 +16,7 @@ use WsdlToClass\Wsdl\Wsdl;
 
 /**
  *
- * @author dannyvandersluijs
+ * @author Danny van der Sluijs <danny.vandersluijs@icloud.com>
  */
 interface IClassMapGenerator
 {

@@ -19,10 +19,17 @@ use WsdlToClass\WsdlToClass;
 use WsdlToClass\Wsdl\Wsdl;
 use WsdlToClass\Parser\RegexParser;
 
+/**
+ * The import commands takes a wsdl and generates a set of php classes which can be utilised
+ * to implement the WSDL for either server or client implemetation.
+ *
+ * @author Danny van der Sluijs <danny.vandersluijs@icloud.com>
+ */
 class ImportCommand extends Command
 {
     /**
      * Configure the import command
+     * @return void
      */
     protected function configure()
     {

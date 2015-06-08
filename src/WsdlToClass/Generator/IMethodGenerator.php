@@ -14,7 +14,7 @@ namespace WsdlToClass\Generator;
 use WsdlToClass\Wsdl\Method;
 /**
  *
- * @author dannyvandersluijs
+ * @author Danny van der Sluijs <danny.vandersluijs@icloud.com>
  */
 interface IMethodGenerator
 {

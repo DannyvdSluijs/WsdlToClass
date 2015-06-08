@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * wsdlToClass
  *
  * PHP Version 5.3
@@ -14,7 +14,7 @@ namespace WsdlToClass\Generator;
 /**
  * Description of AbstractGenerator
  *
- * @author dannyvandersluijs
+ * @author Danny van der Sluijs <danny.vandersluijs@icloud.com>
  */
 class AbstractGenerator
 {
