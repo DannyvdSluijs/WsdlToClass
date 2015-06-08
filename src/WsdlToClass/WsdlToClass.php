@@ -12,6 +12,8 @@
 namespace WsdlToClass;
 
 use Symfony\Component\Console\Output\OutputInterface;
+use WsdlToClass\Wsdl\Wsdl;
+use WsdlToClass\Parser\IParser;
 
 /**
  * The WsdlToClass acts as facade class to simplyfy the overall process.
@@ -22,7 +24,7 @@ class WsdlToClass
 {
     /**
      * The Wsdl class
-     * @var \WsdlToClass\Wsdl\Wsdl
+     * @var Wsdl
      */
     private $wsdl;
 
@@ -46,7 +48,7 @@ class WsdlToClass
 
     /**
      * The parser to parse PHP internals to WsdlToClass internals
-     * @var \WsdlToClass\Parser\IParser
+     * @var IParser
      */
     private $parser;
 
@@ -54,8 +56,8 @@ class WsdlToClass
      * Constructor
      * @param Wsdl $wsdl
      * @param string $destination
-     * @param type $namespacePrefix
-     * @param type $parser
+     * @param string $namespacePrefix
+     * @param IParser $parser
      */
     public function __construct(Wsdl $wsdl, $destination, $namespacePrefix, IParser $parser)
     {
@@ -67,7 +69,7 @@ class WsdlToClass
 
     /**
      * Get the Wsdl
-     * @return Wsdl\Wsdl
+     * @return Wsdl
      */
     public function getWsdl()
     {
@@ -76,10 +78,10 @@ class WsdlToClass
 
     /**
      * Set the Wsdl
-     * @param \WsdlToClass\Wsdl\Wsdl $wsdl
+     * @param Wsdl $wsdl
      * @return \WsdlToClass\WsdlToClass
      */
-    public function setWsdl(Wsdl\Wsdl $wsdl)
+    public function setWsdl(Wsdl $wsdl)
     {
         $this->wsdl = $wsdl;
 
@@ -118,7 +120,7 @@ class WsdlToClass
 
     /**
      * Set the namespace prefix
-     * @param type $namespacePrefix
+     * @param string $namespacePrefix
      * @return \WsdlToClass\WsdlToClass
      */
     public function setNamespacePrefix($namespacePrefix)
