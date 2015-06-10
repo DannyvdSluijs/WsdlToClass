@@ -19,12 +19,7 @@ use WsdlToClass\Wsdl\Struct;
  *
  * @author Danny van der Sluijs <danny.vandersluijs@icloud.com>
  */
-class Generator extends AbstractGenerator implements
-    IClassMapGenerator,
-    IStructureGenerator,
-    IServiceGenerator,
-    IClientGenerator,
-    IMethodGenerator
+class Generator extends AbstractGenerator implements ICompositeGenerator
 {
     /**
      * Generate a class map.

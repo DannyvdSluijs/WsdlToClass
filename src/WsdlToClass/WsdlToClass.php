@@ -14,6 +14,8 @@ namespace WsdlToClass;
 use Symfony\Component\Console\Output\OutputInterface;
 use WsdlToClass\Wsdl\Wsdl;
 use WsdlToClass\Parser\IParser;
+use WsdlToClass\Generator\ICompositeGenerator;
+use WsdlToClass\Writer\IWriter;
 
 /**
  * The WsdlToClass acts as facade class to simplyfy the overall process.
@@ -53,18 +55,38 @@ class WsdlToClass
     private $parser;
 
     /**
+     * The generator to generate WsdlClass internals to classes
+     * @var ICompositeGenerator
+     */
+    private $generator;
+
+    /**
+     * The writer to write the classes to file
+     * @var IWriter
+     */
+    private $writer;
+
+    /**
      * Constructor
      * @param Wsdl\Wsdl $wsdl
      * @param string $destination
      * @param string $namespacePrefix
      * @param IParser $parser
      */
-    public function __construct(Wsdl $wsdl, $destination, $namespacePrefix, IParser $parser)
-    {
+    public function __construct(
+        Wsdl $wsdl,
+        $destination,
+        $namespacePrefix,
+        IParser $parser,
+        ICompositeGenerator $generator,
+        IWriter $writer
+    ) {
         $this->wsdl = $wsdl;
         $this->destination = (string) $destination;
         $this->namespacePrefix = (string) $namespacePrefix;
         $this->parser = $parser;
+        $this->generator = $generator;
+        $this->writer = $writer;
     }
 
     /**
@@ -150,6 +172,28 @@ class WsdlToClass
         return $this;
     }
 
+    public function getParser()
+    {
+        return $this->parser;
+    }
+
+    public function setParser(IParser $parser)
+    {
+        $this->parser = $parser;
+        return $this;
+    }
+
+    public function getGenerator()
+    {
+        return $this->generator;
+    }
+
+    public function setGenerator(ICompositeGenerator $generator)
+    {
+        $this->generator = $generator;
+        return $this;
+    }
+
     /**
      * Execte the wsdl to class
      * @return void
@@ -217,8 +261,8 @@ class WsdlToClass
     {
         $this->output->writeln("Generating structures.");
 
-        $generator = new Generator\Generator();
-        $generator->setNamespace($this->getNamespacePrefix() . '\Structure');
+
+        $this->generator->setNamespace($this->getNamespacePrefix() . '\Structure');
 
         foreach ($this->wsdl->getStructures() as $name => $structure) {
             /* Request & response are generated in generateResponses */
@@ -227,10 +271,8 @@ class WsdlToClass
             }
 
             $filename = $this->destination . DIRECTORY_SEPARATOR . 'Structure' . DIRECTORY_SEPARATOR . ucfirst($name) . '.php';
-
-            $handle = fopen($filename, 'w');
-            fwrite($handle, $structure->visit($generator));
-            fclose($handle);
+            $content = $structure->visit($this->generator);
+            $this->writer->writeFile($filename, $content);
         }
 
         return $this;
@@ -244,14 +286,12 @@ class WsdlToClass
     {
         $this->output->writeln("Generating requests.");
 
-        $generator = new Generator\Generator();
-        $generator->setNamespace($this->getNamespacePrefix() . '\Request');
+        $this->generator->setNamespace($this->getNamespacePrefix() . '\Request');
 
         foreach ($this->wsdl->getRequests() as $name => $request) {
             $filename = $this->destination . DIRECTORY_SEPARATOR . 'Request' . DIRECTORY_SEPARATOR . ucfirst($name) . '.php';
-            $handle = fopen($filename, 'w');
-            fwrite($handle, $request->visit($generator));
-            fclose($handle);
+            $content = $request->visit($this->generator);
+            $this->writer->writeFile($filename, $content);
         }
 
         return $this;
@@ -265,14 +305,12 @@ class WsdlToClass
     {
         $this->output->writeln("Generating responses.");
 
-        $generator = new Generator\Generator();
-        $generator->setNamespace($this->getNamespacePrefix() . '\Response');
+        $this->generator->setNamespace($this->getNamespacePrefix() . '\Response');
 
         foreach ($this->wsdl->getResponses() as $name => $response) {
             $filename = $this->destination . DIRECTORY_SEPARATOR . 'Response' . DIRECTORY_SEPARATOR . ucfirst($name) . '.php';
-            $handle = fopen($filename, 'w');
-            fwrite($handle, $response->visit($generator));
-            fclose($handle);
+            $content = $response->visit($this->generator);
+            $this->writer->writeFile($filename, $content);
         }
 
         return $this;
@@ -286,13 +324,11 @@ class WsdlToClass
     {
         $this->output->writeln("Generating methods.");
 
-        $generator = new Generator\Generator();
-        $generator->setNamespace($this->getNamespacePrefix());
+        $this->generator->setNamespace($this->getNamespacePrefix());
         foreach ($this->wsdl->getMethods() as $name => $method) {
             $filename = $this->destination . DIRECTORY_SEPARATOR . 'Method' . DIRECTORY_SEPARATOR . ucfirst($name) . '.php';
-            $handle = fopen($filename, 'w');
-            fwrite($handle, $method->visit($generator));
-            fclose($handle);
+            $content = $method->visit($this->generator);
+            $this->writer->writeFile($filename, $content);
         }
 
         return $this;
@@ -306,13 +342,10 @@ class WsdlToClass
     {
         $this->output->writeln("Generating service.");
 
-        $serviceGenerator = new Generator\Generator();
-        $serviceGenerator->setNamespace($this->getNamespacePrefix());
+        $this->generator->setNamespace($this->getNamespacePrefix());
         $filename = $this->destination . DIRECTORY_SEPARATOR . 'Service.php';
-
-        $handle = fopen($filename, 'w');
-        fwrite($handle, $this->wsdl->visit($serviceGenerator));
-        fclose($handle);
+        $content = $this->wsdl->visit($this->generator);
+        $this->writer->writeFile($filename, $content);
 
         return $this;
     }
@@ -325,13 +358,10 @@ class WsdlToClass
     {
         $this->output->writeln("Generating client.");
 
-        $generator = new Generator\Generator();
-        $generator->setNamespace($this->getNamespacePrefix());
+        $this->generator->setNamespace($this->getNamespacePrefix());
         $filename = $this->destination . DIRECTORY_SEPARATOR . 'Client.php';
-
-        $handle = fopen($filename, 'w');
-        fwrite($handle, $generator->generateClient($this->wsdl));
-        fclose($handle);
+        $content = $this->generator->generateClient($this->wsdl);
+        $this->writer->writeFile($filename, $content);
 
         return $this;
     }
@@ -344,14 +374,11 @@ class WsdlToClass
     {
         $this->output->writeln("Generating class map.");
 
-        $generator = new Generator\Generator();
-        $generator->setNamespace($this->getNamespacePrefix());
+        $this->generator->setNamespace($this->getNamespacePrefix());
         $filename = $this->destination . DIRECTORY_SEPARATOR . 'ClassMap.php';
-
-        $handle = fopen($filename, 'w');
-        fwrite($handle, $generator->generateClassMap($this->wsdl));
-        fclose($handle);
-
+        $content = $this->generator->generateClassMap($this->wsdl);
+        $this->writer->writeFile($filename, $content);
+        
         return $this;
     }
 }

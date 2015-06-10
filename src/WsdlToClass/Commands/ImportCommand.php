@@ -18,6 +18,8 @@ use Symfony\Component\Console\Input\InputOption;
 use WsdlToClass\WsdlToClass;
 use WsdlToClass\Wsdl\Wsdl;
 use WsdlToClass\Parser\RegexParser;
+use WsdlToClass\Generator\Generator;
+use WsdlToClass\Writer\ResourceWriter;
 
 /**
  * The import commands takes a wsdl and generates a set of php classes which can be utilised
@@ -65,9 +67,10 @@ EOT
             new Wsdl($input->getArgument('wsdl')),
             $input->getOption('destination'),
             $input->getOption('namespace'),
-            new RegexParser()
+            new RegexParser(),
+            new Generator(),
+            new ResourceWriter()
         );
-
 
         $wsdlToClass->setOutput($output)->execute();
     }
