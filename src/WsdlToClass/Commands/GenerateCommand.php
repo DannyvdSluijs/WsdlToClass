@@ -22,37 +22,37 @@ use WsdlToClass\Generator\TwigGenerator;
 use WsdlToClass\Writer\ResourceWriter;
 
 /**
- * The import commands takes a wsdl and generates a set of php classes which can be utilised
+ * The generate commands takes a wsdl and generates a set of php classes which can be utilised
  * to implement the WSDL for either server or client implemetation.
  *
  * @author Danny van der Sluijs <danny.vandersluijs@icloud.com>
  */
-class ImportCommand extends Command
+class GenerateCommand extends Command
 {
     /**
-     * Configure the import command
+     * Configure the generate command
      * @return void
      */
     protected function configure()
     {
         $this
-            ->setName("wsdltoclass:import")
-             ->setDescription("Import a WSDL to output classes")
+            ->setName("wsdltoclass:generate")
+             ->setDescription("Transform a WSDL to PHP classes")
              ->setDefinition(array(
-                new InputArgument('wsdl', InputArgument::REQUIRED, 'The wsdl to import', null),
+                new InputArgument('wsdl', InputArgument::REQUIRED, 'The wsdl to generate', null),
                 new InputOption('destination', 'd', InputOption::VALUE_REQUIRED, 'The destination directory', getcwd()),
-                new InputOption('namespace', null, InputOption::VALUE_OPTIONAL, 'An optional namespace'),
+                new InputOption('namespace', null, InputOption::VALUE_REQUIRED, 'An optional namespace', 'Soap'),
             ))
              ->setHelp(<<<EOT
 Usage:
 
-<info>./run.php wdltoclass:import http://www.url.com/wsdl</info>
+<info>./run.php wdltoclass:generate http://www.url.com/wsdl</info>
 EOT
 );
     }
 
     /**
-     * Execute the import command
+     * Execute the generate command
      * @param  InputInterface  $input
      * @param  OutputInterface $output
      * @throws \Exception

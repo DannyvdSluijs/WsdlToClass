@@ -57,7 +57,7 @@ class TwigGenerator extends AbstractGenerator implements ICompositeGenerator
     {
         return $this->twig->render('struct.html', array(
             'struct' => $struct,
-            'namespace' => $this->getNamespace(),
+            'namespace' => $this->getNamespace()
         ));
     }
 
@@ -68,7 +68,7 @@ class TwigGenerator extends AbstractGenerator implements ICompositeGenerator
      */
     public function generateService(Wsdl $wsdl)
     {
-        return $this->twig->render('service.html', array('wsdl' => $wsdl));
+        return $this->twig->render('service.html', array('wsdl' => $wsdl, 'namespace' => $this->getNamespace()));
     }
 
     /**
@@ -78,7 +78,7 @@ class TwigGenerator extends AbstractGenerator implements ICompositeGenerator
      */
     public function generateMethod(\WsdlToClass\Wsdl\Method $method)
     {
-        return $this->twig->render('method.html', array('method' => $method));
+        return $this->twig->render('method.html', array('method' => $method, 'namespace' => $this->getNamespace()));
     }
 
     /**
@@ -88,7 +88,7 @@ class TwigGenerator extends AbstractGenerator implements ICompositeGenerator
      */
     public function generateClient(Wsdl $wsdl)
     {
-        return $this->twig->render('client.html', array('wsdl' => $wsdl));
+        return $this->twig->render('client.html', array('wsdl' => $wsdl, 'namespace' => $this->getNamespace()));
     }
 
 }

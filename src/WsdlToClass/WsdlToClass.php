@@ -324,7 +324,7 @@ class WsdlToClass
     {
         $this->output->writeln("Generating methods.");
 
-        $this->generator->setNamespace($this->getNamespacePrefix());
+        $this->generator->setNamespace($this->getNamespacePrefix() . '\Method');
         foreach ($this->wsdl->getMethods() as $name => $method) {
             $filename = $this->destination . DIRECTORY_SEPARATOR . 'Method' . DIRECTORY_SEPARATOR . ucfirst($name) . '.php';
             $content = $method->visit($this->generator);
@@ -378,7 +378,7 @@ class WsdlToClass
         $filename = $this->destination . DIRECTORY_SEPARATOR . 'ClassMap.php';
         $content = $this->generator->generateClassMap($this->wsdl);
         $this->writer->writeFile($filename, $content);
-        
+
         return $this;
     }
 }
