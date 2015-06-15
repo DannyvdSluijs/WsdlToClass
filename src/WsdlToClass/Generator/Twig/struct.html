@@ -1,0 +1,29 @@
+<?php
+
+{% include "sections/file-header.html" %}
+
+namespace {{ namespace }};
+
+class {{ struct.name }}
+{
+{% set properties = struct.properties %}
+{% for property in properties %}
+    /**
+     *
+     * @var {{property.type}}
+     */
+    public ${{ property.name }};
+{% endfor %}
+
+{% for property in properties %}
+    /**
+     * Get the {{ property.name }}
+     * @return {{ property.type }}
+     */
+    public function get{{ property.name }}()
+    {
+        return $this->{{ property.name }};
+    }
+
+{% endfor %}
+}

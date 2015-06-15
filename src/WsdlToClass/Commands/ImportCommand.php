@@ -18,7 +18,7 @@ use Symfony\Component\Console\Input\InputOption;
 use WsdlToClass\WsdlToClass;
 use WsdlToClass\Wsdl\Wsdl;
 use WsdlToClass\Parser\RegexParser;
-use WsdlToClass\Generator\Generator;
+use WsdlToClass\Generator\TwigGenerator;
 use WsdlToClass\Writer\ResourceWriter;
 
 /**
@@ -68,7 +68,7 @@ EOT
             $input->getOption('destination'),
             $input->getOption('namespace'),
             new RegexParser(),
-            new Generator(),
+            new TwigGenerator(),
             new ResourceWriter()
         );
 

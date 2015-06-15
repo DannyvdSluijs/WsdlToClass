@@ -1,0 +1,34 @@
+<?php
+
+{% include "sections/file-header.html" %}
+
+namespace {{ namespace }};
+
+use SoapClient;
+use {{ namespace }}\ClassMap;
+
+/**
+ *
+ * @category
+ * @package
+ * @author
+ * @license
+ * @link
+ *
+{% for method in wsdl.methods %}
+ * @method {{ namespace }}\Response\{{ method.response}} {{ method.name }}({{ namespace }}\Request\{{ method.request }} $request)
+{% endfor %}
+ */
+class Client extends SoapClient
+{
+    /**
+     * Construct a client
+     */
+    public function __construct()
+    {
+        parent::__construct(
+            '{{ wsdl.source }}',
+            array('classmap' => ClassMap::get())
+        );
+    }
+}
