@@ -32,6 +32,15 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers WsdlToClass\Wsdl\Wsdl::__construct
+     */
+    public function testConstruct()
+    {
+        $this->object = new Wsdl('http://www.w3schools.com/webservices/tempconvert.asmx?WSDL');
+        $this->assertSame('http://www.w3schools.com/webservices/tempconvert.asmx?WSDL', $this->object->getSource());
+    }
+
+    /**
      * @covers WsdlToClass\Wsdl\Wsdl::getSource
      */
     public function testGetSource()
@@ -52,26 +61,26 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers WsdlToClass\Wsdl\Wsdl::addStruct
-     * @todo   Implement testAddStruct().
+     * @covers WsdlToClass\Wsdl\Wsdl::add
      */
     public function testAddStruct()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $struct = $this->getMockBuilder('WsdlToClass\Wsdl\Struct')->disableOriginalConstructor()->getMock();
+        $this->assertSame($this->object, $this->object->addStruct('mock', $struct));
+        $this->assertAttributeContains($struct, 'structures', $this->object);
     }
 
     /**
      * @covers WsdlToClass\Wsdl\Wsdl::getStructures
-     * @todo   Implement testGetStructures().
      */
     public function testGetStructures()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $this->assertEmpty($this->object->getStructures());
+        $struct = $this->getMockBuilder('WsdlToClass\Wsdl\Struct')->disableOriginalConstructor()->getMock();
+        $this->object->addStruct('mock', $struct);
+        $this->assertContainsOnly('WsdlToClass\Wsdl\Struct', $this->object->getStructures());
+        $this->assertContains($struct, $this->object->getStructures());
+        $this->assertArrayHasKey('mock', $this->object->getStructures());
     }
 
     /**
@@ -88,50 +97,50 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers WsdlToClass\Wsdl\Wsdl::addMethod
-     * @todo   Implement testAddMethod().
+     * @covers WsdlToClass\Wsdl\Wsdl::add
      */
     public function testAddMethod()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $method = $this->getMockBuilder('WsdlToClass\Wsdl\Method')->disableOriginalConstructor()->getMock();
+        $this->assertSame($this->object, $this->object->addMethod('method', $method));
+        $this->assertAttributeContains($method, 'methods', $this->object);
     }
 
     /**
      * @covers WsdlToClass\Wsdl\Wsdl::getMethods
-     * @todo   Implement testGetMethods().
      */
     public function testGetMethods()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $this->assertEmpty($this->object->getMethods());
+        $method = $this->getMockBuilder('WsdlToClass\Wsdl\Method')->disableOriginalConstructor()->getMock();
+        $this->object->addMethod('method', $method);
+        $this->assertContainsOnly('WsdlToClass\Wsdl\Method', $this->object->getMethods());
+        $this->assertContains($method, $this->object->getMethods());
+        $this->assertArrayHasKey('method', $this->object->getMethods());
     }
 
     /**
      * @covers WsdlToClass\Wsdl\Wsdl::addRequest
-     * @todo   Implement testAddRequest().
+     * @covers WsdlToClass\Wsdl\Wsdl::add
      */
     public function testAddRequest()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $request = $this->getMockBuilder('WsdlToClass\Wsdl\Request')->disableOriginalConstructor()->getMock();
+        $this->assertSame($this->object, $this->object->addRequest('request', $request));
+        $this->assertAttributeContains($request, 'requests', $this->object);
     }
 
     /**
      * @covers WsdlToClass\Wsdl\Wsdl::getRequests
-     * @todo   Implement testGetRequests().
      */
     public function testGetRequests()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $this->assertEmpty($this->object->getRequests());
+        $request = $this->getMockBuilder('WsdlToClass\Wsdl\Request')->disableOriginalConstructor()->getMock();
+        $this->object->addRequest('request', $request);
+        $this->assertContainsOnly('WsdlToClass\Wsdl\Request', $this->object->getRequests());
+        $this->assertContains($request, $this->object->getRequests());
+        $this->assertArrayHasKey('request', $this->object->getRequests());
     }
 
     /**
@@ -148,26 +157,26 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers WsdlToClass\Wsdl\Wsdl::addResponse
-     * @todo   Implement testAddResponse().
+     * @covers WsdlToClass\Wsdl\Wsdl::add
      */
     public function testAddResponse()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $response = $this->getMockBuilder('WsdlToClass\Wsdl\Response')->disableOriginalConstructor()->getMock();
+        $this->assertSame($this->object, $this->object->addResponse('response', $response));
+        $this->assertAttributeContains($response, 'responses', $this->object);
     }
 
     /**
      * @covers WsdlToClass\Wsdl\Wsdl::getResponses
-     * @todo   Implement testGetResponses().
      */
     public function testGetResponses()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $this->assertEmpty($this->object->getResponses());
+        $response = $this->getMockBuilder('WsdlToClass\Wsdl\Response')->disableOriginalConstructor()->getMock();
+        $this->object->addResponse('mock', $response);
+        $this->assertContainsOnly('WsdlToClass\Wsdl\Response', $this->object->getResponses());
+        $this->assertContains($response, $this->object->getResponses());
+        $this->assertArrayHasKey('mock', $this->object->getResponses());
     }
 
     /**
