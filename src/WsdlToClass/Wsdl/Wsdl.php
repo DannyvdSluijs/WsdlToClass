@@ -225,7 +225,7 @@ class Wsdl
      */
     public function addResponse($key, $response)
     {
-        $this->add('responses', $key, $response);
+        return $this->add('responses', $key, $response);
     }
 
     /**
