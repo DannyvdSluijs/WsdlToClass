@@ -118,7 +118,7 @@ class Wsdl
      * Get a named item from its internal stack
      * @param  string     $which
      * @param  string     $key
-     * @return \Object
+     * @return Struct|Method|Request|Response
      * @throws \Exception
      */
     private function get($which, $key)
