@@ -180,8 +180,8 @@ class Wsdl
     {
         if (!$this->hasResponse($method->getResponse()) && $this->hasStruct($method->getResponse())) {
             $struct = $this->getStruct($method->getResponse());
-            $$request = Response::createFromStruct($struct);
-            $this->addResponse($method->getResponse(), $$request);
+            $request = Response::createFromStruct($struct);
+            $this->addResponse($method->getResponse(), $request);
         }
 
         if (!$this->hasRequest($method->getRequest()) && $this->hasStruct($method->getRequest())) {
