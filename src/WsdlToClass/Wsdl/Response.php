@@ -20,5 +20,13 @@ use WsdlToClass\Generator\IStructureGenerator;
  */
 class Response extends Struct
 {
+    static public function createFromStruct(Struct $struct)
+    {
+        $response = new static;
+        $response
+            ->setName($struct->getName())
+            ->setProperties($struct->getProperties());
 
+        return $response;
+    }
 }

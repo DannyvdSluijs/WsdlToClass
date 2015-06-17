@@ -18,7 +18,7 @@ use WsdlToClass\Generator\IMethodGenerator;
  *
  * @author Danny van der Sluijs <danny.vandersluijs@icloud.com>
  */
-class Method
+class Method implements IWsdlNode
 {
     /**
      * The name of the method.

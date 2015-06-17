@@ -18,7 +18,7 @@ use WsdlToClass\Generator\IStructureGenerator;
  *
  * @author Danny van der Sluijs <danny.vandersluijs@icloud.com>
  */
-class Struct
+class Struct implements IWsdlNode
 {
     /**
      * The name of the Struct

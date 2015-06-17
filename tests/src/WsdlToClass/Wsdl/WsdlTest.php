@@ -102,6 +102,14 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
     public function testAddMethod()
     {
         $method = $this->getMockBuilder('WsdlToClass\Wsdl\Method')->disableOriginalConstructor()->getMock();
+        $request = $this->getMockBuilder('WsdlToClass\Wsdl\Request')->disableOriginalConstructor()->getMock();
+        $response = $this->getMockBuilder('WsdlToClass\Wsdl\Response')->disableOriginalConstructor()->getMock();
+        $request->expects($this->any())->method('getProperties')->willReturn(array());
+        $response->expects($this->any())->method('getProperties')->willReturn(array());
+        $method->expects($this->any())->method('getRequest')->willReturn('request');
+        $method->expects($this->any())->method('getResponse')->willReturn('response');
+        $this->object->addStruct('response', $response);
+        $this->object->addStruct('request', $request);
         $this->assertSame($this->object, $this->object->addMethod('method', $method));
         $this->assertAttributeContains($method, 'methods', $this->object);
     }

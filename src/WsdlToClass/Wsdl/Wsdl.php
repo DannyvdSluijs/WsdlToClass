@@ -34,7 +34,7 @@ class Wsdl
 
     /**
      * The structures(complex types) that are used in the web service.
-     * @var Wsdl\Structs[]
+     * @var Wsdl\Struct[]
      */
     private $structures = array();
 
@@ -83,11 +83,11 @@ class Wsdl
      * Add an internal item to its stack
      * @param  string                 $which
      * @param  string                 $key
-     * @param  Struct|Method|Request|Response                $value
+     * @param  IWsdlNode              $value
      * @return \WsdlToClass\Wsdl\Wsdl
      * @throws \Exception
      */
-    private function add($which, $key, $value)
+    private function add($which, $key, IWsdlNode $value)
     {
         if (!isset($this->$which)) {
             throw new \Exception(sprintf('Invalid property [%s]', $which));
@@ -118,7 +118,7 @@ class Wsdl
      * Get a named item from its internal stack
      * @param  string     $which
      * @param  string     $key
-     * @return Struct|Method|Request|Response
+     * @return IWsdlNode
      * @throws \Exception
      */
     private function get($which, $key)
@@ -151,6 +151,16 @@ class Wsdl
     }
 
     /**
+     * Test if a named struct is available.
+     * @param  string  $key
+     * @return boolean
+     */
+    public function hasStruct($key)
+    {
+        return $this->has('structures', $key);
+    }
+
+    /**
      * Get a single named struct
      * @param  string $key
      * @return Struct
@@ -168,12 +178,16 @@ class Wsdl
      */
     public function addMethod($key, Method $method)
     {
-        if (!$this->hasResponse($method->getResponse())) {
-            $this->addResponse($method->getResponse(), $this->getStruct($method->getResponse()));
+        if (!$this->hasResponse($method->getResponse()) && $this->hasStruct($method->getResponse())) {
+            $struct = $this->getStruct($method->getResponse());
+            $$request = Response::createFromStruct($struct);
+            $this->addResponse($method->getResponse(), $$request);
         }
 
-        if (!$this->hasRequest($method->getRequest())) {
-            $this->addRequest($method->getRequest(), $this->getStruct($method->getRequest()));
+        if (!$this->hasRequest($method->getRequest()) && $this->hasStruct($method->getRequest())) {
+            $struct = $this->getStruct($method->getRequest());
+            $request = Request::createFromStruct($struct);
+            $this->addRequest($method->getRequest(), $request);
         }
 
         return $this->add('methods', $key, $method);
@@ -223,7 +237,7 @@ class Wsdl
      * @param string   $key
      * @param Response $response
      */
-    public function addResponse($key, $response)
+    public function addResponse($key, Response $response)
     {
         return $this->add('responses', $key, $response);
     }
