@@ -24,7 +24,7 @@ interface IWsdlNode
     /**
      * Set the name of the Wsdl Node
      * @param string $name
-     * @return WsdlNode
+     * @return IWsdlNode
      */
     public function setName($name);
 }

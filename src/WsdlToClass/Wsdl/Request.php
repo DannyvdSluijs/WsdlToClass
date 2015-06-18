@@ -18,7 +18,12 @@ namespace WsdlToClass\Wsdl;
  */
 class Request extends Struct
 {
-    static public function createFromStruct(Struct $struct)
+    /**
+     * Create a request from a Struct
+     * @param \WsdlToClass\Wsdl\Struct $struct
+     * @return Request
+     */
+    public static function createFromStruct(Struct $struct)
     {
         $request = new static;
         $request

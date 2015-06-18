@@ -20,7 +20,12 @@ use WsdlToClass\Generator\IStructureGenerator;
  */
 class Response extends Struct
 {
-    static public function createFromStruct(Struct $struct)
+    /**
+     * Create a response from a Struct
+     * @param \WsdlToClass\Wsdl\Struct $struct
+     * @return Response
+     */
+    public static function createFromStruct(Struct $struct)
     {
         $response = new static;
         $response
