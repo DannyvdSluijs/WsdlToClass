@@ -13,6 +13,8 @@ namespace WsdlToClass;
 
 use Symfony\Component\Console\Output\OutputInterface;
 use WsdlToClass\Wsdl\Wsdl;
+use WsdlToClass\Wsdl\Struct;
+use WsdlToClass\Wsdl\Property;
 use WsdlToClass\Parser\IParser;
 use WsdlToClass\Generator\ICompositeGenerator;
 use WsdlToClass\Writer\IWriter;
@@ -243,9 +245,9 @@ class WsdlToClass
         foreach ($client->__getTypes() as $rawType) {
             $type = $this->parser->parseType($rawType);
 
-            if ($type instanceof Wsdl\Struct) {
+            if ($type instanceof Struct) {
                 $this->wsdl->addStruct($type->getName(), $type);
-            } elseif ($type instanceof Wsdl\Property) {
+            } elseif ($type instanceof Property) {
                 $this->wsdl->addProperty($type->getName(), $type);
             }
         }

@@ -44,7 +44,6 @@ class TwigGenerator extends AbstractGenerator implements ICompositeGenerator
         return $this->twig->render('class-map.html', array(
             'wsdl' => $wsdl,
             'namespace' => $this->getNamespace(),
-
         ));
     }
 
