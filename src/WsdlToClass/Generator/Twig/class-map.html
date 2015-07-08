@@ -28,5 +28,6 @@ class ClassMap
 {% for response in responses %}
             '{{ response.name }}' => '{{ namespace }}\Structures\{{ response.name }}',
 {% endfor %}
+        );
     }
 }
