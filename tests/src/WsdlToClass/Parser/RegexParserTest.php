@@ -67,6 +67,17 @@ EOT
     /**
      * @covers WsdlToClass\Parser\RegexParser::parseType
      */
+    public function testParseSimpleType()
+    {
+        $result = $this->object->parseType('string DeliveryStatus');
+        $this->assertInstanceOf('WsdlToClass\Wsdl\Property', $result);
+        $this->assertSame('DeliveryStatus', $result->getName());
+        $this->assertSame('string', $result->getType());
+    }
+
+    /**
+     * @covers WsdlToClass\Parser\RegexParser::parseType
+     */
     public function testParseTypeInvalidInput()
     {
         $this->setExpectedException('Exception');

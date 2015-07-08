@@ -51,6 +51,12 @@ class Wsdl
     private $responses = array();
 
     /**
+     * The simple types that are used in the web service
+     * @var Wsdl\Property[]
+     */
+    private $simpleTypes = array();
+
+    /**
      * Comstructor
      * @param string $source
      */
@@ -262,7 +268,36 @@ class Wsdl
     }
 
     /**
-     * Cast the wsdl to string. Acts a convenience methof to use the Wsdl as the source for a client.
+     * Get all simpel types
+     * @return Wsdl\Property[]
+     */
+    public function getSimpleTypes()
+    {
+        return $this->simpleTypes;
+    }
+
+    /**
+     * Test if a named simple type is available.
+     * @param  string  $key
+     * @return boolean
+     */
+    public function hasSimpleType($key)
+    {
+        return $this->has('simpleTypes', $key);
+    }
+
+    /**
+     * Get a single named simple type
+     * @param  string $key
+     * @return SimpleType
+     */
+    public function getSimpleType($key)
+    {
+        return $this->get('simpleTypes', $key);
+    }
+
+    /**
+     * Cast the wsdl to string. Acts a convenience method to use the Wsdl as the source for a client.
      * @return string
      */
     public function __toString()

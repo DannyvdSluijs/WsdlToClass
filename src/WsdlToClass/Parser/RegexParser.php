@@ -29,10 +29,11 @@ class RegexParser implements IParser
 
     const ARRAYOFCOMPLEXTYPE = '/^(?P<type>\w*) (?P<name>\w*)\[\]$/';
 
+    const SIMPLE_TYPE = '/^(?P<type>\w*) (?P<name>\w*)$/';
     /**
      * Parse a type from a string to a Struct
      * @param string $input
-     * @return Struct
+     * @return Struct|Property
      */
     public function parseType($input)
     {
@@ -55,6 +56,8 @@ class RegexParser implements IParser
             $struct->setName($matches['name']);
             $struct->addProperty(new Property($matches['type'], $matches['type'] . '[]'));
             return $struct;
+        } elseif (\preg_match(self::SIMPLE_TYPE, trim($input), $matches)) {
+            return new Property($matches['name'], $matches['type']);
         } else {
             throw new \Exception(sprintf('Unable to parse input [%s]', $input));
         }

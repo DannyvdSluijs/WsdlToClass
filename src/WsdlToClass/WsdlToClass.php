@@ -241,8 +241,13 @@ class WsdlToClass
         $client = new \SoapClient((string) $this->wsdl);
 
         foreach ($client->__getTypes() as $rawType) {
-            $struct = $this->parser->parseType($rawType);
-            $this->wsdl->addStruct($struct->getName(), $struct);
+            $type = $this->parser->parseType($rawType);
+
+            if ($type instanceof Wsdl\Struct) {
+                $this->wsdl->addStruct($type->getName(), $type);
+            } elseif ($type instanceof Wsdl\Property) {
+                $this->wsdl->addProperty($type->getName(), $type);
+            }
         }
 
         foreach ($client->__getFunctions() as $rawFunction) {
