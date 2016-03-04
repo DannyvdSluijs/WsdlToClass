@@ -84,7 +84,7 @@ class WsdlToClass
         IWriter $writer
     ) {
         $this->wsdl = $wsdl;
-        $this->destination = (string) $destination;
+        $this->setDestination($destination);
         $this->namespacePrefix = (string) $namespacePrefix;
         $this->parser = $parser;
         $this->generator = $generator;
@@ -123,13 +123,12 @@ class WsdlToClass
 
     /**
      * Set the destination folder
-     * @param type $destination
+     * @param string $destination
      * @return \WsdlToClass\WsdlToClass
      */
     public function setDestination($destination)
     {
-        $this->destination = (string) $destination;
-
+        $this->destination = (substr($destination, -1) == '/') ? substr($destination, 0, -1) : $destination;
         return $this;
     }
 
