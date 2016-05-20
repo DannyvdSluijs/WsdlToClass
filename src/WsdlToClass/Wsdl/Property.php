@@ -16,7 +16,7 @@ namespace WsdlToClass\Wsdl;
  *
  * @author Danny van der Sluijs <danny.vandersluijs@icloud.com>
  */
-class Property
+class Property implements IWsdlNode
 {
     /**
      * The name of the property

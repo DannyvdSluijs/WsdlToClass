@@ -247,7 +247,7 @@ class WsdlToClass
             if ($type instanceof Struct) {
                 $this->wsdl->addStruct($type->getName(), $type);
             } elseif ($type instanceof Property) {
-                $this->wsdl->addProperty($type->getName(), $type);
+                $this->wsdl->addSimpleType($type->getName(), $type);
             }
         }
 

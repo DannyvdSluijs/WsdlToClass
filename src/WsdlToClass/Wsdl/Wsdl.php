@@ -28,31 +28,31 @@ class Wsdl
 
     /**
      * The methods available in the WSDl
-     * @var Wsdl\Method[]
+     * @var Method[]
      */
     private $methods = array();
 
     /**
      * The structures(complex types) that are used in the web service.
-     * @var Wsdl\Struct[]
+     * @var Struct[]
      */
     private $structures = array();
 
     /**
      * The requests(complex types) that are used in the webservice
-     * @var Wsdl\Request[]
+     * @var Request[]
      */
     private $requests = array();
 
     /**
      * The responses(complex types) that are used in the webservice
-     * @var Wsdl\Response[]
+     * @var Response[]
      */
     private $responses = array();
 
     /**
      * The simple types that are used in the web service
-     * @var Wsdl\Property[]
+     * @var Property[]
      */
     private $simpleTypes = array();
 
@@ -76,7 +76,7 @@ class Wsdl
 
     /**
      * Set the WSDL source
-     * @param type $source
+     * @param string $source
      * @return \WsdlToClass\Wsdl\Wsdl
      */
     public function setSource($source)
@@ -265,6 +265,16 @@ class Wsdl
     public function hasResponse($key)
     {
         return $this->has('responses', $key);
+    }
+
+    /**
+     * Add a simple type.
+     * @param string   $key
+     * @param Property $response
+     */
+    public function addSimpleType($key, Property $response)
+    {
+        return $this->add('simpleTypes', $key, $response);
     }
 
     /**
