@@ -13,6 +13,8 @@ namespace WsdlToClass\Generator;
 
 use WsdlToClass\Wsdl\Wsdl;
 use WsdlToClass\Wsdl\Struct;
+use Twig_Environment;
+use Twig_Loader_Filesystem;
 
 /**
  * The generator generates the classes based on the Wsdl provided.
@@ -32,10 +34,7 @@ class TwigGenerator extends AbstractGenerator implements ICompositeGenerator
      */
     public function __construct()
     {
-        $this->twig = new \Twig_Environment(
-            new \Twig_Loader_Filesystem(__DIR__ . '/Twig'),
-            array()
-        );
+        $this->twig = new Twig_Environment(new Twig_Loader_Filesystem(__DIR__ . '/Twig'), array());
     }
 
     /**
