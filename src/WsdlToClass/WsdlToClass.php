@@ -201,6 +201,7 @@ class WsdlToClass
      */
     public function execute()
     {
+        $this->generator->setNamespace($this->getNamespacePrefix());
         $this->setupDirectoryStructure()
             ->parseWsdl()
             ->generateStructures()
@@ -268,7 +269,7 @@ class WsdlToClass
         $this->output->writeln("Generating structures.");
 
 
-        $this->generator->setNamespace($this->getNamespacePrefix() . '\Structure');
+        $this->generator->setChildNamespace('Structure');
 
         foreach ($this->wsdl->getStructures() as $name => $structure) {
             /* Request & response are generated in generateResponses */
@@ -292,7 +293,7 @@ class WsdlToClass
     {
         $this->output->writeln("Generating requests.");
 
-        $this->generator->setNamespace($this->getNamespacePrefix() . '\Request');
+        $this->generator->setChildNamespace('Request');
 
         foreach ($this->wsdl->getRequests() as $name => $request) {
             $filename = $this->destination . DIRECTORY_SEPARATOR . 'Request' . DIRECTORY_SEPARATOR . ucfirst($name) . '.php';
@@ -311,7 +312,7 @@ class WsdlToClass
     {
         $this->output->writeln("Generating responses.");
 
-        $this->generator->setNamespace($this->getNamespacePrefix() . '\Response');
+        $this->generator->setChildNamespace('Response');
 
         foreach ($this->wsdl->getResponses() as $name => $response) {
             $filename = $this->destination . DIRECTORY_SEPARATOR . 'Response' . DIRECTORY_SEPARATOR . ucfirst($name) . '.php';
@@ -330,7 +331,7 @@ class WsdlToClass
     {
         $this->output->writeln("Generating methods.");
 
-        $this->generator->setNamespace($this->getNamespacePrefix() . '\Method');
+        $this->generator->setChildNamespace('Method');
         foreach ($this->wsdl->getMethods() as $name => $method) {
             $filename = $this->destination . DIRECTORY_SEPARATOR . 'Method' . DIRECTORY_SEPARATOR . ucfirst($name) . '.php';
             $content = $method->visit($this->generator);

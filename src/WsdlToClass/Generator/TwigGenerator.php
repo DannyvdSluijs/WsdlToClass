@@ -21,6 +21,10 @@ use WsdlToClass\Wsdl\Struct;
  */
 class TwigGenerator extends AbstractGenerator implements ICompositeGenerator
 {
+    /**
+     *
+     * @var Twig_Environment
+     */
     private $twig;
 
     /**
@@ -56,7 +60,8 @@ class TwigGenerator extends AbstractGenerator implements ICompositeGenerator
     {
         return $this->twig->render('struct.html', array(
             'struct' => $struct,
-            'namespace' => $this->getNamespace()
+            'namespace' => $this->getNamespace(),
+            'full_namespace' => $this->getFullNamespace()
         ));
     }
 
@@ -77,7 +82,11 @@ class TwigGenerator extends AbstractGenerator implements ICompositeGenerator
      */
     public function generateMethod(\WsdlToClass\Wsdl\Method $method)
     {
-        return $this->twig->render('method.html', array('method' => $method, 'namespace' => $this->getNamespace()));
+        return $this->twig->render('method.html', array(
+            'method' => $method,
+            'namespace' => $this->getNamespace(),
+            'full_namespace' => $this->getFullNamespace()
+        ));
     }
 
     /**

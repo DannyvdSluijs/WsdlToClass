@@ -19,10 +19,16 @@ namespace WsdlToClass\Generator;
 abstract class AbstractGenerator
 {
     /**
-     * The namespace to be used when calling a generate command.
+     * The package root namespace.
      * @var string
      */
     private $namespace;
+
+    /**
+     * The child namespace used for contextual knowlegde e.g. request/response etc
+     * @var string
+     */
+    private $childNamespace;
 
     /**
      * Get the namespace
@@ -43,5 +49,38 @@ abstract class AbstractGenerator
         $this->namespace = (string) $namespace;
 
         return $this;
+    }
+
+    /**
+     * Get the child namespace
+     * @return string
+     */
+    public function getChildNamespace()
+    {
+        return $this->childNamespace;
+    }
+
+    /**
+     * Set the child namespace
+     * @param string $childNamespace
+     * @return \WsdlToClass\Generator\AbstractGenerator
+     */
+    public function setChildNamespace($childNamespace)
+    {
+        $this->childNamespace = (string) $childNamespace;
+        return $this;
+    }
+
+    /**
+     * Get the full namespace
+     * @return type
+     */
+    public function getFullNamespace()
+    {
+        if (empty($this->childNamespace)) {
+            return $this->namespace;
+        }
+
+        return $this->namespace . '\\' . $this->childNamespace;
     }
 }

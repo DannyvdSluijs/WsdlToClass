@@ -8,12 +8,7 @@ use SoapClient;
 use {{ namespace }}\ClassMap;
 
 /**
- *
- * @category
- * @package
- * @author
- * @license
- * @link
+ * A generated SOAP client
  *
 {% for method in wsdl.methods %}
  * @method {{ namespace }}\Response\{{ method.response}} {{ method.name }}({{ namespace }}\Request\{{ method.request }} $request)

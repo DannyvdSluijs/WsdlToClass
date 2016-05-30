@@ -1,12 +1,17 @@
 <?php
+{% set properties = struct.properties %}
 
 {% include "sections/file-header.html" %}
 
-namespace {{ namespace }};
+
+namespace {{ full_namespace }};
+
+{% for property in properties %}{% if property.type not in ['string', 'float', 'integer'] %}
+use {{ namespace}}\Structure\{{property.type}};
+{% endif %}{% endfor %}
 
 class {{ struct.name }}
 {
-{% set properties = struct.properties %}
 {% for property in properties %}
     /**
      *
@@ -25,5 +30,14 @@ class {{ struct.name }}
         return $this->{{ property.name }};
     }
 
+    /**
+     * Set the {{ property.name }}
+     * @return {{ property.type }}
+     */
+    public function set{{ property.name }}(${{ property.name }})
+    {
+        $this->${{ property.name }} = ${{ property.name }};
+        return $this;
+    }
 {% endfor %}
 }
