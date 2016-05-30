@@ -23,7 +23,11 @@ class Client extends SoapClient
     {
         parent::__construct(
             '{{ wsdl.source }}',
-            array('classmap' => ClassMap::get())
+            array(
+                'classmap' => ClassMap::get(),
+                'user_agent' => 'WsdlToClass V0.2',
+                'trace' => true
+            )
         );
     }
 }
