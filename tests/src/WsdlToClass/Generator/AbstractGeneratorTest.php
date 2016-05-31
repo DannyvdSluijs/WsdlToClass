@@ -50,4 +50,34 @@ class AbstractGeneratorTest extends \PHPUnit_Framework_TestCase
         $this->assertAttributeSame('\Soap\Method', 'namespace', $this->object);
     }
 
+    /**
+     * @covers WsdlToClass\Generator\AbstractGenerator::getChildNamespace
+     */
+    public function testGetChildNamespace()
+    {
+        $this->assertNull($this->object->getChildNamespace());
+        $this->object->setChildNamespace('command');
+        $this->assertSame('command', $this->object->getChildNamespace());
+    }
+
+    /**
+     * @covers WsdlToClass\Generator\AbstractGenerator::setChildNamespace
+     */
+    public function testSetChildNamespace()
+    {
+        $this->assertSame($this->object, $this->object->setChildNamespace('request'));
+        $this->assertAttributeSame('request', 'childNamespace', $this->object);
+    }
+
+    /**
+     * @covers WsdlToClass\Generator\AbstractGenerator::getFullNamespace
+     */
+    public function testGetFullNamespace()
+    {
+        $this->assertNull($this->object->getFullNamespace());
+        $this->object->setNamespace('\Random\Shizzle');
+        $this->assertSame('\Random\Shizzle', $this->object->getFullNamespace());
+        $this->object->setChildNamespace('MyNizzle');
+        $this->assertSame('\Random\Shizzle\MyNizzle', $this->object->getFullNamespace());
+    }
 }
