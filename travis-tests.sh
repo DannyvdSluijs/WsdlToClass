@@ -1,2 +1,2 @@
 #!/bin/bash
-phpunit --coverage-clover=coverage.clover
+./vendor/bin/phpunit --coverage-clover=coverage.clover
