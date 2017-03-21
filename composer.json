@@ -17,9 +17,6 @@
         "zendframework/zend-cache": "^2.7"
     },
     "require-dev": {
-        "symfony/filesystem": "2.8.3",
-        "symfony/translation": "2.8.3",
-        "symfony/yaml": "2.8.3",
         "squizlabs/php_codesniffer": "^2.8"
     },
     "bin": [
