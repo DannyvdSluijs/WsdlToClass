@@ -60,7 +60,11 @@ EOT
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        if (!is_readable($input->getOption('destination')) && !mkdir($input->getOption('destination'), 0755, true)) {
+        $destination = $input->getOption('destination');
+
+        if (!is_readable(dirname($destination))
+            || !is_readable($destination) && !mkdir($destination, 0755, true)
+        ) {
             throw new \Exception(sprintf('Unable to read output directory [%s]', $input->getOption('destination')));
         }
 

@@ -39,4 +39,24 @@ class GenerateCommandTest extends \PHPUnit_Framework_TestCase
 
         $command->run($input, $output);
     }
+
+    /**
+     * @covers \WsdlToClass\Commands\GenerateCommand::configure()
+     * @covers \WsdlToClass\Commands\GenerateCommand::execute()
+     */
+    public function testExecuteWithUnreadableDestination()
+    {
+        $command = new GenerateCommand();
+        $input = $this->createMock('Symfony\Component\Console\Input\InputInterface');
+        $output = $this->createMock('Symfony\Component\Console\Output\OutputInterface');
+
+        $input->expects($this->atLeastOnce())
+            ->method('getOption')
+            ->willReturnMap([
+                ['destination', '/some/random/directory/that/is/not/there'],
+            ]);
+
+        $this->expectException('Exception');
+        $command->run($input, $output);
+    }
 }
