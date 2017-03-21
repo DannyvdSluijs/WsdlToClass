@@ -65,7 +65,9 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
      */
     public function testAddStruct()
     {
-        $struct = $this->getMockBuilder('WsdlToClass\Wsdl\Struct')->disableOriginalConstructor()->getMock();
+        $struct = $this->getMockBuilder('WsdlToClass\Wsdl\Struct')
+            ->disableOriginalConstructor()
+            ->getMock();
         $this->assertSame($this->object, $this->object->addStruct('mock', $struct));
         $this->assertAttributeContains($struct, 'structures', $this->object);
     }
@@ -213,7 +215,7 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
      */
     public function testVisit()
     {
-        $mock = $this->getMock('WsdlToClass\Generator\IServiceGenerator');
+        $mock = $this->createMock('WsdlToClass\Generator\IServiceGenerator');
         $mock->expects($this->once())->method('generateService')->with($this->object)->willReturn('<?php echo "Hello world!"; ');
         $this->assertSame('<?php echo "Hello world!"; ', $this->object->visit($mock));
     }

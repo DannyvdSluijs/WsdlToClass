@@ -20,9 +20,9 @@ class WsdlToClassTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $wsdl = $this->getMockBuilder('WsdlToClass\Wsdl\Wsdl')->disableOriginalConstructor()->getMock();
-        $parser = $this->getMock('WsdlToClass\Parser\IParser');
-        $generator = $this->getMock('WsdlToClass\Generator\ICompositeGenerator');
-        $writer = $this->getMock('WsdlToClass\Writer\IWriter');
+        $parser = $this->createMock('WsdlToClass\Parser\IParser');
+        $generator = $this->createMock('WsdlToClass\Generator\ICompositeGenerator');
+        $writer = $this->createMock('WsdlToClass\Writer\IWriter');
 
         $this->object = new WsdlToClass(
             $wsdl,
@@ -132,7 +132,7 @@ class WsdlToClassTest extends \PHPUnit_Framework_TestCase
     public function testGetParser()
     {
         $this->assertInstanceOf('WsdlToClass\Parser\IParser', $this->object->getParser());
-        $parser = $this->getMock('WsdlToClass\Parser\IParser');
+        $parser = $this->createMock('WsdlToClass\Parser\IParser');
         $this->object->setParser($parser);
         $this->assertSame($parser, $this->object->getParser());
     }
@@ -142,7 +142,7 @@ class WsdlToClassTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetParser()
     {
-        $parser = $this->getMock('WsdlToClass\Parser\IParser');
+        $parser = $this->createMock('WsdlToClass\Parser\IParser');
         $this->assertSame($this->object, $this->object->setParser($parser));
         $this->assertAttributeSame($parser, 'parser', $this->object);
     }
@@ -153,7 +153,7 @@ class WsdlToClassTest extends \PHPUnit_Framework_TestCase
     public function testGetGenerator()
     {
         $this->assertInstanceOf('WsdlToClass\Generator\ICompositeGenerator', $this->object->getGenerator());
-        $generator = $this->getMock('WsdlToClass\Generator\ICompositeGenerator');
+        $generator = $this->createMock('WsdlToClass\Generator\ICompositeGenerator');
         $this->object->setGenerator($generator);
         $this->assertSame($generator, $this->object->getGenerator());
     }
@@ -163,7 +163,7 @@ class WsdlToClassTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetGenerator()
     {
-        $generator = $this->getMock('WsdlToClass\Generator\ICompositeGenerator');
+        $generator = $this->createMock('WsdlToClass\Generator\ICompositeGenerator');
         $this->assertSame($this->object, $this->object->setGenerator($generator));
         $this->assertAttributeSame($generator, 'generator', $this->object);
     }

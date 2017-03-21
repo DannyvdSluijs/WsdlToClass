@@ -33,7 +33,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
      */
     public function testCreateFromStruct()
     {
-        $struct = $this->getMock('WsdlToClass\Wsdl\Struct');
+        $struct = $this->createMock('WsdlToClass\Wsdl\Struct');
         $struct->expects($this->once())->method('getName')->willReturn('ExampleRequest');
         $struct->expects($this->once())->method('getProperties')->willReturn(array());
         $request = Request::createFromStruct($struct);

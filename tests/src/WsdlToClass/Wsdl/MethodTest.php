@@ -93,7 +93,7 @@ class MethodTest extends \PHPUnit_Framework_TestCase
      */
     public function testVisit()
     {
-        $mock = $this->getMock('WsdlToClass\Generator\IMethodGenerator');
+        $mock = $this->createMock('WsdlToClass\Generator\IMethodGenerator');
         $mock->expects($this->once())->method('generateMethod')->with($this->object)->willReturn('<?php echo "Hello world!"; ');
         $this->assertSame('<?php echo "Hello world!"; ', $this->object->visit($mock));
     }

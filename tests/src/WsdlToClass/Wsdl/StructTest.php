@@ -54,7 +54,7 @@ class StructTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetProperties()
     {
-        $property = $this->getMock('WsdlToClass\Wsdl\Property');
+        $property = $this->createMock('WsdlToClass\Wsdl\Property');
         $this->assertNull($this->object->getName());
         $this->object->setProperties(array('identifier' => $property));
         $this->assertContains($property, $this->object->getProperties());
@@ -66,7 +66,7 @@ class StructTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetProperties()
     {
-        $property = $this->getMock('WsdlToClass\Wsdl\Property');
+        $property = $this->createMock('WsdlToClass\Wsdl\Property');
         $this->assertSame($this->object, $this->object->setProperties(array('identifier' => $property)));
     }
 
@@ -75,7 +75,7 @@ class StructTest extends \PHPUnit_Framework_TestCase
      */
     public function testAddProperty()
     {
-        $property = $this->getMock('WsdlToClass\Wsdl\Property');
+        $property = $this->createMock('WsdlToClass\Wsdl\Property');
         $property->expects($this->once())->method('getName')->willReturn('type');
         $this->assertSame($this->object, $this->object->addProperty($property));
         $this->assertContains($property, $this->object->getProperties());
@@ -89,7 +89,7 @@ class StructTest extends \PHPUnit_Framework_TestCase
     public function testGetProperty()
     {
         $this->assertNull($this->object->getProperty('uuid'));
-        $property = $this->getMock('WsdlToClass\Wsdl\Property');
+        $property = $this->createMock('WsdlToClass\Wsdl\Property');
         $property->expects($this->once())->method('getName')->willReturn('uuid');
         $this->object->addProperty($property);
         $this->assertSame($property, $this->object->getProperty('uuid'));
@@ -101,7 +101,7 @@ class StructTest extends \PHPUnit_Framework_TestCase
     public function testHasProperty()
     {
         $this->assertFalse($this->object->hasProperty('msisdn'));
-        $property = $this->getMock('WsdlToClass\Wsdl\Property');
+        $property = $this->createMock('WsdlToClass\Wsdl\Property');
         $property->expects($this->once())->method('getName')->willReturn('msisdn');
         $this->object->addProperty($property);
         $this->assertTrue($this->object->hasProperty('msisdn'));
@@ -112,7 +112,7 @@ class StructTest extends \PHPUnit_Framework_TestCase
      */
     public function testVisit()
     {
-        $mock = $this->getMock('WsdlToClass\Generator\IStructureGenerator');
+        $mock = $this->createMock('WsdlToClass\Generator\IStructureGenerator');
         $mock->expects($this->once())->method('generateStruct')->with($this->object)->willReturn('<?php echo "Hello world!"; ');
         $this->assertSame('<?php echo "Hello world!"; ', $this->object->visit($mock));
     }
