@@ -25,7 +25,7 @@ abstract class AbstractGenerator
     private $namespace;
 
     /**
-     * The child namespace used for contextual knowlegde e.g. request/response etc
+     * The child namespace used for contextual knowledge e.g. request/response etc
      * @var string
      */
     private $childNamespace;
@@ -41,7 +41,7 @@ abstract class AbstractGenerator
 
     /**
      * Set the namespace
-     * @param  string                                   $namespace
+     * @param  string $namespace
      * @return \WsdlToClass\Generator\AbstractGenerator
      */
     public function setNamespace($namespace)
@@ -73,7 +73,7 @@ abstract class AbstractGenerator
 
     /**
      * Get the full namespace
-     * @return type
+     * @return string
      */
     public function getFullNamespace()
     {

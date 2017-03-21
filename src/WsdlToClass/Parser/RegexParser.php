@@ -39,7 +39,6 @@ class RegexParser implements IParser
     {
         $matches = $properties = array();
         if (\preg_match(self::STRUCT, trim($input), $matches)) {
-
             /* Optional parse properties of the struct, could be empty complex types */
             \preg_match_all(self::PROPERTY, $matches['properties'], $properties);
 

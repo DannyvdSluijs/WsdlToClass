@@ -25,4 +25,10 @@ interface IServiceGenerator
      * @param Wsdl $wsdl
      */
     public function generateService(Wsdl $wsdl);
+
+    /**
+     * Get the namespace
+     * @return string
+     */
+    public function getNamespace();
 }

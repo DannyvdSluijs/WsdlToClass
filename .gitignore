@@ -1,4 +1,4 @@
 /vendor/
-/nbproject/private/
 /build/
-.DS_Store
+/.idea/
+/composer.phar

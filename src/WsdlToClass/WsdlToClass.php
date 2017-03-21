@@ -70,7 +70,7 @@ class WsdlToClass
 
     /**
      * Constructor
-     * @param Wsdl\Wsdl $wsdl
+     * @param Wsdl $wsdl
      * @param string $destination
      * @param string $namespacePrefix
      * @param IParser $parser

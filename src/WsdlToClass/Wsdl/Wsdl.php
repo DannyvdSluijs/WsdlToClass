@@ -57,7 +57,7 @@ class Wsdl
     private $simpleTypes = array();
 
     /**
-     * Comstructor
+     * Constructor
      * @param string $source
      */
     public function __construct($source)
@@ -149,7 +149,7 @@ class Wsdl
 
     /**
      * Get all structures
-     * @return Wsdl\Structs[]
+     * @return Struct[]
      */
     public function getStructures()
     {
@@ -201,7 +201,7 @@ class Wsdl
 
     /**
      * Get all methods
-     * @return Wsdl\Method[]
+     * @return Method[]
      */
     public function getMethods()
     {
@@ -221,7 +221,7 @@ class Wsdl
 
     /**
      * Get all requests.
-     * @return Wsdl\Request[]
+     * @return Request[]
      */
     public function getRequests()
     {
@@ -240,8 +240,9 @@ class Wsdl
 
     /**
      * Add a named response.
-     * @param string   $key
+     * @param string $key
      * @param Response $response
+     * @return Wsdl
      */
     public function addResponse($key, Response $response)
     {
@@ -250,7 +251,7 @@ class Wsdl
 
     /**
      * Get all responses.
-     * @return Wsdl\Response[]
+     * @return Response[]
      */
     public function getResponses()
     {
@@ -258,7 +259,7 @@ class Wsdl
     }
 
     /**
-     * Test if a nmed response is avialable.
+     * Test if a named response is available.
      * @param  string  $key
      * @return boolean
      */
@@ -269,8 +270,9 @@ class Wsdl
 
     /**
      * Add a simple type.
-     * @param string   $key
+     * @param string $key
      * @param Property $response
+     * @return Wsdl
      */
     public function addSimpleType($key, Property $response)
     {
@@ -278,8 +280,8 @@ class Wsdl
     }
 
     /**
-     * Get all simpel types
-     * @return Wsdl\Property[]
+     * Get all simple types
+     * @return Property[]
      */
     public function getSimpleTypes()
     {

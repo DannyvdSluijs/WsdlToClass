@@ -55,7 +55,7 @@ class Struct implements IWsdlNode
 
     /**
      * Get the properties fo the Struct
-     * @return type
+     * @return \WsdlToClass\Wsdl\Property[]
      */
     public function getProperties()
     {
@@ -64,7 +64,7 @@ class Struct implements IWsdlNode
 
     /**
      * Set the properties of the Struct
-     * @param  array                    $properties
+     * @param  \WsdlToClass\Wsdl\Property[] $properties
      * @return \WsdlToClass\Wsdl\Struct
      */
     public function setProperties(array $properties)

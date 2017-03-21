@@ -10,11 +10,12 @@
  * @link      http://dannyvandersluijs.nl
  */
 namespace WsdlToClass\Generator;
+
 /**
- *
+ * The ICompositeGenerator joins the different generator interfaces to a single interface
  * @author dannyvandersluijs
  */
 interface ICompositeGenerator extends IClassMapGenerator, IClientGenerator, IMethodGenerator, IServiceGenerator, IStructureGenerator
 {
-    //put your code here
+    /* Intentionally left blank */
 }

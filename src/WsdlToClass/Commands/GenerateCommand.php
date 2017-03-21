@@ -23,7 +23,7 @@ use WsdlToClass\Writer\ResourceWriter;
 
 /**
  * The generate commands takes a wsdl and generates a set of php classes which can be utilised
- * to implement the WSDL for either server or client implemetation.
+ * to implement the WSDL for either server or client implementation.
  *
  * @author Danny van der Sluijs <danny.vandersluijs@icloud.com>
  */
@@ -42,19 +42,20 @@ class GenerateCommand extends Command
                 new InputArgument('wsdl', InputArgument::REQUIRED, 'The wsdl to generate', null),
                 new InputOption('destination', 'd', InputOption::VALUE_REQUIRED, 'The destination directory', getcwd()),
                 new InputOption('namespace', null, InputOption::VALUE_REQUIRED, 'An optional namespace', 'Soap'),
-            ))
+             ))
              ->setHelp(<<<EOT
 Usage:
 
-<info>./run.php wdltoclass:generate http://www.url.com/wsdl</info>
+<info>./run.php wsdltoclass:generate http://www.url.com/wsdl</info>
 EOT
-);
+        );
     }
 
     /**
      * Execute the generate command
-     * @param  InputInterface  $input
+     * @param  InputInterface $input
      * @param  OutputInterface $output
+     * @return void
      * @throws \Exception
      */
     protected function execute(InputInterface $input, OutputInterface $output)

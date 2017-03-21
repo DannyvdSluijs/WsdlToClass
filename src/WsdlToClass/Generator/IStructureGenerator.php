@@ -12,6 +12,7 @@
 namespace WsdlToClass\Generator;
 
 use WsdlToClass\Wsdl\Struct;
+
 /**
  * The IStructureGenerator ensures that teh structure classes can be generated
  * @author Danny van der Sluijs <danny.vandersluijs@icloud.com>
@@ -23,4 +24,10 @@ interface IStructureGenerator
      * @param Struct $struct
      */
     public function generateStruct(Struct $struct);
+
+    /**
+     * Get the namespace
+     * @return string
+     */
+    public function getNamespace();
 }

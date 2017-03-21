@@ -25,4 +25,10 @@ interface IClientGenerator
      * @param Wsdl $wsdl
      */
     public function generateClient(Wsdl $wsdl);
+
+    /**
+     * Get the namespace
+     * @return string
+     */
+    public function getNamespace();
 }

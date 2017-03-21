@@ -25,4 +25,10 @@ interface IClassMapGenerator
      * @param Wsdl $wsdl
      */
     public function generateClassMap(Wsdl $wsdl);
+
+    /**
+     * Get the namespace
+     * @return string
+     */
+    public function getNamespace();
 }

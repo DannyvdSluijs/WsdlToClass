@@ -10,6 +10,7 @@
  * @link      http://dannyvandersluijs.nl
  */
 namespace WsdlToClass\Writer;
+
 /**
  * Description of ResourceWriter
  *

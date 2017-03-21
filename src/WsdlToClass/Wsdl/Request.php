@@ -26,8 +26,7 @@ class Request extends Struct
     public static function createFromStruct(Struct $struct)
     {
         $request = new static;
-        $request
-            ->setName($struct->getName())
+        $request->setName($struct->getName())
             ->setProperties($struct->getProperties());
 
         return $request;

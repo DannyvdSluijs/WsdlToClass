@@ -29,5 +29,5 @@ interface IParser
      * @param  string                   $input
      * @return \WsdlToClass\Wsdl\Method
      */
-    public function parsefunction($input);
+    public function parseFunction($input);
 }
