@@ -30,10 +30,12 @@ class RegexParser implements IParser
     const ARRAYOFCOMPLEXTYPE = '/^(?P<type>\w*) (?P<name>\w*)\[\]$/';
 
     const SIMPLE_TYPE = '/^(?P<type>\w*) (?P<name>\w*)$/';
+
     /**
      * Parse a type from a string to a Struct
      * @param string $input
      * @return Struct|Property
+     * @throws \Exception when the input cannot be properly parsed.
      */
     public function parseType($input)
     {
