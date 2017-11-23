@@ -7,7 +7,6 @@ namespace WsdlToClass\Wsdl;
  */
 class StructTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * @var Struct
      */
@@ -23,25 +22,17 @@ class StructTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     */
-    protected function tearDown()
-    {
-    }
-
-    /**
-     * @covers WsdlToClass\Wsdl\Struct::getName
+     * @covers \WsdlToClass\Wsdl\Struct::getName
      */
     public function testGetName()
     {
-        $this->assertNull($this->object->getName());
+        $this->assertEmpty($this->object->getName());
         $this->object->setName('identifier');
         $this->assertSame('identifier', $this->object->getName());
     }
 
     /**
-     * @covers WsdlToClass\Wsdl\Struct::setName
+     * @covers \WsdlToClass\Wsdl\Struct::setName
      */
     public function testSetName()
     {
@@ -50,70 +41,79 @@ class StructTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WsdlToClass\Wsdl\Struct::getProperties
+     * @covers \WsdlToClass\Wsdl\Struct::getProperties
      */
     public function testGetProperties()
     {
         $property = $this->createMock('WsdlToClass\Wsdl\Property');
-        $this->assertNull($this->object->getName());
-        $this->object->setProperties(array('identifier' => $property));
+        $this->assertEmpty($this->object->getName());
+        $this->object->setProperties(['identifier' => $property]);
         $this->assertContains($property, $this->object->getProperties());
         $this->assertArrayHasKey('identifier', $this->object->getProperties());
     }
 
     /**
-     * @covers WsdlToClass\Wsdl\Struct::setProperties
+     * @covers \WsdlToClass\Wsdl\Struct::setProperties
      */
     public function testSetProperties()
     {
         $property = $this->createMock('WsdlToClass\Wsdl\Property');
-        $this->assertSame($this->object, $this->object->setProperties(array('identifier' => $property)));
+        $this->assertSame($this->object, $this->object->setProperties(['identifier' => $property]));
     }
 
     /**
-     * @covers WsdlToClass\Wsdl\Struct::addProperty
+     * @covers \WsdlToClass\Wsdl\Struct::addProperty
      */
     public function testAddProperty()
     {
         $property = $this->createMock('WsdlToClass\Wsdl\Property');
-        $property->expects($this->once())->method('getName')->willReturn('type');
+        $property->expects($this->once())
+            ->method('getName')
+            ->willReturn('type');
         $this->assertSame($this->object, $this->object->addProperty($property));
         $this->assertContains($property, $this->object->getProperties());
         $this->assertArrayHasKey('type', $this->object->getProperties());
     }
 
     /**
-     * @covers WsdlToClass\Wsdl\Struct::getProperty
+     * @covers \WsdlToClass\Wsdl\Struct::getProperty
      * @depends testAddProperty
      */
     public function testGetProperty()
     {
         $this->assertNull($this->object->getProperty('uuid'));
         $property = $this->createMock('WsdlToClass\Wsdl\Property');
-        $property->expects($this->once())->method('getName')->willReturn('uuid');
+        $property->expects($this->once())
+            ->method('getName')
+            ->willReturn('uuid');
         $this->object->addProperty($property);
         $this->assertSame($property, $this->object->getProperty('uuid'));
     }
 
     /**
-     * @covers WsdlToClass\Wsdl\Struct::hasProperty
+     * @covers \WsdlToClass\Wsdl\Struct::hasProperty
      */
     public function testHasProperty()
     {
         $this->assertFalse($this->object->hasProperty('msisdn'));
         $property = $this->createMock('WsdlToClass\Wsdl\Property');
-        $property->expects($this->once())->method('getName')->willReturn('msisdn');
+        $property->expects($this->once())
+            ->method('getName')
+            ->willReturn('msisdn');
         $this->object->addProperty($property);
         $this->assertTrue($this->object->hasProperty('msisdn'));
     }
 
     /**
-     * @covers WsdlToClass\Wsdl\Struct::visit
+     * @covers \WsdlToClass\Wsdl\Struct::visit
      */
     public function testVisit()
     {
         $mock = $this->createMock('WsdlToClass\Generator\IStructureGenerator');
-        $mock->expects($this->once())->method('generateStruct')->with($this->object)->willReturn('<?php echo "Hello world!"; ');
+        $mock->expects($this->once())
+            ->method('generateStruct')
+            ->with($this->object)
+            ->willReturn('<?php echo "Hello world!"; ');
         $this->assertSame('<?php echo "Hello world!"; ', $this->object->visit($mock));
     }
 }

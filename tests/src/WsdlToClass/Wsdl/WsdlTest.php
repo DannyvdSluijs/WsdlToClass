@@ -23,16 +23,7 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     */
-    protected function tearDown()
-    {
-
-    }
-
-    /**
-     * @covers WsdlToClass\Wsdl\Wsdl::__construct
+     * @covers \WsdlToClass\Wsdl\Wsdl::__construct
      */
     public function testConstruct()
     {
@@ -41,7 +32,7 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WsdlToClass\Wsdl\Wsdl::getSource
+     * @covers \WsdlToClass\Wsdl\Wsdl::getSource
      */
     public function testGetSource()
     {
@@ -51,7 +42,7 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WsdlToClass\Wsdl\Wsdl::setSource
+     * @covers \WsdlToClass\Wsdl\Wsdl::setSource
      */
     public function testSetSource()
     {
@@ -60,8 +51,8 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WsdlToClass\Wsdl\Wsdl::addStruct
-     * @covers WsdlToClass\Wsdl\Wsdl::add
+     * @covers \WsdlToClass\Wsdl\Wsdl::addStruct
+     * @covers \WsdlToClass\Wsdl\Wsdl::add
      */
     public function testAddStruct()
     {
@@ -70,10 +61,12 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
             ->getMock();
         $this->assertSame($this->object, $this->object->addStruct('mock', $struct));
         $this->assertAttributeContains($struct, 'structures', $this->object);
+
+        return $this->object;
     }
 
     /**
-     * @covers WsdlToClass\Wsdl\Wsdl::getStructures
+     * @covers \WsdlToClass\Wsdl\Wsdl::getStructures
      */
     public function testGetStructures()
     {
@@ -86,20 +79,33 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WsdlToClass\Wsdl\Wsdl::getStruct
-     * @todo   Implement testGetStruct().
+     * @covers  \WsdlToClass\Wsdl\Wsdl::getStruct
+     * @covers  \WsdlToClass\Wsdl\Wsdl::get
+     * @depends testAddStruct
+     * @param $wsdl
      */
-    public function testGetStruct()
+    public function testGetStruct($wsdl)
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $this->assertInstanceOf('WsdlToClass\Wsdl\Struct', $wsdl->getStruct('mock'));
+
+        return $wsdl;
     }
 
     /**
-     * @covers WsdlToClass\Wsdl\Wsdl::addMethod
-     * @covers WsdlToClass\Wsdl\Wsdl::add
+     * @covers  \WsdlToClass\Wsdl\Wsdl::hasStruct()
+     * @covers  \WsdlToClass\Wsdl\Wsdl::has()
+     * @depends testGetStruct
+     * @param $wsdl
+     */
+    public function testHasStruct($wsdl)
+    {
+        $this->assertFalse($wsdl->hasStruct('Bananas'));
+        $this->assertTrue($wsdl->hasStruct('mock'));
+    }
+
+    /**
+     * @covers \WsdlToClass\Wsdl\Wsdl::addMethod
+     * @covers \WsdlToClass\Wsdl\Wsdl::add
      */
     public function testAddMethod()
     {
@@ -117,7 +123,7 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WsdlToClass\Wsdl\Wsdl::getMethods
+     * @covers \WsdlToClass\Wsdl\Wsdl::getMethods
      */
     public function testGetMethods()
     {
@@ -130,8 +136,8 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WsdlToClass\Wsdl\Wsdl::addRequest
-     * @covers WsdlToClass\Wsdl\Wsdl::add
+     * @covers \WsdlToClass\Wsdl\Wsdl::addRequest
+     * @covers \WsdlToClass\Wsdl\Wsdl::add
      */
     public function testAddRequest()
     {
@@ -141,7 +147,7 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WsdlToClass\Wsdl\Wsdl::getRequests
+     * @covers \WsdlToClass\Wsdl\Wsdl::getRequests
      */
     public function testGetRequests()
     {
@@ -154,20 +160,20 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WsdlToClass\Wsdl\Wsdl::hasRequest
+     * @covers \WsdlToClass\Wsdl\Wsdl::hasRequest
      * @todo   Implement testHasRequest().
      */
     public function testHasRequest()
     {
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete(
-                'This test has not been implemented yet.'
+            'This test has not been implemented yet.'
         );
     }
 
     /**
-     * @covers WsdlToClass\Wsdl\Wsdl::addResponse
-     * @covers WsdlToClass\Wsdl\Wsdl::add
+     * @covers \WsdlToClass\Wsdl\Wsdl::addResponse
+     * @covers \WsdlToClass\Wsdl\Wsdl::add
      */
     public function testAddResponse()
     {
@@ -177,7 +183,7 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WsdlToClass\Wsdl\Wsdl::getResponses
+     * @covers \WsdlToClass\Wsdl\Wsdl::getResponses
      */
     public function testGetResponses()
     {
@@ -190,19 +196,19 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WsdlToClass\Wsdl\Wsdl::hasResponse
+     * @covers \WsdlToClass\Wsdl\Wsdl::hasResponse
      * @todo   Implement testHasResponse().
      */
     public function testHasResponse()
     {
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete(
-                'This test has not been implemented yet.'
+            'This test has not been implemented yet.'
         );
     }
 
     /**
-     * @covers WsdlToClass\Wsdl\Wsdl::__toString
+     * @covers \WsdlToClass\Wsdl\Wsdl::__toString
      */
     public function test__toString()
     {
@@ -211,7 +217,7 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WsdlToClass\Wsdl\Wsdl::visit
+     * @covers \WsdlToClass\Wsdl\Wsdl::visit
      */
     public function testVisit()
     {
@@ -219,5 +225,4 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
         $mock->expects($this->once())->method('generateService')->with($this->object)->willReturn('<?php echo "Hello world!"; ');
         $this->assertSame('<?php echo "Hello world!"; ', $this->object->visit($mock));
     }
-
 }

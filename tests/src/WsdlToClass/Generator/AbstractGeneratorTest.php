@@ -28,21 +28,20 @@ class AbstractGeneratorTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-
     }
 
     /**
-     * @covers WsdlToClass\Generator\AbstractGenerator::getNamespace
+     * @covers \WsdlToClass\Generator\AbstractGenerator::getNamespace
      */
     public function testGetNamespace()
     {
-        $this->assertNull($this->object->getNamespace());
+        $this->assertEmpty($this->object->getNamespace());
         $this->object->setNamespace('\Soap\Messages');
         $this->assertSame('\Soap\Messages', $this->object->getNamespace());
     }
 
     /**
-     * @covers WsdlToClass\Generator\AbstractGenerator::setNamespace
+     * @covers \WsdlToClass\Generator\AbstractGenerator::setNamespace
      */
     public function testSetNamespace()
     {
@@ -51,17 +50,17 @@ class AbstractGeneratorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WsdlToClass\Generator\AbstractGenerator::getChildNamespace
+     * @covers \WsdlToClass\Generator\AbstractGenerator::getChildNamespace
      */
     public function testGetChildNamespace()
     {
-        $this->assertNull($this->object->getChildNamespace());
+        $this->assertEmpty($this->object->getChildNamespace());
         $this->object->setChildNamespace('command');
         $this->assertSame('command', $this->object->getChildNamespace());
     }
 
     /**
-     * @covers WsdlToClass\Generator\AbstractGenerator::setChildNamespace
+     * @covers \WsdlToClass\Generator\AbstractGenerator::setChildNamespace
      */
     public function testSetChildNamespace()
     {
@@ -70,11 +69,11 @@ class AbstractGeneratorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WsdlToClass\Generator\AbstractGenerator::getFullNamespace
+     * @covers \WsdlToClass\Generator\AbstractGenerator::getFullNamespace
      */
     public function testGetFullNamespace()
     {
-        $this->assertNull($this->object->getFullNamespace());
+        $this->assertEmpty($this->object->getFullNamespace());
         $this->object->setNamespace('\Random\Shizzle');
         $this->assertSame('\Random\Shizzle', $this->object->getFullNamespace());
         $this->object->setChildNamespace('MyNizzle');

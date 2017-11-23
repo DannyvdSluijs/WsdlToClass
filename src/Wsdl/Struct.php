@@ -1,22 +1,20 @@
 <?php
-
 /**
  * WsdlToClass
  *
- * PHP Version 5.6
+ * PHP Version 7.0
  *
- * @copyright 2015 Danny van der Sluijs <danny.vandersluijs@icloud.com>
+ * @copyright 2015-2017 Danny van der Sluijs <danny.vandersluijs@icloud.com>
  * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU-GPL
  * @link      http://dannyvandersluijs.nl
  */
+
 namespace WsdlToClass\Wsdl;
 
 use WsdlToClass\Generator\IStructureGenerator;
 
 /**
  * A Struct is a class representation of complex type in the wsdl.
- *
- * @author Danny van der Sluijs <danny.vandersluijs@icloud.com>
  */
 class Struct implements IWsdlNode
 {
@@ -24,29 +22,29 @@ class Struct implements IWsdlNode
      * The name of the Struct
      * @var string
      */
-    private $name;
+    private $name = '';
 
     /**
      * The properties of the Struct
      * @var Property[]
      */
-    private $properties = array();
+    private $properties = [];
 
     /**
      * Get the name of the Struct
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
     /**
      * Set the name of the struct
-     * @param  string                   $name
-     * @return \WsdlToClass\Wsdl\Struct
+     * @param  string $name
+     * @return string
      */
-    public function setName($name)
+    public function setName(string $name)
     {
         $this->name = (string) $name;
 

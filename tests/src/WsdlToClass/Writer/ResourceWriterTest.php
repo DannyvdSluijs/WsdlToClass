@@ -28,7 +28,6 @@ class ResourceWriterTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-
     }
 
     /**
@@ -43,5 +42,4 @@ class ResourceWriterTest extends \PHPUnit_Framework_TestCase
         $this->assertFileExists($filename);
         $this->assertEquals($content, file_get_contents($filename));
     }
-
 }

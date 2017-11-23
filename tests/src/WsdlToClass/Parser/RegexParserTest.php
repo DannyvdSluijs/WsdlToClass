@@ -41,7 +41,7 @@ struct ProductLine {
  string RelevanceRank;
 }
 EOT
-);
+        );
         $this->assertInstanceOf('WsdlToClass\Wsdl\Struct', $result);
         $this->assertSame('ProductLine', $result->getName());
         $this->assertTrue($result->hasProperty('Mode'));

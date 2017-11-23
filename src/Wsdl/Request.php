@@ -1,11 +1,10 @@
 <?php
-
 /**
  * WsdlToClass
  *
- * PHP Version 5.6
+ * PHP Version 7.0
  *
- * @copyright 2015 Danny van der Sluijs <danny.vandersluijs@icloud.com>
+ * @copyright 2015-2017 Danny van der Sluijs <danny.vandersluijs@icloud.com>
  * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU-GPL
  * @link      http://dannyvandersluijs.nl
  */
@@ -13,8 +12,6 @@ namespace WsdlToClass\Wsdl;
 
 /**
  * The request is a specific type of struct
- *
- * @author Danny van der Sluijs <danny.vandersluijs@icloud.com>
  */
 class Request extends Struct
 {
@@ -23,7 +20,7 @@ class Request extends Struct
      * @param \WsdlToClass\Wsdl\Struct $struct
      * @return Request
      */
-    public static function createFromStruct(Struct $struct)
+    public static function createFromStruct(Struct $struct): Request
     {
         $request = new static;
         $request->setName($struct->getName())

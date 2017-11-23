@@ -23,15 +23,7 @@ class PropertyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     */
-    protected function tearDown()
-    {
-    }
-
-    /**
-     * @covers WsdlToClass\Wsdl\Property::__construct
+     * @covers \WsdlToClass\Wsdl\Property::__construct
      */
     public function testConstructor()
     {
@@ -41,17 +33,17 @@ class PropertyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WsdlToClass\Wsdl\Property::getName
+     * @covers \WsdlToClass\Wsdl\Property::getName
      */
     public function testGetName()
     {
-        $this->assertNull($this->object->getName());
+        $this->assertEmpty($this->object->getName());
         $this->object->setName('identifier');
         $this->assertSame('identifier', $this->object->getName());
     }
 
     /**
-     * @covers WsdlToClass\Wsdl\Property::setName
+     * @covers \WsdlToClass\Wsdl\Property::setName
      */
     public function testSetName()
     {
@@ -60,17 +52,17 @@ class PropertyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WsdlToClass\Wsdl\Property::getType
+     * @covers \WsdlToClass\Wsdl\Property::getType
      */
     public function testGetType()
     {
-        $this->assertNull($this->object->getType());
+        $this->assertEmpty($this->object->getType());
         $this->object->setType('string');
         $this->assertSame('string', $this->object->getType());
     }
 
     /**
-     * @covers WsdlToClass\Wsdl\Property::setType
+     * @covers \WsdlToClass\Wsdl\Property::setType
      */
     public function testSetType()
     {

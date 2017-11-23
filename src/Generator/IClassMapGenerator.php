@@ -1,11 +1,10 @@
 <?php
-
 /**
  * WsdlToClass
  *
- * PHP Version 5.6
+ * PHP Version 7.0
  *
- * @copyright 2015 Danny van der Sluijs <danny.vandersluijs@icloud.com>
+ * @copyright 2015-2017 Danny van der Sluijs <danny.vandersluijs@icloud.com>
  * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU-GPL
  * @link      http://dannyvandersluijs.nl
  */
@@ -16,19 +15,26 @@ use WsdlToClass\Wsdl\Wsdl;
 
 /**
  * The IClassMapGenerator ensures that a classmap class can be generated.
- * @author Danny van der Sluijs <danny.vandersluijs@icloud.com>
  */
 interface IClassMapGenerator
 {
     /**
      * Generate a class map from an WSDL object
      * @param Wsdl $wsdl
+     * @return string
      */
-    public function generateClassMap(Wsdl $wsdl);
+    public function generateClassMap(Wsdl $wsdl): string;
 
     /**
      * Get the namespace
      * @return string
      */
-    public function getNamespace();
+    public function getNamespace(): string;
+
+    /**
+     * Set the namespace
+     * @param string $namespace
+     * @return self
+     */
+    public function setNamespace(string $namespace);
 }

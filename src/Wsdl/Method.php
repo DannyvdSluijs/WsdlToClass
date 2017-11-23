@@ -1,11 +1,10 @@
 <?php
-
 /**
  * WsdlToClass
  *
- * PHP Version 5.6
+ * PHP Version 7.0
  *
- * @copyright 2015 Danny van der Sluijs <danny.vandersluijs@icloud.com>
+ * @copyright 2015-2017 Danny van der Sluijs <danny.vandersluijs@icloud.com>
  * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU-GPL
  * @link      http://dannyvandersluijs.nl
  */
@@ -15,8 +14,6 @@ use WsdlToClass\Generator\IMethodGenerator;
 
 /**
  * A method represents an function available from a WSDL.
- *
- * @author Danny van der Sluijs <danny.vandersluijs@icloud.com>
  */
 class Method implements IWsdlNode
 {
@@ -24,25 +21,25 @@ class Method implements IWsdlNode
      * The name of the method.
      * @var string
      */
-    private $name;
+    private $name = '';
 
     /**
      * The name of the request belonging to the method.
      * @var string
      */
-    private $request;
+    private $request = '';
 
     /**
      * The name of the response belonging to the method.
      * @var string
      */
-    private $response;
+    private $response = '';
 
     /**
      * Get the name of the method.
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -52,7 +49,7 @@ class Method implements IWsdlNode
      * @param  string $name
      * @return Method
      */
-    public function setName($name)
+    public function setName(string $name)
     {
         $this->name = (string) $name;
 
@@ -63,7 +60,7 @@ class Method implements IWsdlNode
      * Get the name of the request belonging to the method.
      * @return string
      */
-    public function getRequest()
+    public function getRequest(): string
     {
         return $this->request;
     }
@@ -73,7 +70,7 @@ class Method implements IWsdlNode
      * @param  string $request
      * @return Method
      */
-    public function setRequest($request)
+    public function setRequest(string $request): Method
     {
         $this->request = (string) $request;
 
@@ -84,7 +81,7 @@ class Method implements IWsdlNode
      * Get the name of the response belonging to the method
      * @return string
      */
-    public function getResponse()
+    public function getResponse(): string
     {
         return $this->response;
     }
@@ -92,8 +89,9 @@ class Method implements IWsdlNode
     /**
      * Set the name of the response belonging to the method
      * @param string $response
+     * @return Method
      */
-    public function setResponse($response)
+    public function setResponse(string $response): self
     {
         $this->response = (string) $response;
 
@@ -105,7 +103,7 @@ class Method implements IWsdlNode
      * @param IMethodGenerator $generator
      * @return string
      */
-    public function visit(IMethodGenerator $generator)
+    public function visit(IMethodGenerator $generator): string
     {
         return $generator->generateMethod($this);
     }

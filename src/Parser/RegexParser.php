@@ -1,14 +1,14 @@
 <?php
-
 /**
  * WsdlToClass
  *
- * PHP Version 5.6
+ * PHP Version 7.0
  *
- * @copyright 2015 Danny van der Sluijs <danny.vandersluijs@icloud.com>
+ * @copyright 2015-2017 Danny van der Sluijs <danny.vandersluijs@icloud.com>
  * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU-GPL
  * @link      http://dannyvandersluijs.nl
  */
+
 namespace WsdlToClass\Parser;
 
 use WsdlToClass\Wsdl\Struct;
@@ -16,9 +16,7 @@ use WsdlToClass\Wsdl\Property;
 use WsdlToClass\Wsdl\Method;
 
 /**
- * The regex parser uses regex to parse string to Structs or Methods
- *
- * @author Danny van der Sluijs <danny.vandersluijs@icloud.com>
+ * The regex parser uses regex to parse string to Struct or Method classes
  */
 class RegexParser implements IParser
 {
@@ -37,7 +35,7 @@ class RegexParser implements IParser
      * @return Struct|Property
      * @throws \Exception when the input cannot be properly parsed.
      */
-    public function parseType($input)
+    public function parseType(string $input)
     {
         $matches = $properties = array();
         if (\preg_match(self::STRUCT, trim($input), $matches)) {
@@ -66,11 +64,11 @@ class RegexParser implements IParser
 
     /**
      * Parse the input from a string to a function
-     * @param  string                   $input
+     * @param  string $input
      * @return Method
      * @throws \Exception
      */
-    public function parseFunction($input)
+    public function parseFunction(string $input): Method
     {
         $matches = array();
         if (\preg_match(self::_FUNCTION, trim($input), $matches)) {

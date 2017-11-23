@@ -2,12 +2,13 @@
 /**
  * WsdlToClass
  *
- * PHP Version 5.6
+ * PHP Version 7.0
  *
- * @copyright 2015 Danny van der Sluijs <danny.vandersluijs@icloud.com>
+ * @copyright 2015-2017 Danny van der Sluijs <danny.vandersluijs@icloud.com>
  * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU-GPL
  * @link      http://dannyvandersluijs.nl
  */
+
 namespace WsdlToClass\Commands;
 
 use Symfony\Component\Console\Command\Command;
@@ -24,8 +25,6 @@ use WsdlToClass\Writer\ResourceWriter;
 /**
  * The generate commands takes a wsdl and generates a set of php classes which can be utilised
  * to implement the WSDL for either server or client implementation.
- *
- * @author Danny van der Sluijs <danny.vandersluijs@icloud.com>
  */
 class GenerateCommand extends Command
 {
@@ -38,11 +37,11 @@ class GenerateCommand extends Command
         $this
             ->setName("wsdltoclass:generate")
              ->setDescription("Transform a WSDL to PHP classes")
-             ->setDefinition(array(
+             ->setDefinition([
                 new InputArgument('wsdl', InputArgument::REQUIRED, 'The wsdl to generate', null),
                 new InputOption('destination', 'd', InputOption::VALUE_REQUIRED, 'The destination directory', getcwd()),
                 new InputOption('namespace', null, InputOption::VALUE_REQUIRED, 'An optional namespace', 'Soap'),
-             ))
+             ])
              ->setHelp(<<<EOT
 Usage:
 

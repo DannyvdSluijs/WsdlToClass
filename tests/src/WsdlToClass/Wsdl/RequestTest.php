@@ -41,6 +41,5 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('WsdlToClass\Wsdl\Request', $request);
         $this->assertSame($request->getName(), 'ExampleRequest');
         $this->assertSame($request->getProperties(), array());
-
     }
 }

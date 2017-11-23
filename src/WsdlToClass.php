@@ -1,14 +1,14 @@
 <?php
-
 /**
  * WsdlToClass
  *
- * PHP Version 5.6
+ * PHP Version 7.0
  *
- * @copyright 2015 Danny van der Sluijs <danny.vandersluijs@icloud.com>
+ * @copyright 2015-2017 Danny van der Sluijs <danny.vandersluijs@icloud.com>
  * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU-GPL
  * @link      http://dannyvandersluijs.nl
  */
+
 namespace WsdlToClass;
 
 use Symfony\Component\Console\Output\OutputInterface;
@@ -20,9 +20,7 @@ use WsdlToClass\Generator\ICompositeGenerator;
 use WsdlToClass\Writer\IWriter;
 
 /**
- * The WsdlToClass acts as facade class to simplyfy the overall process.
- *
- * @author Danny van der Sluijs <danny.vandersluijs@icloud.com>
+ * The WsdlToClass acts as facade class to simplify the overall process.
  */
 class WsdlToClass
 {
@@ -74,6 +72,8 @@ class WsdlToClass
      * @param string $destination
      * @param string $namespacePrefix
      * @param IParser $parser
+     * @param ICompositeGenerator $generator
+     * @param IWriter $writer
      */
     public function __construct(
         Wsdl $wsdl,
@@ -95,7 +95,7 @@ class WsdlToClass
      * Get the Wsdl
      * @return Wsdl
      */
-    public function getWsdl()
+    public function getWsdl(): Wsdl
     {
         return $this->wsdl;
     }
@@ -105,7 +105,7 @@ class WsdlToClass
      * @param Wsdl $wsdl
      * @return \WsdlToClass\WsdlToClass
      */
-    public function setWsdl(Wsdl $wsdl)
+    public function setWsdl(Wsdl $wsdl): WsdlToClass
     {
         $this->wsdl = $wsdl;
 
@@ -116,7 +116,7 @@ class WsdlToClass
      * Get the destination folder
      * @return string
      */
-    public function getDestination()
+    public function getDestination(): string
     {
         return $this->destination;
     }
@@ -126,7 +126,7 @@ class WsdlToClass
      * @param string $destination
      * @return \WsdlToClass\WsdlToClass
      */
-    public function setDestination($destination)
+    public function setDestination($destination): WsdlToClass
     {
         $this->destination = (substr($destination, -1) == '/') ? substr($destination, 0, -1) : $destination;
         return $this;
@@ -136,7 +136,7 @@ class WsdlToClass
      * Get the namespace prefix
      * @return string
      */
-    public function getNamespacePrefix()
+    public function getNamespacePrefix(): string
     {
         return $this->namespacePrefix;
     }
@@ -146,7 +146,7 @@ class WsdlToClass
      * @param string $namespacePrefix
      * @return \WsdlToClass\WsdlToClass
      */
-    public function setNamespacePrefix($namespacePrefix)
+    public function setNamespacePrefix($namespacePrefix): WsdlToClass
     {
         $this->namespacePrefix = (string) $namespacePrefix;
 
@@ -157,7 +157,7 @@ class WsdlToClass
      * Get the output interface
      * @return OutputInterface
      */
-    public function getOutput()
+    public function getOutput(): OutputInterface
     {
         return $this->output;
     }
@@ -167,29 +167,43 @@ class WsdlToClass
      * @param OutputInterface $output
      * @return \WsdlToClass\WsdlToClass
      */
-    public function setOutput(OutputInterface $output)
+    public function setOutput(OutputInterface $output): WsdlToClass
     {
         $this->output = $output;
         return $this;
     }
 
-    public function getParser()
+    /**
+     * @return IParser
+     */
+    public function getParser(): IParser
     {
         return $this->parser;
     }
 
-    public function setParser(IParser $parser)
+    /**
+     * @param IParser $parser
+     * @return WsdlToClass
+     */
+    public function setParser(IParser $parser): WsdlToClass
     {
         $this->parser = $parser;
         return $this;
     }
 
-    public function getGenerator()
+    /**
+     * @return ICompositeGenerator
+     */
+    public function getGenerator(): ICompositeGenerator
     {
         return $this->generator;
     }
 
-    public function setGenerator(ICompositeGenerator $generator)
+    /**
+     * @param ICompositeGenerator $generator
+     * @return WsdlToClass
+     */
+    public function setGenerator(ICompositeGenerator $generator): WsdlToClass
     {
         $this->generator = $generator;
         return $this;
@@ -217,10 +231,10 @@ class WsdlToClass
      * Create the required directories
      * @return \WsdlToClass\WsdlToClass
      */
-    protected function setupDirectoryStructure()
+    protected function setupDirectoryStructure(): WsdlToClass
     {
         $this->output->writeln("Creating subdirectories.");
-        $subDirectories = array('Method', 'Structure', 'Request', 'Response');
+        $subDirectories = ['Method', 'Structure', 'Request', 'Response'];
 
         foreach ($subDirectories as $subDir) {
             $fqdn = $this->getDestination() . DIRECTORY_SEPARATOR . $subDir;
@@ -237,7 +251,7 @@ class WsdlToClass
      * Parse a  wsdl to the WsdlToClass internals
      * @return \WsdlToClass\WsdlToClass
      */
-    protected function parseWsdl()
+    protected function parseWsdl(): WsdlToClass
     {
         $this->output->writeln("Parsing WSDL.");
         $client = new \SoapClient((string) $this->wsdl);
@@ -262,9 +276,9 @@ class WsdlToClass
 
     /**
      * Generate the structure classes
-     * @return \WsdlToClass\WsdlToClass
+     * @return WsdlToClass
      */
-    protected function generateStructures()
+    protected function generateStructures(): WsdlToClass
     {
         $this->output->writeln("Generating structures.");
 
@@ -287,9 +301,9 @@ class WsdlToClass
 
     /**
      * Generate the request classes
-     * @return \WsdlToClass\WsdlToClass
+     * @return WsdlToClass
      */
-    protected function generateRequests()
+    protected function generateRequests(): WsdlToClass
     {
         $this->output->writeln("Generating requests.");
 
@@ -306,9 +320,9 @@ class WsdlToClass
 
     /**
      * Generate the response classes
-     * @return \WsdlToClass\WsdlToClass
+     * @return WsdlToClass
      */
-    protected function generateResponses()
+    protected function generateResponses(): WsdlToClass
     {
         $this->output->writeln("Generating responses.");
 
@@ -325,9 +339,9 @@ class WsdlToClass
 
     /**
      * Generate the method classes
-     * @return \WsdlToClass\WsdlToClass
+     * @return WsdlToClass
      */
-    protected function generateMethods()
+    protected function generateMethods(): WsdlToClass
     {
         $this->output->writeln("Generating methods.");
 
@@ -343,9 +357,9 @@ class WsdlToClass
 
     /**
      * Generate the service class
-     * @return \WsdlToClass\WsdlToClass
+     * @return WsdlToClass
      */
-    protected function generateService()
+    protected function generateService(): WsdlToClass
     {
         $this->output->writeln("Generating service.");
 
@@ -359,9 +373,9 @@ class WsdlToClass
 
     /**
      * Generate the client class
-     * @return \WsdlToClass\WsdlToClass
+     * @return WsdlToClass
      */
-    protected function generateClient()
+    protected function generateClient(): WsdlToClass
     {
         $this->output->writeln("Generating client.");
 
@@ -375,9 +389,9 @@ class WsdlToClass
 
     /**
      * Generate the class map class
-     * @return \WsdlToClass\WsdlToClass
+     * @return WsdlToClass
      */
-    protected function generateClassMap()
+    protected function generateClassMap(): WsdlToClass
     {
         $this->output->writeln("Generating class map.");
 

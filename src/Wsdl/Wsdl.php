@@ -1,11 +1,10 @@
 <?php
-
 /**
  * WsdlToClass
  *
- * PHP Version 5.6
+ * PHP Version 7.0
  *
- * @copyright 2015 Danny van der Sluijs <danny.vandersluijs@icloud.com>
+ * @copyright 2015-2017 Danny van der Sluijs <danny.vandersluijs@icloud.com>
  * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU-GPL
  * @link      http://dannyvandersluijs.nl
  */
@@ -15,8 +14,6 @@ use WsdlToClass\Generator\IServiceGenerator;
 
 /**
  * The Wsdl is a class representation of an actual WSDL
- *
- * @author Danny van der Sluijs <danny.vandersluijs@icloud.com>
  */
 class Wsdl
 {
@@ -30,46 +27,46 @@ class Wsdl
      * The methods available in the WSDl
      * @var Method[]
      */
-    private $methods = array();
+    private $methods = [];
 
     /**
      * The structures(complex types) that are used in the web service.
      * @var Struct[]
      */
-    private $structures = array();
+    private $structures = [];
 
     /**
      * The requests(complex types) that are used in the webservice
      * @var Request[]
      */
-    private $requests = array();
+    private $requests = [];
 
     /**
      * The responses(complex types) that are used in the webservice
      * @var Response[]
      */
-    private $responses = array();
+    private $responses = [];
 
     /**
      * The simple types that are used in the web service
      * @var Property[]
      */
-    private $simpleTypes = array();
+    private $simpleTypes = [];
 
     /**
      * Constructor
      * @param string $source
      */
-    public function __construct($source)
+    public function __construct(string $source)
     {
-        $this->source = (string) $source;
+        $this->source = $source;
     }
 
     /**
      * Get the WSDL source
      * @return string
      */
-    public function getSource()
+    public function getSource(): string
     {
         return $this->source;
     }
@@ -79,9 +76,9 @@ class Wsdl
      * @param string $source
      * @return \WsdlToClass\Wsdl\Wsdl
      */
-    public function setSource($source)
+    public function setSource(string $source)
     {
-        $this->source = (string) $source;
+        $this->source = $source;
         return $this;
     }
 
@@ -93,7 +90,7 @@ class Wsdl
      * @return \WsdlToClass\Wsdl\Wsdl
      * @throws \Exception
      */
-    private function add($which, $key, IWsdlNode $value)
+    private function add(string $which, string $key, IWsdlNode $value)
     {
         if (!isset($this->$which)) {
             throw new \Exception(sprintf('Invalid property [%s]', $which));
@@ -111,7 +108,7 @@ class Wsdl
      * @return boolean
      * @throws \Exception
      */
-    private function has($which, $key)
+    private function has(string $which, string $key)
     {
         if (!isset($this->$which)) {
             throw new \Exception(sprintf('Invalid property [%s]', $which));
@@ -127,7 +124,7 @@ class Wsdl
      * @return IWsdlNode
      * @throws \Exception
      */
-    private function get($which, $key)
+    private function get(string $which, string $key)
     {
         if (!isset($this->$which)) {
             throw new \Exception(sprintf('Invalid property [%s]', $which));
@@ -142,7 +139,7 @@ class Wsdl
      * @param Struct $struct
      * @return Wsdl
      */
-    public function addStruct($key, Struct $struct)
+    public function addStruct(string $key, Struct $struct)
     {
         return $this->add('structures', $key, $struct);
     }
@@ -161,7 +158,7 @@ class Wsdl
      * @param  string  $key
      * @return boolean
      */
-    public function hasStruct($key)
+    public function hasStruct(string $key): bool
     {
         return $this->has('structures', $key);
     }
@@ -171,7 +168,7 @@ class Wsdl
      * @param  string $key
      * @return Struct
      */
-    public function getStruct($key)
+    public function getStruct(string $key): Struct
     {
         return $this->get('structures', $key);
     }
@@ -182,7 +179,7 @@ class Wsdl
      * @param \WsdlToClass\Wsdl\Method $method
      * @return Wsdl
      */
-    public function addMethod($key, Method $method)
+    public function addMethod(string $key, Method $method): self
     {
         if (!$this->hasResponse($method->getResponse()) && $this->hasStruct($method->getResponse())) {
             $struct = $this->getStruct($method->getResponse());
@@ -214,7 +211,7 @@ class Wsdl
      * @param Request $request
      * @return Wsdl
      */
-    public function addRequest($key, $request)
+    public function addRequest(string $key, Request $request): self
     {
         return $this->add('requests', $key, $request);
     }
@@ -233,7 +230,7 @@ class Wsdl
      * @param  string  $key
      * @return boolean
      */
-    public function hasRequest($key)
+    public function hasRequest(string $key): bool
     {
         return $this->has('requests', $key);
     }
@@ -244,7 +241,7 @@ class Wsdl
      * @param Response $response
      * @return Wsdl
      */
-    public function addResponse($key, Response $response)
+    public function addResponse(string $key, Response $response): self
     {
         return $this->add('responses', $key, $response);
     }
@@ -263,7 +260,7 @@ class Wsdl
      * @param  string  $key
      * @return boolean
      */
-    public function hasResponse($key)
+    public function hasResponse(string $key): bool
     {
         return $this->has('responses', $key);
     }
@@ -274,7 +271,7 @@ class Wsdl
      * @param Property $response
      * @return Wsdl
      */
-    public function addSimpleType($key, Property $response)
+    public function addSimpleType(string $key, Property $response): self
     {
         return $this->add('simpleTypes', $key, $response);
     }
@@ -293,7 +290,7 @@ class Wsdl
      * @param  string  $key
      * @return boolean
      */
-    public function hasSimpleType($key)
+    public function hasSimpleType(string $key): bool
     {
         return $this->has('simpleTypes', $key);
     }
@@ -301,9 +298,9 @@ class Wsdl
     /**
      * Get a single named simple type
      * @param  string $key
-     * @return SimpleType
+     * @return Property
      */
-    public function getSimpleType($key)
+    public function getSimpleType(string $key): Property
     {
         return $this->get('simpleTypes', $key);
     }
@@ -312,7 +309,7 @@ class Wsdl
      * Cast the wsdl to string. Acts a convenience method to use the Wsdl as the source for a client.
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->source;
     }
@@ -322,7 +319,7 @@ class Wsdl
      * @param  IServiceGenerator $generator
      * @return string
      */
-    public function visit(IServiceGenerator $generator)
+    public function visit(IServiceGenerator $generator): string
     {
         return $generator->generateService($this);
     }

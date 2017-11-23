@@ -1,20 +1,18 @@
 <?php
-
 /**
  * WsdlToClass
  *
- * PHP Version 5.6
+ * PHP Version 7.0
  *
- * @copyright 2015 Danny van der Sluijs <danny.vandersluijs@icloud.com>
+ * @copyright 2015-2017 Danny van der Sluijs <danny.vandersluijs@icloud.com>
  * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU-GPL
  * @link      http://dannyvandersluijs.nl
  */
+
 namespace WsdlToClass\Generator;
 
 /**
  * The abstract generator holds attributes needed, without being to concrete
- *
- * @author Danny van der Sluijs <danny.vandersluijs@icloud.com>
  */
 abstract class AbstractGenerator
 {
@@ -22,19 +20,19 @@ abstract class AbstractGenerator
      * The package root namespace.
      * @var string
      */
-    private $namespace;
+    private $namespace = '';
 
     /**
      * The child namespace used for contextual knowledge e.g. request/response etc
      * @var string
      */
-    private $childNamespace;
+    private $childNamespace = '';
 
     /**
      * Get the namespace
      * @return string
      */
-    public function getNamespace()
+    public function getNamespace(): string
     {
         return $this->namespace;
     }
@@ -42,9 +40,9 @@ abstract class AbstractGenerator
     /**
      * Set the namespace
      * @param  string $namespace
-     * @return \WsdlToClass\Generator\AbstractGenerator
+     * @return AbstractGenerator
      */
-    public function setNamespace($namespace)
+    public function setNamespace(string $namespace)
     {
         $this->namespace = (string) $namespace;
 
@@ -55,7 +53,7 @@ abstract class AbstractGenerator
      * Get the child namespace
      * @return string
      */
-    public function getChildNamespace()
+    public function getChildNamespace(): string
     {
         return $this->childNamespace;
     }
@@ -63,7 +61,7 @@ abstract class AbstractGenerator
     /**
      * Set the child namespace
      * @param string $childNamespace
-     * @return \WsdlToClass\Generator\AbstractGenerator
+     * @return AbstractGenerator
      */
     public function setChildNamespace($childNamespace)
     {
@@ -75,7 +73,7 @@ abstract class AbstractGenerator
      * Get the full namespace
      * @return string
      */
-    public function getFullNamespace()
+    public function getFullNamespace(): string
     {
         if (empty($this->childNamespace)) {
             return $this->namespace;

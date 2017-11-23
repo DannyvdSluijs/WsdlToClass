@@ -23,26 +23,17 @@ class MethodTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     */
-    protected function tearDown()
-    {
-
-    }
-
-    /**
-     * @covers WsdlToClass\Wsdl\Method::getName
+     * @covers \WsdlToClass\Wsdl\Method::getName
      */
     public function testGetName()
     {
-        $this->assertNull($this->object->getName());
+        $this->assertEmpty($this->object->getName());
         $this->object->setName('save');
         $this->assertSame('save', $this->object->getName());
     }
 
     /**
-     * @covers WsdlToClass\Wsdl\Method::setName
+     * @covers \WsdlToClass\Wsdl\Method::setName
      */
     public function testSetName()
     {
@@ -51,17 +42,17 @@ class MethodTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WsdlToClass\Wsdl\Method::getRequest
+     * @covers \WsdlToClass\Wsdl\Method::getRequest
      */
     public function testGetRequest()
     {
-        $this->assertNull($this->object->getRequest());
+        $this->assertEmpty($this->object->getRequest());
         $this->object->setRequest('request');
         $this->assertSame('request', $this->object->getRequest());
     }
 
     /**
-     * @covers WsdlToClass\Wsdl\Method::setRequest
+     * @covers \WsdlToClass\Wsdl\Method::setRequest
      */
     public function testSetRequest()
     {
@@ -70,17 +61,17 @@ class MethodTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WsdlToClass\Wsdl\Method::getResponse
+     * @covers \WsdlToClass\Wsdl\Method::getResponse
      */
     public function testGetResponse()
     {
-        $this->assertNull($this->object->getResponse());
+        $this->assertEmpty($this->object->getResponse());
         $this->object->setResponse('response');
         $this->assertSame('response', $this->object->getResponse());
     }
 
     /**
-     * @covers WsdlToClass\Wsdl\Method::setResponse
+     * @covers \WsdlToClass\Wsdl\Method::setResponse
      */
     public function testSetResponse()
     {
@@ -89,7 +80,7 @@ class MethodTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WsdlToClass\Wsdl\Method::visit
+     * @covers \WsdlToClass\Wsdl\Method::visit
      */
     public function testVisit()
     {
@@ -97,5 +88,4 @@ class MethodTest extends \PHPUnit_Framework_TestCase
         $mock->expects($this->once())->method('generateMethod')->with($this->object)->willReturn('<?php echo "Hello world!"; ');
         $this->assertSame('<?php echo "Hello world!"; ', $this->object->visit($mock));
     }
-
 }

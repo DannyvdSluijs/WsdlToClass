@@ -1,11 +1,10 @@
 <?php
-
-/*
+/**
  * WsdlToClass
  *
- * PHP Version 5.6
+ * PHP Version 7.0
  *
- * @copyright 2015 Danny van der Sluijs <danny.vandersluijs@icloud.com>
+ * @copyright 2015-2017 Danny van der Sluijs <danny.vandersluijs@icloud.com>
  * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU-GPL
  * @link      http://dannyvandersluijs.nl
  */
@@ -13,19 +12,18 @@ namespace WsdlToClass\Wsdl;
 
 /**
  *
- * @author dannyvandersluijs
  */
 interface IWsdlNode
 {
     /**
      * Get the name of the Wsdl Node
      */
-    public function getName();
+    public function getName(): string;
 
     /**
      * Set the name of the Wsdl Node
      * @param string $name
      * @return IWsdlNode
      */
-    public function setName($name);
+    public function setName(string $name);
 }
