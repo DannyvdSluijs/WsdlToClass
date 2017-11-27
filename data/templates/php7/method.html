@@ -1,0 +1,35 @@
+<?php
+{% include "sections/file-header.html" %}
+
+
+namespace {{ full_namespace }};
+
+use {{ namespace }}\Request\{{ method.request }} as Request;
+use {{ namespace }}\Response\{{ method.response }} as Response;
+
+class {{ method.name }}
+{
+    /**
+     * @var Request
+     */
+    private $request;
+
+    /**
+     * Constructor
+     * @param Request $request
+     */
+    public function __construct(Request $request)
+    {
+        $this->request = $request;
+    }
+
+    /**
+     * Execute the {{ method.name }} method
+     * @return Response
+     */
+    public function execute(): Response
+    {
+        /* @todo implement method */
+        return new Response();
+    }
+}

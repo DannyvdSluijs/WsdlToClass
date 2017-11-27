@@ -2,14 +2,16 @@
 <?php
 
 if (PHP_SAPI !== 'cli') {
-    echo 'Warning: Composer should be invoked via the CLI version of PHP, not the '.PHP_SAPI.' SAPI'.PHP_EOL;
+    die('Warning: WsdlToClass should be invoked via the CLI version of PHP, not the '.PHP_SAPI.' SAPI'.PHP_EOL);
 }
 
-$autoLoaderFiles = array(
-    __DIR__ . '/vendor/autoload.php',
-    __DIR__ . '/../../autoload.php',
-    __DIR__ . '/../autoload.php'
-);
+/**
+ * This makes our life easier when dealing with paths. Everything is relative
+ * to the application root now.
+ */
+chdir(__DIR__);
+
+$autoLoaderFiles = array('vendor/autoload.php', '../autoload.php', '../../autoload.php');
 
 foreach ($autoLoaderFiles as $autoLoaderFile) {
     if (is_readable($autoLoaderFile)) {

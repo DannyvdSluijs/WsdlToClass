@@ -1,6 +1,6 @@
 <?php
-
 {% include "sections/file-header.html" %}
+
 
 namespace {{ namespace }};
 
@@ -11,7 +11,7 @@ use {{ namespace }}\ClassMap;
  * A generated SOAP client
  *
 {% for method in wsdl.methods %}
- * @method {{ namespace }}\Response\{{ method.response}} {{ method.name }}({{ namespace }}\Request\{{ method.request }} $request)
+ * @method \{{ namespace }}\Response\{{ method.response}} {{ method.name }}(\{{ namespace }}\Request\{{ method.request }} $request)
 {% endfor %}
  */
 class Client extends SoapClient

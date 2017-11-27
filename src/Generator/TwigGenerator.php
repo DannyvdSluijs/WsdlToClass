@@ -11,6 +11,7 @@
 
 namespace WsdlToClass\Generator;
 
+use WsdlToClass\Exception\NotFoundException;
 use WsdlToClass\Wsdl\Method;
 use WsdlToClass\Wsdl\Wsdl;
 use WsdlToClass\Wsdl\Struct;
@@ -31,9 +32,15 @@ class TwigGenerator extends AbstractGenerator implements ICompositeGenerator
     /**
      * Constructor
      */
-    public function __construct()
+    public function __construct($template)
     {
-        $this->twig = new Twig_Environment(new Twig_Loader_Filesystem(__DIR__ . '/Twig'));
+        $path = 'data/templates/' . $template;
+
+        if (!is_readable($path)) {
+            throw new NotFoundException('Unable to read ' . $path);
+        }
+        $this->twig = new Twig_Environment(new Twig_Loader_Filesystem($path));
+        $this->twig->addExtension(new TwigExtension());
     }
 
     /**

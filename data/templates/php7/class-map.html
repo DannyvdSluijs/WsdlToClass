@@ -1,0 +1,33 @@
+<?php
+{% include "sections/file-header.html" %}
+
+
+namespace {{ namespace }};
+
+class ClassMap
+{
+    /**
+     * Get the WSDL class mapping
+     * @return string[]
+     */
+    public static function get()
+    {
+        return [
+            /* Structs */
+{% set structures = wsdl.structures %}
+{% for structure in structures %}
+            '{{ structure.name }}' => '{{ namespace }}\Structure\{{ structure.name }}',
+{% endfor %}
+            /* Requests */
+{% set requests = wsdl.requests %}
+{% for request in requests %}
+            '{{ request.name }}' => '{{ namespace }}\Request\{{ request.name }}',
+{% endfor %}
+            /* Responses */
+{% set responses = wsdl.responses %}
+{% for response in responses %}
+            '{{ response.name }}' => '{{ namespace }}\Response\{{ response.name }}',
+{% endfor %}
+        ];
+    }
+}

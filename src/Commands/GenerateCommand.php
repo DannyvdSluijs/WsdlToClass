@@ -41,6 +41,7 @@ class GenerateCommand extends Command
                 new InputArgument('wsdl', InputArgument::REQUIRED, 'The wsdl to generate', null),
                 new InputOption('destination', 'd', InputOption::VALUE_REQUIRED, 'The destination directory', getcwd()),
                 new InputOption('namespace', null, InputOption::VALUE_REQUIRED, 'An optional namespace', 'Soap'),
+                new InputOption('template', null, InputOption::VALUE_OPTIONAL, ' Name of the template to use (optional)', 'default'),
              ])
              ->setHelp(<<<EOT
 Usage:
@@ -72,7 +73,7 @@ EOT
             $input->getOption('destination'),
             $input->getOption('namespace'),
             new RegexParser(),
-            new TwigGenerator(),
+            new TwigGenerator($input->getOption('template')),
             new ResourceWriter()
         );
 

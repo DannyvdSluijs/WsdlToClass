@@ -19,7 +19,7 @@ class TwigGeneratorTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->object = new TwigGenerator;
+        $this->object = new TwigGenerator('default');
         $this->object->setNamespace('DannyvdSluijs\WsdlToClass\UnitTest');
     }
 

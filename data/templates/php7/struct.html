@@ -1,0 +1,43 @@
+<?php
+{% set properties = struct.properties %}
+{% include "sections/file-header.html" %}
+
+
+namespace {{ full_namespace }};
+
+{% for property in properties %}{% if property.type not in ['string', 'float', 'integer'] %}
+use {{ namespace}}\Structure\{{property.type}};
+{% endif %}{% endfor %}
+
+class {{ struct.name }}
+{
+{% for property in properties %}
+    /**
+     *
+     * @var {{property.type}}
+     */
+    public ${{ property.name|lowerCamelCase }};
+{% endfor %}
+
+{% for property in properties %}
+    /**
+     * Get the {{ property.name }}
+     * @return {{ property.type }}
+     */
+    public function get{{ property.name }}(): {{ property.type }}
+    {
+        return $this->{{ property.name|lowerCamelCase }};
+    }
+
+    /**
+     * Set the {{ property.name }}
+     * @param {{ property.type }} ${{ property.name|lowerCamelCase }}
+     * @return {{ struct.name }}
+     */
+    public function set{{ property.name }}({{ property.type }} ${{ property.name|lowerCamelCase }}): {{ struct.name }}
+    {
+        $this->${{ property.name|lowerCamelCase }} = ${{ property.name|lowerCamelCase }};
+        return $this;
+    }
+{% endfor %}
+}

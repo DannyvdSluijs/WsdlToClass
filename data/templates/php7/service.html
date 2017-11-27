@@ -1,0 +1,23 @@
+<?php
+{% include "sections/file-header.html" %}
+
+
+namespace {{ namespace }};
+
+class Service
+{
+{% for method in wsdl.methods %}
+    /**
+     * Calls the soap method {{ method.name }}
+     * @return Response\{{ method.response }}
+     **/
+    public function {{ method.name }}(): Response\{{ method.response }}
+    {
+        $request = new Request\{{ method.request }}();
+        $method = new Method\{{ method.name() }}($request);
+
+        return new Response\{{ method.response }}($method->execute());
+    }
+
+{% endfor %}
+}

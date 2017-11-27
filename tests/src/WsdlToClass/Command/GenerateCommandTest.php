@@ -29,7 +29,8 @@ class GenerateCommandTest extends \PHPUnit_Framework_TestCase
             ->method('getOption')
             ->willReturnMap([
                 ['destination', sys_get_temp_dir()],
-                ['namespace', 'DannyvdSluijs\WsdlToClass\PhpUnit']
+                ['namespace', 'DannyvdSluijs\WsdlToClass\PhpUnit'],
+                ['template', 'default']
             ]);
         $input->expects($this->atLeastOnce())
             ->method('getArgument')
