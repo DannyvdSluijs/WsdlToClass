@@ -74,6 +74,7 @@ class WsdlToClass
      * @param IParser $parser
      * @param ICompositeGenerator $generator
      * @param IWriter $writer
+     * @param OutputInterface $output
      */
     public function __construct(
         Wsdl $wsdl,
@@ -81,7 +82,8 @@ class WsdlToClass
         $namespacePrefix,
         IParser $parser,
         ICompositeGenerator $generator,
-        IWriter $writer
+        IWriter $writer,
+        OutputInterface $output
     ) {
         $this->wsdl = $wsdl;
         $this->setDestination($destination);
@@ -89,6 +91,7 @@ class WsdlToClass
         $this->parser = $parser;
         $this->generator = $generator;
         $this->writer = $writer;
+        $this->output = $output;
     }
 
     /**

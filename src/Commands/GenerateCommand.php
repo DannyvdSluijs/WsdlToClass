@@ -74,9 +74,10 @@ EOT
             $input->getOption('namespace'),
             new RegexParser(),
             new TwigGenerator($input->getOption('template')),
-            new ResourceWriter()
+            new ResourceWriter(),
+            $output
         );
 
-        $wsdlToClass->setOutput($output)->execute();
+        $wsdlToClass->execute();
     }
 }
