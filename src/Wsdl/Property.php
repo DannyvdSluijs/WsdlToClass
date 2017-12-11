@@ -34,8 +34,8 @@ class Property implements IWsdlNode
      */
     public function __construct(string $name = null, string $type = null)
     {
-        $this->name = !is_null($name) ? (string) $name : '';
-        $this->type = !is_null($type) ? (string) $type : '';
+        $this->name = !is_null($name) ? $name : '';
+        $this->type = !is_null($type) ? $type : '';
     }
 
     /**

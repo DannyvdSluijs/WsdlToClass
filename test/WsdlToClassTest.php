@@ -1,18 +1,19 @@
 <?php
 
-namespace WsdlToClass;
+namespace WsdlToClassTest;
+
 use Symfony\Component\Console\Output\OutputInterface;
+use WsdlToClass\WsdlToClass;
 
 /**
  *
  */
 class WsdlToClassTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * @var WsdlToClass
      */
-    protected $object;
+    private $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.

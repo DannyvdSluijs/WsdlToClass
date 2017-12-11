@@ -51,7 +51,7 @@ class Method implements IWsdlNode
      */
     public function setName(string $name)
     {
-        $this->name = (string) $name;
+        $this->name = $name;
 
         return $this;
     }
@@ -72,7 +72,7 @@ class Method implements IWsdlNode
      */
     public function setRequest(string $request): Method
     {
-        $this->request = (string) $request;
+        $this->request = $request;
 
         return $this;
     }
@@ -93,7 +93,7 @@ class Method implements IWsdlNode
      */
     public function setResponse(string $response): self
     {
-        $this->response = (string) $response;
+        $this->response = $response;
 
         return $this;
     }

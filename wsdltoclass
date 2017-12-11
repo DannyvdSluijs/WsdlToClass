@@ -31,5 +31,5 @@ set_time_limit(0);
 date_default_timezone_set('Europe/Amsterdam');
 
 $app = new \Cilex\Application('Cilex');
-$app->command(new \WsdlToClass\Commands\GenerateCommand());
+$app->command(new \WsdlToClass\Command\GenerateCommand());
 $app->run();

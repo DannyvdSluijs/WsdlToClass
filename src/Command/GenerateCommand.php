@@ -9,7 +9,7 @@
  * @link      http://dannyvandersluijs.nl
  */
 
-namespace WsdlToClass\Commands;
+namespace WsdlToClass\Command;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -34,8 +34,7 @@ class GenerateCommand extends Command
      */
     protected function configure()
     {
-        $this
-            ->setName("wsdltoclass:generate")
+        $this->setName("wsdltoclass:generate")
              ->setDescription("Transform a WSDL to PHP classes")
              ->setDefinition([
                 new InputArgument('wsdl', InputArgument::REQUIRED, 'The wsdl to generate', null),

@@ -9,15 +9,15 @@
  * @link      http://dannyvandersluijs.nl
  */
 
-namespace WsdlToClassTest\Commands;
+namespace WsdlToClassTest\Command;
 
-use WsdlToClass\Commands\GenerateCommand;
+use WsdlToClass\Command\GenerateCommand;
 
 class GenerateCommandTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers \WsdlToClass\Commands\GenerateCommand::configure()
-     * @covers \WsdlToClass\Commands\GenerateCommand::execute()
+     * @covers \WsdlToClass\Command\GenerateCommand::configure()
+     * @covers \WsdlToClass\Command\GenerateCommand::execute()
      */
     public function testExecute()
     {
@@ -42,8 +42,8 @@ class GenerateCommandTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \WsdlToClass\Commands\GenerateCommand::configure()
-     * @covers \WsdlToClass\Commands\GenerateCommand::execute()
+     * @covers \WsdlToClass\Command\GenerateCommand::configure()
+     * @covers \WsdlToClass\Command\GenerateCommand::execute()
      */
     public function testExecuteWithUnreadableDestination()
     {

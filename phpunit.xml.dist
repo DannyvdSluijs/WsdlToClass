@@ -13,7 +13,7 @@
 >
     <testsuites>
         <testsuite name="WsdlToClass Test Suite">
-            <directory>./tests/</directory>
+            <directory>./test/</directory>
         </testsuite>
     </testsuites>
     <filter>

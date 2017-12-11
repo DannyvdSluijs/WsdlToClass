@@ -87,7 +87,7 @@ class WsdlToClass
     ) {
         $this->wsdl = $wsdl;
         $this->setDestination($destination);
-        $this->namespacePrefix = (string) $namespacePrefix;
+        $this->namespacePrefix = $namespacePrefix;
         $this->parser = $parser;
         $this->generator = $generator;
         $this->writer = $writer;
@@ -151,7 +151,7 @@ class WsdlToClass
      */
     public function setNamespacePrefix($namespacePrefix): WsdlToClass
     {
-        $this->namespacePrefix = (string) $namespacePrefix;
+        $this->namespacePrefix = $namespacePrefix;
 
         return $this;
     }

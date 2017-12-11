@@ -42,11 +42,11 @@ class Struct implements IWsdlNode
     /**
      * Set the name of the struct
      * @param  string $name
-     * @return string
+     * @return \WsdlToClass\Wsdl\Struct
      */
     public function setName(string $name)
     {
-        $this->name = (string) $name;
+        $this->name = $name;
 
         return $this;
     }

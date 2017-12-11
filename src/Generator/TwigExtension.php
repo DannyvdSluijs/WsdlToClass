@@ -11,7 +11,6 @@
 
 namespace WsdlToClass\Generator;
 
-
 class TwigExtension extends \Twig_Extension
 {
     public function getFilters()

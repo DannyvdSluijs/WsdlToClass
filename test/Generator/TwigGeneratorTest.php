@@ -1,6 +1,7 @@
 <?php
-namespace WsdlToClass\Generator;
+namespace WsdlToClassTest\Generator;
 
+use WsdlToClass\Generator\TwigGenerator;
 use WsdlToClass\Wsdl\Wsdl;
 
 /**
@@ -11,7 +12,7 @@ class TwigGeneratorTest extends \PHPUnit_Framework_TestCase
     /**
      * @var TwigGenerator
      */
-    protected $object;
+    private $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -48,8 +49,9 @@ class TwigGeneratorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \WsdlToClass\Generator\TwigGenerator::generateService
+     * @covers       \WsdlToClass\Generator\TwigGenerator::generateService
      * @dataProvider wsdlDataProvider
+     * @param Wsdl $wsdl
      */
     public function testGenerateService(Wsdl $wsdl)
     {
@@ -71,8 +73,9 @@ class TwigGeneratorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \WsdlToClass\Generator\TwigGenerator::generateClient
+     * @covers       \WsdlToClass\Generator\TwigGenerator::generateClient
      * @dataProvider wsdlDataProvider
+     * @param Wsdl $wsdl
      */
     public function testGenerateClient(Wsdl $wsdl)
     {
@@ -83,10 +86,8 @@ class TwigGeneratorTest extends \PHPUnit_Framework_TestCase
 
     public function wsdlDataProvider()
     {
-        $wsdl = new Wsdl('http://wsf.cdyne.com/WeatherWS/Weather.asmx?WSDL');
-
-        return array(
-            'Weather cdyne.com' => array($wsdl)
-        );
+        return [
+            'Weather cdyne.com' => [new Wsdl('http://wsf.cdyne.com/WeatherWS/Weather.asmx?WSDL')]
+        ];
     }
 }

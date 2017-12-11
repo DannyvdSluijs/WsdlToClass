@@ -44,7 +44,7 @@ abstract class AbstractGenerator
      */
     public function setNamespace(string $namespace)
     {
-        $this->namespace = (string) $namespace;
+        $this->namespace = $namespace;
 
         return $this;
     }
@@ -65,7 +65,7 @@ abstract class AbstractGenerator
      */
     public function setChildNamespace($childNamespace)
     {
-        $this->childNamespace = (string) $childNamespace;
+        $this->childNamespace = $childNamespace;
         return $this;
     }
 

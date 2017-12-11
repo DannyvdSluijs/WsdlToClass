@@ -17,13 +17,17 @@
         "zendframework/zend-cache": "^2.7"
     },
     "require-dev": {
-        "squizlabs/php_codesniffer": "^2.8"
+        "squizlabs/php_codesniffer": "^2.8",
+        "phpstan/phpstan": "^0.9.1"
     },
     "bin": [
         "wsdltoclass"
     ],
     "autoload": {
-        "psr-4": { "WsdlToClass\\": "src" }
+        "psr-4": {
+            "WsdlToClass\\": "src",
+            "WsdlToClassTest\\": "test"
+        }
     },
     "extra": {
         "branch-alias": {
