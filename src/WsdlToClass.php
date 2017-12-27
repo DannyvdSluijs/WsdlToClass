@@ -263,15 +263,15 @@ class WsdlToClass
             $type = $this->parser->parseType($rawType);
 
             if ($type instanceof Struct) {
-                $this->wsdl->addStruct($type->getName(), $type);
+                $this->wsdl->addStruct($type);
             } elseif ($type instanceof Property) {
-                $this->wsdl->addSimpleType($type->getName(), $type);
+                $this->wsdl->addSimpleType($type);
             }
         }
 
         foreach ($client->__getFunctions() as $rawFunction) {
             $method = $this->parser->parseFunction($rawFunction);
-            $this->wsdl->addMethod($method->getName(), $method);
+            $this->wsdl->addMethod($method);
         }
 
         return $this;

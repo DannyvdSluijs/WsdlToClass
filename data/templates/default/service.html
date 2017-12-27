@@ -9,7 +9,7 @@ class Service
 {% for method in wsdl.methods %}
     /**
      * Calls the soap method {{ method.name }}
-     * @return {{ method.response }}
+     * @return Response\{{ method.response }}
      **/
     public function {{ method.name }}()
     {

@@ -2,6 +2,7 @@
 
 namespace WsdlToClassTest\Wsdl;
 
+use WsdlToClass\Generator\IMethodGenerator;
 use WsdlToClass\Wsdl\Method;
 
 /**
@@ -85,8 +86,12 @@ class MethodTest extends \PHPUnit_Framework_TestCase
      */
     public function testVisit()
     {
-        $mock = $this->createMock('WsdlToClass\Generator\IMethodGenerator');
-        $mock->expects($this->once())->method('generateMethod')->with($this->object)->willReturn('<?php echo "Hello world!"; ');
+        /** @var \PHPUnit_Framework_MockObject_MockObject|IMethodGenerator $mock */
+        $mock = $this->createMock(IMethodGenerator::class);
+        $mock->expects($this->once())
+            ->method('generateMethod')
+            ->with($this->object)
+            ->willReturn('<?php echo "Hello world!"; ');
         $this->assertSame('<?php echo "Hello world!"; ', $this->object->visit($mock));
     }
 }

@@ -3,6 +3,7 @@
 namespace WsdlToClassTest\Wsdl;
 
 use WsdlToClass\Wsdl\Request;
+use WsdlToClass\Wsdl\Struct;
 
 /**
  *
@@ -28,13 +29,12 @@ class RequestTest extends \PHPUnit_Framework_TestCase
      */
     public function testCreateFromStruct()
     {
-        $struct = $this->createMock('WsdlToClass\Wsdl\Struct');
-        $struct->expects($this->once())->method('getName')->willReturn('ExampleRequest');
-        $struct->expects($this->once())->method('getProperties')->willReturn(array());
+        $struct = (new Struct())->setName('ExampleRequest')
+            ->setProperties([]);
         $request = Request::createFromStruct($struct);
 
-        $this->assertInstanceOf('WsdlToClass\Wsdl\Request', $request);
+        $this->assertInstanceOf(\WsdlToClass\Wsdl\Request::class, $request);
         $this->assertSame($request->getName(), 'ExampleRequest');
-        $this->assertSame($request->getProperties(), array());
+        $this->assertSame($request->getProperties(), []);
     }
 }

@@ -3,6 +3,7 @@
 namespace WsdlToClassTest\Wsdl;
 
 use WsdlToClass\Wsdl\Response;
+use WsdlToClass\Wsdl\Struct;
 
 /**
  *
@@ -24,25 +25,15 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     */
-    protected function tearDown()
-    {
-    }
-
-    /**
      * @covers \WsdlToClass\Wsdl\Response::createFromStruct
      */
     public function testCreateFromStruct()
     {
-        $struct = $this->createMock('WsdlToClass\Wsdl\Struct');
-        $struct->expects($this->once())->method('getName')->willReturn('ExampleResponse');
-        $struct->expects($this->once())->method('getProperties')->willReturn(array());
+        $struct = (new Struct())->setName('ExampleResponse');
         $request = Response::createFromStruct($struct);
 
-        $this->assertInstanceOf('WsdlToClass\Wsdl\Response', $request);
+        $this->assertInstanceOf(\WsdlToClass\Wsdl\Response::class, $request);
         $this->assertSame($request->getName(), 'ExampleResponse');
-        $this->assertSame($request->getProperties(), array());
+        $this->assertSame($request->getProperties(), []);
     }
 }

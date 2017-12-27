@@ -6,7 +6,7 @@
 
 namespace {{ full_namespace }};
 
-{% for property in properties %}{% if property.type not in ['string', 'float', 'integer'] %}
+{% for property in properties %}{% if property.type not in ['string', 'float', 'integer', 'double', 'boolean', 'short'] %}
 use {{ namespace}}\Structure\{{property.type}};
 {% endif %}{% endfor %}
 
@@ -15,28 +15,28 @@ class {{ struct.name }}
 {% for property in properties %}
     /**
      *
-     * @var {{property.type}}
+     * @var {{property.type|toPhpSupportedScalar}}
      */
-    public ${{ property.name }};
+    public ${{ property.name|lowerCamelCase }};
 {% endfor %}
 
 {% for property in properties %}
     /**
-     * Get the {{ property.name }}
-     * @return {{ property.type }}
+     * Get the {{ property.name|camelCaseToWords }}
+     * @return {{ property.type|toPhpSupportedScalar }}
      */
     public function get{{ property.name }}()
     {
-        return $this->{{ property.name }};
+        return $this->{{ property.name|lowerCamelCase }};
     }
 
     /**
-     * Set the {{ property.name }}
-     * @return {{ property.type }}
+     * Set the {{ property.name|camelCaseToWords }}
+     * @return {{ struct.name }}
      */
-    public function set{{ property.name }}(${{ property.name }})
+    public function set{{ property.name }}(${{ property.name|lowerCamelCase }})
     {
-        $this->${{ property.name }} = ${{ property.name }};
+        $this->{{ property.name|lowerCamelCase }} = ${{ property.name|lowerCamelCase }};
         return $this;
     }
 {% endfor %}
