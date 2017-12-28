@@ -195,7 +195,7 @@ class WsdlToClassTest extends \PHPUnit_Framework_TestCase
     {
         $root = vfsStream::setup('wsdltoclass', null, ['Output' => []]);
 
-        $wsdl = new Wsdl('data/wsdl/ip2geo.wsdl');
+        $wsdl = new Wsdl('./data/wsdl/ip2geo.wsdl');
         $parser = new RegexParser();
         $generator = new TwigGenerator('php7');
         $writer = new ResourceWriter();
