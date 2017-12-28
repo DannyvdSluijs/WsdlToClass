@@ -11,13 +11,10 @@
 
 namespace WsdlToClass\Wsdl;
 
-use IteratorAggregate;
-use Countable;
-
 /**
  * The method collection is used to group all the methods in a single object
  */
-class MethodCollection extends ArrayCollection implements IteratorAggregate, Countable
+class MethodCollection extends ArrayCollection
 {
     /**
      * MethodCollection constructor.

@@ -11,13 +11,10 @@
 
 namespace WsdlToClass\Wsdl;
 
-use IteratorAggregate;
-use Countable;
-
 /**
  * The response collection is used to group all the responses in a single object
  */
-class ResponseCollection extends ArrayCollection implements IteratorAggregate, Countable
+class ResponseCollection extends ArrayCollection
 {
     /**
      * ResponseCollection constructor.

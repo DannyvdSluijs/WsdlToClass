@@ -11,13 +11,10 @@
 
 namespace WsdlToClass\Wsdl;
 
-use IteratorAggregate;
-use Traversable;
-
 /**
  * The property collection is used to group all the properties in a single object
  */
-class PropertyCollection extends ArrayCollection implements IteratorAggregate
+class PropertyCollection extends ArrayCollection
 {
     /**
      * PropertyCollection constructor.

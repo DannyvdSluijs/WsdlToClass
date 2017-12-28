@@ -11,10 +11,13 @@
 
 namespace WsdlToClass\Wsdl;
 
+use IteratorAggregate;
+use Countable;
+
 /**
  * The array collection offers basic operations on an array collection
  */
-abstract class ArrayCollection
+abstract class ArrayCollection implements IteratorAggregate, Countable
 {
     /**
      * @var mixed[]

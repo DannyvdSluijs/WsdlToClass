@@ -11,13 +11,10 @@
 
 namespace WsdlToClass\Wsdl;
 
-use IteratorAggregate;
-use Countable;
-
 /**
  * The request collection is used to group all the requests in a single object
  */
-class RequestCollection extends ArrayCollection implements IteratorAggregate, Countable
+class RequestCollection extends ArrayCollection
 {
     /**
      * RequestCollection constructor.

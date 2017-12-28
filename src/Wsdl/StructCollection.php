@@ -11,13 +11,10 @@
 
 namespace WsdlToClass\Wsdl;
 
-use Countable;
-use IteratorAggregate;
-
 /**
  * The struct collection is used to group all the structs in a single object
  */
-class StructCollection extends ArrayCollection implements IteratorAggregate, Countable
+class StructCollection extends ArrayCollection
 {
     /**
      * StructCollection constructor.
