@@ -82,7 +82,7 @@ class Wsdl
      * @param Struct $struct
      * @return Wsdl
      */
-    public function addStruct(Struct $struct)
+    public function addStruct(Struct $struct): self
     {
         $this->structures->add($struct);
 
@@ -93,7 +93,7 @@ class Wsdl
      * Get all structures
      * @return StructCollection
      */
-    public function getStructures()
+    public function getStructures(): StructCollection
     {
         return $this->structures;
     }
@@ -126,7 +126,7 @@ class Wsdl
      * Get all methods
      * @return MethodCollection
      */
-    public function getMethods()
+    public function getMethods(): MethodCollection
     {
         return $this->methods;
     }
@@ -135,7 +135,7 @@ class Wsdl
      * Get all requests.
      * @return RequestCollection
      */
-    public function getRequests()
+    public function getRequests(): RequestCollection
     {
         return $this->requests;
     }
@@ -154,7 +154,7 @@ class Wsdl
      * Get all responses.
      * @return ResponseCollection
      */
-    public function getResponses()
+    public function getResponses(): ResponseCollection
     {
         return $this->responses;
     }
@@ -176,14 +176,16 @@ class Wsdl
      */
     public function addSimpleType(Property $property): self
     {
-        return $this->simpleTypes->add($property);
+        $this->simpleTypes->add($property);
+
+        return $this;
     }
 
     /**
      * Get all simple types
      * @return PropertyCollection
      */
-    public function getSimpleTypes()
+    public function getSimpleTypes(): PropertyCollection
     {
         return $this->simpleTypes;
     }
