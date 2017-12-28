@@ -109,12 +109,14 @@ class Wsdl
             $struct = $this->structures->get($method->getResponse());
             $response = Response::createFromStruct($struct);
             $this->responses->add($response);
+            $this->structures->remove($struct);
         }
 
         if (!$this->hasRequest($method->getRequest()) && $this->structures->has($method->getRequest())) {
             $struct = $this->structures->get($method->getRequest());
             $request = Request::createFromStruct($struct);
             $this->requests->add($request);
+            $this->structures->remove($struct);
         }
 
         $this->methods->add($method);

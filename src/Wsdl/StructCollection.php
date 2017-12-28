@@ -37,4 +37,9 @@ class StructCollection extends ArrayCollection implements IteratorAggregate, Cou
     {
         $this->addItem($struct->getName(), $struct);
     }
+
+    public function remove(Struct $struct): bool
+    {
+        return $this->removeItem($struct->getName());
+    }
 }

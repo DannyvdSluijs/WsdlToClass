@@ -289,11 +289,6 @@ class WsdlToClass
         $this->generator->setChildNamespace('Structure');
 
         foreach ($this->wsdl->getStructures() as $name => $structure) {
-            /* Request & response are generated in generateResponses */
-            if ($this->wsdl->hasResponse($name) || $this->wsdl->hasRequest($name)) {
-                continue;
-            }
-
             $filename = $this->destination . DIRECTORY_SEPARATOR . 'Structure' . DIRECTORY_SEPARATOR . ucfirst($name) . '.php';
             $content = $structure->visit($this->generator);
             $this->writer->writeFile($filename, $content);

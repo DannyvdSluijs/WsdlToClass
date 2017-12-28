@@ -30,28 +30,15 @@ abstract class ArrayCollection
         $this->items[$name] = $item;
     }
 
-    /**
-     * @return \ArrayIterator
-     */
-    public function getIterator()
+    protected function removeItem(string $name): bool
     {
-        return new \ArrayIterator($this->items);
-    }
+        if (!$this->has($name)) {
+            return false;
+        }
 
-    /**
-     * @return array
-     */
-    public function toArray(): array
-    {
-        return $this->items;
-    }
+        unset($this->items[$name]);
 
-    /**
-     * @return int
-     */
-    public function count()
-    {
-        return count($this->items);
+        return true;
     }
 
     /**
@@ -74,5 +61,29 @@ abstract class ArrayCollection
         }
 
         return $this->items[$name];
+    }
+
+    /**
+     * @return \ArrayIterator
+     */
+    public function getIterator()
+    {
+        return new \ArrayIterator($this->items);
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray(): array
+    {
+        return $this->items;
+    }
+
+    /**
+     * @return int
+     */
+    public function count()
+    {
+        return count($this->items);
     }
 }
