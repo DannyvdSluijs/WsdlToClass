@@ -1,4 +1,3 @@
-[![Dependency Status](https://www.versioneye.com/user/projects/5575f55f33633400230003ed/badge.svg?style=flat)](https://www.versioneye.com/user/projects/5575f55f33633400230003ed)
 [![Build Status](https://travis-ci.org/DannyvdSluijs/WsdlToClass.svg?branch=master)](https://travis-ci.org/DannyvdSluijs/WsdlToClass)
 [![Latest Stable Version](https://poser.pugx.org/dvandersluijs/wsdl-to-class/v/stable)](https://packagist.org/packages/dvandersluijs/wsdl-to-class)
 [![Latest Unstable Version](https://poser.pugx.org/dvandersluijs/wsdl-to-class/v/unstable)](https://packagist.org/packages/dvandersluijs/wsdl-to-class)
