@@ -20,50 +20,59 @@ use Countable;
 abstract class ArrayCollection implements IteratorAggregate, Countable
 {
     /**
+     * A collection of items
      * @var mixed[]
      */
     protected $items = [];
 
     /**
-     * @param string $name
-     * @param $item
+     * Add an item to the array collection
+     * @param string $key
+     * @param mixed $item
      */
-    protected function addItem(string $name, $item)
+    protected function addItem(string $key, $item)
     {
-        $this->items[$name] = $item;
+        $this->items[$key] = $item;
     }
 
-    protected function removeItem(string $name): bool
+    /**
+     * Remove an item from the array collection by its key
+     * @param string $key
+     * @return bool Returns true if item was removed
+     */
+    protected function removeItem(string $key): bool
     {
-        if (!$this->has($name)) {
+        if (!$this->has($key)) {
             return false;
         }
 
-        unset($this->items[$name]);
+        unset($this->items[$key]);
 
         return true;
     }
 
     /**
-     * @param string $name
+     * See if a item is available in the collection by its key
+     * @param string $key
      * @return bool
      */
-    public function has(string $name): bool
+    public function has(string $key): bool
     {
-        return array_key_exists($name, $this->items);
+        return array_key_exists($key, $this->items);
     }
 
     /**
-     * @param string $name
+     * Get an item from the collection by its key
+     * @param string $key
      * @return mixed
      */
-    public function get(string $name)
+    public function get(string $key)
     {
-        if (!$this->has($name)) {
-            throw new \RuntimeException('No request with name ' . $name . ' available');
+        if (!$this->has($key)) {
+            throw new \RuntimeException('No item with name ' . $key . ' available');
         }
 
-        return $this->items[$name];
+        return $this->items[$key];
     }
 
     /**
