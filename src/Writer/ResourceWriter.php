@@ -10,15 +10,25 @@
  */
 
 namespace WsdlToClass\Writer;
+use WsdlToClass\Exception\Exception;
 
 /**
  *
  */
 class ResourceWriter implements IWriter
 {
+    /**
+     * @param string $filename
+     * @param string $content
+     * @throws Exception
+     */
     public function writeFile(string $filename, string $content = '')
     {
         $handle = fopen($filename, 'w');
+        if ($handle === false) {
+            throw new Exception("Unable to open file [$filename] for writing.");
+        }
+
         fwrite($handle, $content);
         fclose($handle);
     }

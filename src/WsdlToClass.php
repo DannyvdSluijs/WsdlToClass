@@ -240,10 +240,10 @@ class WsdlToClass
         $subDirectories = ['Method', 'Structure', 'Request', 'Response'];
 
         foreach ($subDirectories as $subDir) {
-            $fqdn = $this->getDestination() . DIRECTORY_SEPARATOR . $subDir;
-            if (!is_dir($fqdn)) {
-                $this->output->writeln("\tCreating subdirectory '$fqdn'");
-                mkdir($fqdn);
+            $path = $this->getDestination() . DIRECTORY_SEPARATOR . $subDir;
+            if (!is_dir($path)) {
+                $this->output->writeln("\tCreating subdirectory '$path'");
+                mkdir($path);
             }
         }
 
@@ -284,7 +284,6 @@ class WsdlToClass
     protected function generateStructures(): WsdlToClass
     {
         $this->output->writeln("Generating structures.");
-
 
         $this->generator->setChildNamespace('Structure');
 

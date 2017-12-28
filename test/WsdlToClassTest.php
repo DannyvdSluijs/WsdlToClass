@@ -2,7 +2,12 @@
 
 namespace WsdlToClassTest;
 
+use org\bovigo\vfs\vfsStream;
 use Symfony\Component\Console\Output\OutputInterface;
+use WsdlToClass\Generator\TwigGenerator;
+use WsdlToClass\Parser\RegexParser;
+use WsdlToClass\Writer\ResourceWriter;
+use WsdlToClass\Wsdl\Wsdl;
 use WsdlToClass\WsdlToClass;
 
 /**
@@ -176,13 +181,43 @@ class WsdlToClassTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers \WsdlToClass\WsdlToClass::execute
-     * @todo   Implement testExecute().
+     * @covers \WsdlToClass\WsdlToClass::setupDirectoryStructure
+     * @covers \WsdlToClass\WsdlToClass::parseWsdl
+     * @covers \WsdlToClass\WsdlToClass::generateStructures
+     * @covers \WsdlToClass\WsdlToClass::generateRequests
+     * @covers \WsdlToClass\WsdlToClass::generateResponses
+     * @covers \WsdlToClass\WsdlToClass::generateMethods
+     * @covers \WsdlToClass\WsdlToClass::generateService
+     * @covers \WsdlToClass\WsdlToClass::generateClient
+     * @covers \WsdlToClass\WsdlToClass::generateClassMap
      */
     public function testExecute()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $root = vfsStream::setup('wsdltoclass', null, ['Output' => []]);
+
+        $wsdl = new Wsdl('data/wsdl/ip2geo.wsdl');
+        $parser = new RegexParser();
+        $generator = new TwigGenerator('php7');
+        $writer = new ResourceWriter();
+        $output = $this->createMock(OutputInterface::class);
+
+        $object = new WsdlToClass($wsdl, vfsStream::url('wsdltoclass/Output'), 'Output', $parser, $generator, $writer, $output);
+
+        $object->execute();
+
+        /* Assert directory structure was created */
+        $this->assertTrue($root->hasChild('Output/Method'));
+        $this->assertTrue($root->hasChild('Output/Structure'));
+        $this->assertTrue($root->hasChild('Output/Request'));
+        $this->assertTrue($root->hasChild('Output/Response'));
+
+        /* Assert files */
+        $this->assertTrue($root->hasChild('Output/ClassMap.php'));
+        $this->assertTrue($root->hasChild('Output/Client.php'));
+        $this->assertTrue($root->hasChild('Output/Service.php'));
+        $this->assertTrue($root->hasChild('Output/Method/ResolveIP.php'));
+        $this->assertTrue($root->hasChild('Output/Request/ResolveIP.php'));
+        $this->assertTrue($root->hasChild('Output/Response/ResolveIPResponse.php'));
+        $this->assertTrue($root->hasChild('Output/Structure/IPInformation.php'));
     }
 }

@@ -115,18 +115,6 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \WsdlToClass\Wsdl\Wsdl::hasRequest
-     * @todo   Implement testHasRequest().
-     */
-    public function testHasRequest()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
-    }
-
-    /**
      * @covers \WsdlToClass\Wsdl\Wsdl::getResponses
      */
     public function testGetResponses()
@@ -136,18 +124,6 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
         $this->object->getResponses()->add($response);
         $this->assertContainsOnly(\WsdlToClass\Wsdl\Response::class, $this->object->getResponses());
         $this->assertContains($response, $this->object->getResponses());
-    }
-
-    /**
-     * @covers \WsdlToClass\Wsdl\Wsdl::hasResponse
-     * @todo   Implement testHasResponse().
-     */
-    public function testHasResponse()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
     }
 
     /**

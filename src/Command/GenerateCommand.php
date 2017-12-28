@@ -37,7 +37,7 @@ class GenerateCommand extends Command
         $this->setName("wsdltoclass:generate")
              ->setDescription("Transform a WSDL to PHP classes")
              ->setDefinition([
-                new InputArgument('wsdl', InputArgument::REQUIRED, 'The wsdl to generate', null),
+                new InputArgument('wsdl', InputArgument::REQUIRED, 'The wsdl to generate, filepath or url', null),
                 new InputOption('destination', 'd', InputOption::VALUE_REQUIRED, 'The destination directory', getcwd()),
                 new InputOption('namespace', null, InputOption::VALUE_REQUIRED, 'An optional namespace', 'Soap'),
                 new InputOption('template', null, InputOption::VALUE_OPTIONAL, ' Name of the template to use (optional)', 'default'),

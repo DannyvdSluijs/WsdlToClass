@@ -105,14 +105,14 @@ class Wsdl
      */
     public function addMethod(Method $method): self
     {
-        if (!$this->hasResponse($method->getResponse()) && $this->structures->has($method->getResponse())) {
+        if (!$this->responses->has($method->getResponse()) && $this->structures->has($method->getResponse())) {
             $struct = $this->structures->get($method->getResponse());
             $response = Response::createFromStruct($struct);
             $this->responses->add($response);
             $this->structures->remove($struct);
         }
 
-        if (!$this->hasRequest($method->getRequest()) && $this->structures->has($method->getRequest())) {
+        if (!$this->requests->has($method->getRequest()) && $this->structures->has($method->getRequest())) {
             $struct = $this->structures->get($method->getRequest());
             $request = Request::createFromStruct($struct);
             $this->requests->add($request);
@@ -159,16 +159,6 @@ class Wsdl
     public function getResponses(): ResponseCollection
     {
         return $this->responses;
-    }
-
-    /**
-     * Test if a named response is available.
-     * @param  string  $name
-     * @return boolean
-     */
-    public function hasResponse(string $name): bool
-    {
-        return $this->responses->has($name);
     }
 
     /**
