@@ -11,7 +11,7 @@
 
 namespace WsdlToClass;
 
-use Symfony\Component\Console\Output\OutputInterface;
+use WsdlToClass\Util\Printer;
 use WsdlToClass\Wsdl\Wsdl;
 use WsdlToClass\Wsdl\Struct;
 use WsdlToClass\Wsdl\Property;
@@ -44,9 +44,9 @@ class WsdlToClass
 
     /**
      * The output interface to output progression
-     * @var OutputInterface
+     * @var Printer
      */
-    private $output;
+    private $printer;
 
     /**
      * The parser to parse PHP internals to WsdlToClass internals
@@ -74,7 +74,7 @@ class WsdlToClass
      * @param IParser $parser
      * @param ICompositeGenerator $generator
      * @param IWriter $writer
-     * @param OutputInterface $output
+     * @param Printer $printer
      */
     public function __construct(
         Wsdl $wsdl,
@@ -83,7 +83,7 @@ class WsdlToClass
         IParser $parser,
         ICompositeGenerator $generator,
         IWriter $writer,
-        OutputInterface $output
+        Printer $printer
     ) {
         $this->wsdl = $wsdl;
         $this->setDestination($destination);
@@ -91,7 +91,7 @@ class WsdlToClass
         $this->parser = $parser;
         $this->generator = $generator;
         $this->writer = $writer;
-        $this->output = $output;
+        $this->printer = $printer;
     }
 
     /**
@@ -158,21 +158,21 @@ class WsdlToClass
 
     /**
      * Get the output interface
-     * @return OutputInterface
+     * @return Printer
      */
-    public function getOutput(): OutputInterface
+    public function getPrinter(): Printer
     {
-        return $this->output;
+        return $this->printer;
     }
 
     /**
      * Set the output interface
-     * @param OutputInterface $output
+     * @param Printer $printer
      * @return \WsdlToClass\WsdlToClass
      */
-    public function setOutput(OutputInterface $output): WsdlToClass
+    public function setPrinter(Printer $printer): WsdlToClass
     {
-        $this->output = $output;
+        $this->printer = $printer;
         return $this;
     }
 
@@ -236,13 +236,13 @@ class WsdlToClass
      */
     protected function setupDirectoryStructure(): WsdlToClass
     {
-        $this->output->writeln("Creating subdirectories.");
+        $this->printer->writeln("Creating subdirectories.");
         $subDirectories = ['Method', 'Structure', 'Request', 'Response'];
 
         foreach ($subDirectories as $subDir) {
             $path = $this->getDestination() . DIRECTORY_SEPARATOR . $subDir;
             if (!is_dir($path)) {
-                $this->output->writeln("\tCreating subdirectory '$path'");
+                $this->printer->writeln("\tCreating subdirectory '$path'");
                 mkdir($path);
             }
         }
@@ -256,7 +256,7 @@ class WsdlToClass
      */
     protected function parseWsdl(): WsdlToClass
     {
-        $this->output->writeln("Parsing WSDL.");
+        $this->printer->writeln("Parsing WSDL.");
         $client = new \SoapClient((string) $this->wsdl);
 
         foreach ($client->__getTypes() as $rawType) {
@@ -283,7 +283,7 @@ class WsdlToClass
      */
     protected function generateStructures(): WsdlToClass
     {
-        $this->output->writeln("Generating structures.");
+        $this->printer->writeln("Generating structures.");
 
         $this->generator->setChildNamespace('Structure');
 
@@ -302,7 +302,7 @@ class WsdlToClass
      */
     protected function generateRequests(): WsdlToClass
     {
-        $this->output->writeln("Generating requests.");
+        $this->printer->writeln("Generating requests.");
 
         $this->generator->setChildNamespace('Request');
 
@@ -321,7 +321,7 @@ class WsdlToClass
      */
     protected function generateResponses(): WsdlToClass
     {
-        $this->output->writeln("Generating responses.");
+        $this->printer->writeln("Generating responses.");
 
         $this->generator->setChildNamespace('Response');
 
@@ -340,7 +340,7 @@ class WsdlToClass
      */
     protected function generateMethods(): WsdlToClass
     {
-        $this->output->writeln("Generating methods.");
+        $this->printer->writeln("Generating methods.");
 
         $this->generator->setChildNamespace('Method');
         foreach ($this->wsdl->getMethods() as $name => $method) {
@@ -358,7 +358,7 @@ class WsdlToClass
      */
     protected function generateService(): WsdlToClass
     {
-        $this->output->writeln("Generating service.");
+        $this->printer->writeln("Generating service.");
 
         $this->generator->setNamespace($this->getNamespacePrefix());
         $filename = $this->destination . DIRECTORY_SEPARATOR . 'Service.php';
@@ -374,7 +374,7 @@ class WsdlToClass
      */
     protected function generateClient(): WsdlToClass
     {
-        $this->output->writeln("Generating client.");
+        $this->printer->writeln("Generating client.");
 
         $this->generator->setNamespace($this->getNamespacePrefix());
         $filename = $this->destination . DIRECTORY_SEPARATOR . 'Client.php';
@@ -390,7 +390,7 @@ class WsdlToClass
      */
     protected function generateClassMap(): WsdlToClass
     {
-        $this->output->writeln("Generating class map.");
+        $this->printer->writeln("Generating class map.");
 
         $this->generator->setNamespace($this->getNamespacePrefix());
         $filename = $this->destination . DIRECTORY_SEPARATOR . 'ClassMap.php';

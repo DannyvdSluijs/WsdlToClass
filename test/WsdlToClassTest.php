@@ -6,6 +6,7 @@ use org\bovigo\vfs\vfsStream;
 use Symfony\Component\Console\Output\OutputInterface;
 use WsdlToClass\Generator\TwigGenerator;
 use WsdlToClass\Parser\RegexParser;
+use WsdlToClass\Util\Printer;
 use WsdlToClass\Writer\ResourceWriter;
 use WsdlToClass\Wsdl\Wsdl;
 use WsdlToClass\WsdlToClass;
@@ -30,9 +31,9 @@ class WsdlToClassTest extends \PHPUnit_Framework_TestCase
         $parser = $this->createMock(\WsdlToClass\Parser\IParser::class);
         $generator = $this->createMock(\WsdlToClass\Generator\ICompositeGenerator::class);
         $writer = $this->createMock(\WsdlToClass\Writer\IWriter::class);
-        $output = $this->createMock(OutputInterface::class);
+        $printer = $this->createMock(Printer::class);
 
-        $this->object = new WsdlToClass($wsdl, '', '', $parser, $generator, $writer, $output);
+        $this->object = new WsdlToClass($wsdl, '', '', $parser, $generator, $writer, $printer);
     }
 
     /**
@@ -44,9 +45,9 @@ class WsdlToClassTest extends \PHPUnit_Framework_TestCase
         $parser = $this->createMock(\WsdlToClass\Parser\IParser::class);
         $generator = $this->createMock(\WsdlToClass\Generator\ICompositeGenerator::class);
         $writer = $this->createMock(\WsdlToClass\Writer\IWriter::class);
-        $output = $this->createMock(OutputInterface::class);
+        $printer = $this->createMock(Printer::class);
 
-        $object = new WsdlToClass($wsdl, '/tmp', '\Temporary\Unit\Test', $parser, $generator, $writer, $output);
+        $object = new WsdlToClass($wsdl, '/tmp', '\Temporary\Unit\Test', $parser, $generator, $writer, $printer);
 
         $this->assertAttributeEquals($wsdl, 'wsdl', $object);
         $this->assertAttributeEquals('/tmp', 'destination', $object);
@@ -54,7 +55,7 @@ class WsdlToClassTest extends \PHPUnit_Framework_TestCase
         $this->assertAttributeEquals($parser, 'parser', $object);
         $this->assertAttributeEquals($generator, 'generator', $object);
         $this->assertAttributeEquals($writer, 'writer', $object);
-        $this->assertAttributeEquals($output, 'output', $object);
+        $this->assertAttributeEquals($printer, 'printer', $object);
     }
 
     /**
@@ -117,24 +118,24 @@ class WsdlToClassTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \WsdlToClass\WsdlToClass::getOutput
+     * @covers \WsdlToClass\WsdlToClass::getPrinter
      */
     public function testGetOutput()
     {
-        $this->assertInstanceOf(OutputInterface::class, $this->object->getOutput());
-        $output = $this->createMock(OutputInterface::class);
-        $this->object->setOutput($output);
-        $this->assertSame($output, $this->object->getOutput());
+        $this->assertInstanceOf(Printer::class, $this->object->getPrinter());
+        $printer = $this->createMock(Printer::class);
+        $this->object->setPrinter($printer);
+        $this->assertSame($printer, $this->object->getPrinter());
     }
 
     /**
-     * @covers \WsdlToClass\WsdlToClass::setOutput
+     * @covers \WsdlToClass\WsdlToClass::setPrinter
      */
     public function testSetOutput()
     {
-        $output = $this->createMock(OutputInterface::class);
-        $this->assertSame($this->object, $this->object->setOutput($output));
-        $this->assertAttributeSame($output, 'output', $this->object);
+        $printer = $this->createMock(Printer::class);
+        $this->assertSame($this->object, $this->object->setPrinter($printer));
+        $this->assertAttributeSame($printer, 'printer', $this->object);
     }
 
     /**
@@ -199,9 +200,9 @@ class WsdlToClassTest extends \PHPUnit_Framework_TestCase
         $parser = new RegexParser();
         $generator = new TwigGenerator('php7');
         $writer = new ResourceWriter();
-        $output = $this->createMock(OutputInterface::class);
+        $printer = $this->createMock(Printer::class);
 
-        $object = new WsdlToClass($wsdl, vfsStream::url('wsdltoclass/Output'), 'Output', $parser, $generator, $writer, $output);
+        $object = new WsdlToClass($wsdl, vfsStream::url('wsdltoclass/Output'), 'Output', $parser, $generator, $writer, $printer);
 
         $object->execute();
 
