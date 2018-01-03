@@ -16,6 +16,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
+use WsdlToClass\Util\Printer;
 use WsdlToClass\WsdlToClass;
 use WsdlToClass\Wsdl\Wsdl;
 use WsdlToClass\Parser\RegexParser;
@@ -74,7 +75,7 @@ EOT
             new RegexParser(),
             new TwigGenerator($input->getOption('template')),
             new ResourceWriter(),
-            $output
+            new Printer(new Printer\SymfonyOutputBridge($output))
         );
 
         $wsdlToClass->execute();
