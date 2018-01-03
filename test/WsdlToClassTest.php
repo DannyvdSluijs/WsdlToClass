@@ -3,7 +3,6 @@
 namespace WsdlToClassTest;
 
 use org\bovigo\vfs\vfsStream;
-use Symfony\Component\Console\Output\OutputInterface;
 use WsdlToClass\Generator\TwigGenerator;
 use WsdlToClass\Parser\RegexParser;
 use WsdlToClass\Util\Printer;
@@ -33,7 +32,7 @@ class WsdlToClassTest extends \PHPUnit_Framework_TestCase
         $writer = $this->createMock(\WsdlToClass\Writer\IWriter::class);
         $printer = $this->createMock(Printer::class);
 
-        $this->object = new WsdlToClass($wsdl, '', '', $parser, $generator, $writer, $printer);
+        $this->object = new WsdlToClass($wsdl, '', 'Foo\Bar', $parser, $generator, $writer, $printer);
     }
 
     /**
@@ -47,11 +46,11 @@ class WsdlToClassTest extends \PHPUnit_Framework_TestCase
         $writer = $this->createMock(\WsdlToClass\Writer\IWriter::class);
         $printer = $this->createMock(Printer::class);
 
-        $object = new WsdlToClass($wsdl, '/tmp', '\Temporary\Unit\Test', $parser, $generator, $writer, $printer);
+        $object = new WsdlToClass($wsdl, '/tmp', 'Temporary\Unit\Test', $parser, $generator, $writer, $printer);
 
         $this->assertAttributeEquals($wsdl, 'wsdl', $object);
         $this->assertAttributeEquals('/tmp', 'destination', $object);
-        $this->assertAttributeEquals('\Temporary\Unit\Test', 'namespacePrefix', $object);
+        $this->assertAttributeEquals('Temporary\Unit\Test', 'namespace', $object);
         $this->assertAttributeEquals($parser, 'parser', $object);
         $this->assertAttributeEquals($generator, 'generator', $object);
         $this->assertAttributeEquals($writer, 'writer', $object);
@@ -99,22 +98,22 @@ class WsdlToClassTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \WsdlToClass\WsdlToClass::getNamespacePrefix
+     * @covers \WsdlToClass\WsdlToClass::getNamespace
      */
     public function testGetNamespacePrefix()
     {
-        $this->assertSame('', $this->object->getNamespacePrefix());
-        $this->object->setNamespacePrefix('Soap\Test');
-        $this->assertSame('Soap\Test', $this->object->getNamespacePrefix());
+        $this->assertSame('Foo\Bar', $this->object->getNamespace());
+        $this->object->setNamespace('Soap\Test');
+        $this->assertSame('Soap\Test', $this->object->getNamespace());
     }
 
     /**
-     * @covers \WsdlToClass\WsdlToClass::setNamespacePrefix
+     * @covers \WsdlToClass\WsdlToClass::setNamespace
      */
     public function testSetNamespacePrefix()
     {
-        $this->assertSame($this->object, $this->object->setNamespacePrefix('Impl\Soap'));
-        $this->assertAttributeSame('Impl\Soap', 'namespacePrefix', $this->object);
+        $this->assertSame($this->object, $this->object->setNamespace('Impl\Soap'));
+        $this->assertAttributeSame('Impl\Soap', 'namespace', $this->object);
     }
 
     /**

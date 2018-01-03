@@ -11,7 +11,9 @@
 
 namespace WsdlToClass;
 
+use WsdlToClass\Exception\InvalidArgumentException;
 use WsdlToClass\Util\Printer;
+use WsdlToClass\Validator\NamespaceValidator;
 use WsdlToClass\Wsdl\Wsdl;
 use WsdlToClass\Wsdl\Struct;
 use WsdlToClass\Wsdl\Property;
@@ -40,7 +42,7 @@ class WsdlToClass
      * A default namespace prefix
      * @var string
      */
-    private $namespacePrefix;
+    private $namespace;
 
     /**
      * The output interface to output progression
@@ -70,7 +72,7 @@ class WsdlToClass
      * Constructor
      * @param Wsdl $wsdl
      * @param string $destination
-     * @param string $namespacePrefix
+     * @param string $namespace
      * @param IParser $parser
      * @param ICompositeGenerator $generator
      * @param IWriter $writer
@@ -79,7 +81,7 @@ class WsdlToClass
     public function __construct(
         Wsdl $wsdl,
         $destination,
-        $namespacePrefix,
+        $namespace,
         IParser $parser,
         ICompositeGenerator $generator,
         IWriter $writer,
@@ -87,11 +89,11 @@ class WsdlToClass
     ) {
         $this->wsdl = $wsdl;
         $this->setDestination($destination);
-        $this->namespacePrefix = $namespacePrefix;
         $this->parser = $parser;
         $this->generator = $generator;
         $this->writer = $writer;
         $this->printer = $printer;
+        $this->setNamespace($namespace);
     }
 
     /**
@@ -139,19 +141,25 @@ class WsdlToClass
      * Get the namespace prefix
      * @return string
      */
-    public function getNamespacePrefix(): string
+    public function getNamespace(): string
     {
-        return $this->namespacePrefix;
+        return $this->namespace;
     }
 
     /**
      * Set the namespace prefix
-     * @param string $namespacePrefix
-     * @return \WsdlToClass\WsdlToClass
+     * @param string $namespace
+     * @return WsdlToClass
+     * @throws InvalidArgumentException
      */
-    public function setNamespacePrefix($namespacePrefix): WsdlToClass
+    public function setNamespace($namespace): WsdlToClass
     {
-        $this->namespacePrefix = $namespacePrefix;
+        $validator = new NamespaceValidator();
+        if (!$validator->isValid($namespace)) {
+            throw InvalidArgumentException::forArgument('namespace', $namespace);
+        }
+
+        $this->namespace = $namespace;
 
         return $this;
     }
@@ -218,7 +226,7 @@ class WsdlToClass
      */
     public function execute()
     {
-        $this->generator->setNamespace($this->getNamespacePrefix());
+        $this->generator->setNamespace($this->getNamespace());
         $this->setupDirectoryStructure()
             ->parseWsdl()
             ->generateStructures()
@@ -360,7 +368,7 @@ class WsdlToClass
     {
         $this->printer->writeln("Generating service.");
 
-        $this->generator->setNamespace($this->getNamespacePrefix());
+        $this->generator->setNamespace($this->getNamespace());
         $filename = $this->destination . DIRECTORY_SEPARATOR . 'Service.php';
         $content = $this->wsdl->visit($this->generator);
         $this->writer->writeFile($filename, $content);
@@ -376,7 +384,7 @@ class WsdlToClass
     {
         $this->printer->writeln("Generating client.");
 
-        $this->generator->setNamespace($this->getNamespacePrefix());
+        $this->generator->setNamespace($this->getNamespace());
         $filename = $this->destination . DIRECTORY_SEPARATOR . 'Client.php';
         $content = $this->generator->generateClient($this->wsdl);
         $this->writer->writeFile($filename, $content);
@@ -392,7 +400,7 @@ class WsdlToClass
     {
         $this->printer->writeln("Generating class map.");
 
-        $this->generator->setNamespace($this->getNamespacePrefix());
+        $this->generator->setNamespace($this->getNamespace());
         $filename = $this->destination . DIRECTORY_SEPARATOR . 'ClassMap.php';
         $content = $this->generator->generateClassMap($this->wsdl);
         $this->writer->writeFile($filename, $content);
