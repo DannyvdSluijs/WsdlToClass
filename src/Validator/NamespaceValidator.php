@@ -1,0 +1,103 @@
+<?php
+/**
+ * WsdlToClass
+ *
+ * PHP Version 7.0
+ *
+ * @copyright 2015-2017 Danny van der Sluijs <danny.vandersluijs@icloud.com>
+ * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU-GPL
+ * @link      http://dannyvandersluijs.nl
+ */
+
+namespace WsdlToClass\Validator;
+
+class NamespaceValidator implements ValidatorInterface
+{
+    private $keywords = [
+        'abstract',
+        'and',
+        'array',
+        'as',
+        'break',
+        'callable',
+        'case',
+        'catch',
+        'class',
+        'clone',
+        'const',
+        'continue',
+        'declare',
+        'default',
+        'die',
+        'do',
+        'echo',
+        'else',
+        'elseif',
+        'empty',
+        'enddeclare',
+        'endfor',
+        'endforeach',
+        'endif',
+        'endswitch',
+        'endwhile',
+        'eval',
+        'exit',
+        'extends',
+        'final',
+        'finally',
+        'for',
+        'foreach',
+        'function',
+        'global',
+        'goto',
+        'if',
+        'implements',
+        'include',
+        'instanceof',
+        'insteadof',
+        'interface',
+        'isset',
+        'list',
+        'namespace',
+        'new',
+        'or',
+        'print',
+        'private',
+        'protected',
+        'public',
+        'require',
+        'return',
+        'static',
+        'switch',
+        'throw',
+        'trait',
+        'try',
+        'unset',
+        'use',
+        'var',
+        'while',
+        'xor',
+        'yield'
+    ];
+
+    /**
+     * @param $value
+     * @return bool
+     */
+    public function isValid($value): bool
+    {
+        /* Validate the namespace value as a correct namespace */
+        if (!preg_match('/^(([A-Za-z]+)(\\\\[A-Za-z]+)*)$/m', $value)) {
+            return false;
+        }
+
+        /* Validate the namespace value not to contain reserved keywords */
+        $found = array_intersect($this->keywords, explode('\\', $value));
+
+        if (count($found)) {
+            return false;
+        }
+
+        return true;
+    }
+}

@@ -10,6 +10,7 @@
  */
 
 namespace WsdlToClass\Writer;
+
 use WsdlToClass\Exception\Exception;
 
 /**
