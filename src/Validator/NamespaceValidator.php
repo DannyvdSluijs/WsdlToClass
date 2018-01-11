@@ -92,7 +92,9 @@ class NamespaceValidator implements ValidatorInterface
         }
 
         /* Validate the namespace value not to contain reserved keywords */
-        $found = array_intersect($this->keywords, explode('\\', $value));
+        $elements = explode('\\', $value);
+        $elements = array_map('strtolower', $elements);
+        $found = array_intersect($this->keywords, $elements);
 
         if (count($found)) {
             return false;

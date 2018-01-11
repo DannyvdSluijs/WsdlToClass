@@ -25,6 +25,9 @@ class ResourceWriter implements IWriter
      */
     public function writeFile(string $filename, string $content = '')
     {
+        if (!is_dir(dirname($filename))) {
+            mkdir(dirname($filename), 0777, true);
+        }
         $handle = fopen($filename, 'w');
         if ($handle === false) {
             throw new Exception("Unable to open file [$filename] for writing.");

@@ -9,14 +9,14 @@ class Service
 {% for method in wsdl.methods %}
     /**
      * Calls the soap method {{ method.name }}
-     * @return Response\{{ method.response }}
+     * @return Response\{{ method.response|postfix('Response') }}
      **/
-    public function {{ method.name }}(): Response\{{ method.response }}
+    public function {{ method.name }}(): Response\{{ method.response|postfix('Response') }}
     {
-        $request = new Request\{{ method.request }}();
-        $method = new Method\{{ method.name() }}($request);
+        $request = new Request\{{ method.request|postfix('Request') }}();
+        $method = new Method\{{ method.name|postfix('Method') }}($request);
 
-        return new Response\{{ method.response }}($method->execute());
+        return $method->execute();
     }
 
 {% endfor %}

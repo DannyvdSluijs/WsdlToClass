@@ -11,9 +11,15 @@
 
 namespace WsdlToClass;
 
+use PhpParser\NodeTraverser;
+use PhpParser\ParserFactory;
 use WsdlToClass\Exception\InvalidArgumentException;
+use WsdlToClass\Util\ClassNameFinder;
 use WsdlToClass\Util\Printer;
 use WsdlToClass\Validator\NamespaceValidator;
+use WsdlToClass\Wsdl\Method;
+use WsdlToClass\Wsdl\Request;
+use WsdlToClass\Wsdl\Response;
 use WsdlToClass\Wsdl\Wsdl;
 use WsdlToClass\Wsdl\Struct;
 use WsdlToClass\Wsdl\Property;
@@ -227,8 +233,7 @@ class WsdlToClass
     public function execute()
     {
         $this->generator->setNamespace($this->getNamespace());
-        $this->setupDirectoryStructure()
-            ->parseWsdl()
+        $this->parseWsdl()
             ->generateStructures()
             ->generateRequests()
             ->generateResponses()
@@ -239,30 +244,10 @@ class WsdlToClass
     }
 
     /**
-     * Create the required directories
-     * @return \WsdlToClass\WsdlToClass
-     */
-    protected function setupDirectoryStructure(): WsdlToClass
-    {
-        $this->printer->writeln("Creating subdirectories.");
-        $subDirectories = ['Method', 'Structure', 'Request', 'Response'];
-
-        foreach ($subDirectories as $subDir) {
-            $path = $this->getDestination() . DIRECTORY_SEPARATOR . $subDir;
-            if (!is_dir($path)) {
-                $this->printer->writeln("\tCreating subdirectory '$path'");
-                mkdir($path);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
      * Parse a  wsdl to the WsdlToClass internals
      * @return \WsdlToClass\WsdlToClass
      */
-    protected function parseWsdl(): WsdlToClass
+    private function parseWsdl(): WsdlToClass
     {
         $this->printer->writeln("Parsing WSDL.");
         $client = new \SoapClient((string) $this->wsdl);
@@ -289,16 +274,15 @@ class WsdlToClass
      * Generate the structure classes
      * @return WsdlToClass
      */
-    protected function generateStructures(): WsdlToClass
+    private function generateStructures(): WsdlToClass
     {
         $this->printer->writeln("Generating structures.");
-
         $this->generator->setChildNamespace('Structure');
 
+        /** @var Struct $structure */
         foreach ($this->wsdl->getStructures() as $name => $structure) {
-            $filename = $this->destination . DIRECTORY_SEPARATOR . 'Structure' . DIRECTORY_SEPARATOR . ucfirst($name) . '.php';
-            $content = $structure->visit($this->generator);
-            $this->writer->writeFile($filename, $content);
+            $this->printer->writeln(" |\-Generating structure $name");
+            $this->generate($structure);
         }
 
         return $this;
@@ -308,16 +292,15 @@ class WsdlToClass
      * Generate the request classes
      * @return WsdlToClass
      */
-    protected function generateRequests(): WsdlToClass
+    private function generateRequests(): WsdlToClass
     {
         $this->printer->writeln("Generating requests.");
-
         $this->generator->setChildNamespace('Request');
 
+        /** @var Request $request */
         foreach ($this->wsdl->getRequests() as $name => $request) {
-            $filename = $this->destination . DIRECTORY_SEPARATOR . 'Request' . DIRECTORY_SEPARATOR . ucfirst($name) . '.php';
-            $content = $request->visit($this->generator);
-            $this->writer->writeFile($filename, $content);
+            $this->printer->writeln(" |\-Generating request $name");
+            $this->generate($request);
         }
 
         return $this;
@@ -327,16 +310,15 @@ class WsdlToClass
      * Generate the response classes
      * @return WsdlToClass
      */
-    protected function generateResponses(): WsdlToClass
+    private function generateResponses(): WsdlToClass
     {
         $this->printer->writeln("Generating responses.");
-
         $this->generator->setChildNamespace('Response');
 
+        /** @var Response $response */
         foreach ($this->wsdl->getResponses() as $name => $response) {
-            $filename = $this->destination . DIRECTORY_SEPARATOR . 'Response' . DIRECTORY_SEPARATOR . ucfirst($name) . '.php';
-            $content = $response->visit($this->generator);
-            $this->writer->writeFile($filename, $content);
+            $this->printer->writeln(" |\-Generating response $name");
+            $this->generate($response);
         }
 
         return $this;
@@ -346,15 +328,20 @@ class WsdlToClass
      * Generate the method classes
      * @return WsdlToClass
      */
-    protected function generateMethods(): WsdlToClass
+    private function generateMethods(): WsdlToClass
     {
         $this->printer->writeln("Generating methods.");
-
         $this->generator->setChildNamespace('Method');
+
+        /** @var Method $method */
         foreach ($this->wsdl->getMethods() as $name => $method) {
-            $filename = $this->destination . DIRECTORY_SEPARATOR . 'Method' . DIRECTORY_SEPARATOR . ucfirst($name) . '.php';
-            $content = $method->visit($this->generator);
-            $this->writer->writeFile($filename, $content);
+            $this->printer->writeln(" |\-Generating method $name");
+            $code = $method->visit($this->generator);
+            $className = $this->findClassName($code);
+            $filename = $this->destination . DIRECTORY_SEPARATOR . str_replace('\\', DIRECTORY_SEPARATOR, $className) . '.php';
+
+            $this->writer->writeFile($filename, $code);
+            $this->printer->writeln("  |- Wrote $className to $filename");
         }
 
         return $this;
@@ -364,14 +351,17 @@ class WsdlToClass
      * Generate the service class
      * @return WsdlToClass
      */
-    protected function generateService(): WsdlToClass
+    private function generateService(): WsdlToClass
     {
         $this->printer->writeln("Generating service.");
-
         $this->generator->setNamespace($this->getNamespace());
-        $filename = $this->destination . DIRECTORY_SEPARATOR . 'Service.php';
-        $content = $this->wsdl->visit($this->generator);
-        $this->writer->writeFile($filename, $content);
+
+        $code = $this->wsdl->visit($this->generator);
+        $className = $this->findClassName($code);
+        $filename = $this->destination . DIRECTORY_SEPARATOR . str_replace('\\', DIRECTORY_SEPARATOR, $className) . '.php';
+
+        $this->writer->writeFile($filename, $code);
+        $this->printer->writeln("  |- Wrote $className to $filename");
 
         return $this;
     }
@@ -380,14 +370,17 @@ class WsdlToClass
      * Generate the client class
      * @return WsdlToClass
      */
-    protected function generateClient(): WsdlToClass
+    private function generateClient(): WsdlToClass
     {
         $this->printer->writeln("Generating client.");
-
         $this->generator->setNamespace($this->getNamespace());
-        $filename = $this->destination . DIRECTORY_SEPARATOR . 'Client.php';
-        $content = $this->generator->generateClient($this->wsdl);
-        $this->writer->writeFile($filename, $content);
+
+        $code = $this->generator->generateClient($this->wsdl);
+        $className = $this->findClassName($code);
+        $filename = $this->destination . DIRECTORY_SEPARATOR . str_replace('\\', DIRECTORY_SEPARATOR, $className) . '.php';
+
+        $this->writer->writeFile($filename, $code);
+        $this->printer->writeln("  |- Wrote $className to $filename");
 
         return $this;
     }
@@ -396,15 +389,51 @@ class WsdlToClass
      * Generate the class map class
      * @return WsdlToClass
      */
-    protected function generateClassMap(): WsdlToClass
+    private function generateClassMap(): WsdlToClass
     {
         $this->printer->writeln("Generating class map.");
-
         $this->generator->setNamespace($this->getNamespace());
-        $filename = $this->destination . DIRECTORY_SEPARATOR . 'ClassMap.php';
-        $content = $this->generator->generateClassMap($this->wsdl);
-        $this->writer->writeFile($filename, $content);
+
+        $code = $this->generator->generateClassMap($this->wsdl);
+        $className = $this->findClassName($code);
+        $filename = $this->destination . DIRECTORY_SEPARATOR . str_replace('\\', DIRECTORY_SEPARATOR, $className) . '.php';
+
+        $this->writer->writeFile($filename, $code);
+        $this->printer->writeln("  |- Wrote $className to $filename");
 
         return $this;
+    }
+
+    private function generate(Struct $struct)
+    {
+        $code = $struct->visit($this->generator);
+        $className = $this->findClassName($code);
+        $filename = $this->destination . DIRECTORY_SEPARATOR . str_replace('\\', DIRECTORY_SEPARATOR, $className) . '.php';
+
+        $this->writer->writeFile($filename, $code);
+        $this->printer->writeln("  |- Wrote $className to $filename");
+    }
+
+    /**
+     * @param $code
+     * @return string
+     */
+    private function findClassName($code): string
+    {
+        $parser = (new ParserFactory)->create(ParserFactory::PREFER_PHP7);
+        try {
+            $ast = $parser->parse($code);
+        } catch (\Exception $e) {
+            throw new Exception('Error "' . $e->getMessage() . '" in ' . $code);
+            die();
+        }
+
+        $traverser = new NodeTraverser();
+        $classNameFinder = new ClassNameFinder();
+        $traverser->addVisitor($classNameFinder);
+
+        $traverser->traverse($ast);
+
+        return (string) $classNameFinder;
     }
 }

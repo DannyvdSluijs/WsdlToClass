@@ -9,7 +9,7 @@ namespace {{ full_namespace }};
 use {{ namespace}}\Structure\{{property.type}};
 {% endif %}{% endfor %}
 
-class {{ struct.name }}
+class {{ struct.name|postfix(classNamePostfix) }}
 {
 {% for property in properties %}
     /**
@@ -33,9 +33,9 @@ class {{ struct.name }}
     /**
      * Set the {{ property.name|camelCaseToWords }}
      * @param {{ property.type|toPhpSupportedScalar }} ${{ property.name|lowerCamelCase }}
-     * @return {{ struct.name }}
+     * @return {{ struct.name|postfix(classNamePostfix) }}
      */
-    public function set{{ property.name|upperCamelCase }}({{ property.type|toPhpSupportedScalar }} ${{ property.name|lowerCamelCase }}): {{ struct.name }}
+    public function set{{ property.name|upperCamelCase }}({{ property.type|toPhpSupportedScalar }} ${{ property.name|lowerCamelCase }}): {{ struct.name|postfix(classNamePostfix) }}
     {
         $this->{{ property.name|lowerCamelCase }} = ${{ property.name|lowerCamelCase }};
         return $this;

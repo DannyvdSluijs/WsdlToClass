@@ -4,10 +4,10 @@
 
 namespace {{ full_namespace }};
 
-use {{ namespace }}\Request\{{ method.request }} as Request;
-use {{ namespace }}\Response\{{ method.response }} as Response;
+use {{ namespace }}\Request\{{ method.request|postfix('Request') }} as Request;
+use {{ namespace }}\Response\{{ method.response|postfix('Response') }} as Response;
 
-class {{ method.name }}
+class {{ method.name|postfix('Method') }}
 {
     /**
      * @var Request

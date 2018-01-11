@@ -12,7 +12,7 @@ use {{ namespace }}\Request;
  * A generated SOAP client
  *
 {% for method in wsdl.methods %}
- * @method Response\{{ method.response}} {{ method.name }}(Request\{{ method.request }} $request)
+ * @method Response\{{ method.response|postfix('Response') }} {{ method.name }}(Request\{{ method.request|postfix('Request') }} $request)
 {% endfor %}
  */
 class Client extends SoapClient
