@@ -201,7 +201,7 @@ class WsdlToClassTest extends \PHPUnit_Framework_TestCase
         $writer = new ResourceWriter();
         $printer = $this->createMock(Printer::class);
 
-        $object = new WsdlToClass($wsdl, vfsStream::url('wsdltoclass/Output'), 'Output', $parser, $generator, $writer, $printer);
+        $object = new WsdlToClass($wsdl, vfsStream::url('wsdltoclass'), 'Output', $parser, $generator, $writer, $printer);
 
         $object->execute();
 
@@ -215,8 +215,8 @@ class WsdlToClassTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($root->hasChild('Output/ClassMap.php'));
         $this->assertTrue($root->hasChild('Output/Client.php'));
         $this->assertTrue($root->hasChild('Output/Service.php'));
-        $this->assertTrue($root->hasChild('Output/Method/ResolveIP.php'));
-        $this->assertTrue($root->hasChild('Output/Request/ResolveIP.php'));
+        $this->assertTrue($root->hasChild('Output/Method/ResolveIPMethod.php'));
+        $this->assertTrue($root->hasChild('Output/Request/ResolveIPRequest.php'));
         $this->assertTrue($root->hasChild('Output/Response/ResolveIPResponse.php'));
         $this->assertTrue($root->hasChild('Output/Structure/IPInformation.php'));
     }
