@@ -21,12 +21,12 @@ class ClassMap
             /* Requests */
 {% set requests = wsdl.requests %}
 {% for request in requests %}
-            '{{ request.name }}' => '{{ namespace }}\Request\{{ request.name }}',
+            '{{ request.name }}' => '{{ namespace }}\Request\{{ request.name|postfix('Request') }}',
 {% endfor %}
             /* Responses */
 {% set responses = wsdl.responses %}
 {% for response in responses %}
-            '{{ response.name }}' => '{{ namespace }}\Response\{{ response.name }}',
+            '{{ response.name }}' => '{{ namespace }}\Response\{{ response.name|postfix('Response') }}',
 {% endfor %}
         ];
     }

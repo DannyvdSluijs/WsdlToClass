@@ -13,6 +13,8 @@ namespace WsdlToClass\Generator;
 
 use WsdlToClass\Exception\NotFoundException;
 use WsdlToClass\Wsdl\Method;
+use WsdlToClass\Wsdl\Request;
+use WsdlToClass\Wsdl\Response;
 use WsdlToClass\Wsdl\Wsdl;
 use WsdlToClass\Wsdl\Struct;
 use Twig_Environment;
@@ -63,7 +65,15 @@ class TwigGenerator extends AbstractGenerator implements ICompositeGenerator
      */
     public function generateStruct(Struct $struct): string
     {
+        $classNamePostfix = '';
+        if ($struct instanceof Response) {
+            $classNamePostfix = 'Response';
+        }
+        if ($struct instanceof Request) {
+            $classNamePostfix = 'Request';
+        }
         return $this->twig->render('struct.html', [
+            'classNamePostfix' => $classNamePostfix,
             'struct' => $struct,
             'namespace' => $this->getNamespace(),
             'full_namespace' => $this->getFullNamespace()

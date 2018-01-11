@@ -11,8 +11,15 @@
 
 namespace WsdlToClass\Generator;
 
+/**
+ * The TwigExtension provides a set of filters to use in the templates
+ */
 class TwigExtension extends \Twig_Extension
 {
+    /**
+     * Get the filters for the extension
+     * @return Twig_SimpleFilter[]
+     */
     public function getFilters(): array
     {
         return [
@@ -20,19 +27,35 @@ class TwigExtension extends \Twig_Extension
             new \Twig_SimpleFilter('upperCamelCase', [$this, 'upperCamelCase']),
             new \Twig_SimpleFilter('camelCaseToWords', [$this, 'camelCaseToWords']),
             new \Twig_SimpleFilter('toPhpSupportedScalar', [$this, 'toPhpSupportedScalar']),
+            new \Twig_SimpleFilter('postfix', [$this, 'postfix']),
         ];
     }
 
+    /**
+     * Change the input to lower camel case
+     * @param string $name
+     * @return string
+     */
     public function lowerCamelCase(string $name): string
     {
         return lcfirst($name);
     }
 
+    /**
+     * Change the input to upper camel case
+     * @param string $name
+     * @return string
+     */
     public function upperCamelCase(string $name): string
     {
         return ucfirst($name);
     }
 
+    /**
+     * Change the camel case input to separate words
+     * @param string $name
+     * @return string
+     */
     public function camelCaseToWords(string $name): string
     {
         return trim(strtolower(preg_replace('/(?<!\ )[A-Z]/', ' $0', $name)));
@@ -56,5 +79,20 @@ class TwigExtension extends \Twig_Extension
         }
 
         return $type;
+    }
+
+    /**
+     * Add an additional postfix if the string doesn't end with it.
+     * @param string $value
+     * @param string $postfix
+     * @return string
+     */
+    public function postfix(string $value, string $postfix): string
+    {
+        if (substr($value, strlen($value) - strlen($postfix)) === $postfix) {
+            return $value;
+        }
+
+        return $value . $postfix;
     }
 }
