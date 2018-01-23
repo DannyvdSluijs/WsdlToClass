@@ -1,7 +1,7 @@
 {
     "name": "dvandersluijs/wsdl-to-class",
     "description": "Generate PHP7 code from an WSDL file",
-    "license": "GNU GENERAL PUBLIC LICENSE",
+    "license": "GPL-3.0-or-later",
     "keywords": [ "soap", "soap-wsdl", "code-generation", "wsdl", "generator", "php" ],
     "authors": [
         {
