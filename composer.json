@@ -1,8 +1,8 @@
 {
     "name": "dvandersluijs/wsdl-to-class",
-    "description": "Import a WSDL to output classes",
+    "description": "Generate PHP7 code from an WSDL file",
     "license": "GNU GENERAL PUBLIC LICENSE",
-    "keywords": [ "soap", "soap-wsdl", "code-generation" ],
+    "keywords": [ "soap", "soap-wsdl", "code-generation", "wsdl", "generator", "php" ],
     "authors": [
         {
             "name": "Danny van der Sluijs",
@@ -33,7 +33,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0-dev"
+            "dev-master": "1.1-dev"
         }
     }
 }
