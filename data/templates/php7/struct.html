@@ -5,21 +5,29 @@
 
 namespace {{ full_namespace }};
 
-{% for property in properties %}{% if property.type not in ['string', 'float', 'integer', 'double', 'boolean', 'short'] %}
+{% for property in properties %}{% if property.type is not scalarType %}
 use {{ namespace}}\Structure\{{property.type}};
 {% endif %}{% endfor %}
 
 class {{ struct.name|postfix(classNamePostfix) }}
 {
 {% for property in properties %}
+{% if property.type is scalarType %}
     /**
-     *
+     * The {{ property.name|camelCaseToWords }}
      * @var {{property.type|toPhpSupportedScalar}}
      */
     public ${{ property.name|lowerCamelCase }};
 
-{% endfor %}
+{% else %}
+    /**
+     * The {{ property.name|camelCaseToWords }}
+     * @var {{property.type}}
+     */
+    public ${{ property.name|lowerCamelCase }};
 
+{% endif %}
+{% endfor %}
 {% for property in properties %}
     /**
      * Get the {{ property.name|camelCaseToWords }}

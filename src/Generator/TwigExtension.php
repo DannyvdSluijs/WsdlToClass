@@ -16,6 +16,20 @@ namespace WsdlToClass\Generator;
  */
 class TwigExtension extends \Twig_Extension
 {
+    const PHP_SCALAR_TYPES = [
+        'string',
+        'float',
+        'int',
+        'bool',
+        'DateTime',
+    ];
+
+    const WSDL_SCALAR_TYPES = [
+        'boolean',
+        'double',
+        'short'
+    ];
+
     /**
      * Get the filters for the extension
      * @return Twig_SimpleFilter[]
@@ -30,6 +44,15 @@ class TwigExtension extends \Twig_Extension
             new \Twig_SimpleFilter('postfix', [$this, 'postfix']),
         ];
     }
+
+    public function getTests()
+    {
+        return [
+            new \Twig_SimpleTest('phpScalarType', [$this, 'isPhpScalarType']),
+            new \Twig_SimpleTest('scalarType', [$this, 'isScalarType']),
+        ];
+    }
+
 
     /**
      * Change the input to lower camel case
@@ -68,6 +91,10 @@ class TwigExtension extends \Twig_Extension
      */
     public function toPhpSupportedScalar(string $type): string
     {
+        if ($this->isPhpScalarType($type)) {
+            return $type;
+        }
+
         if ($type == 'short') {
             return 'float';
         }
@@ -79,6 +106,24 @@ class TwigExtension extends \Twig_Extension
         }
 
         return $type;
+    }
+
+    /**
+     * @param string $type
+     * @return bool
+     */
+    public function isPhpScalarType(string $type): bool
+    {
+        return in_array($type, self::PHP_SCALAR_TYPES);
+    }
+
+    /**
+     * @param string $type
+     * @return bool
+     */
+    public function isScalarType(string $type): bool
+    {
+        return in_array($type, array_merge(self::PHP_SCALAR_TYPES, self::WSDL_SCALAR_TYPES));
     }
 
     /**

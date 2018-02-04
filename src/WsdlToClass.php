@@ -13,6 +13,7 @@ namespace WsdlToClass;
 
 use PhpParser\NodeTraverser;
 use PhpParser\ParserFactory;
+use WsdlToClass\Exception\Exception;
 use WsdlToClass\Exception\InvalidArgumentException;
 use WsdlToClass\Util\ClassNameFinder;
 use WsdlToClass\Util\Printer;
