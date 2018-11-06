@@ -2,7 +2,7 @@
 <?php
 
 if (PHP_SAPI !== 'cli') {
-    die('Warning: WsdlToClass should be invoked via the CLI version of PHP, not the '.PHP_SAPI.' SAPI'.PHP_EOL);
+    die('Warning: WsdlToClass should be invoked via the CLI version of PHP, not the ' . PHP_SAPI . ' SAPI' . PHP_EOL);
 }
 
 /**
@@ -30,6 +30,6 @@ set_time_limit(0);
 /* Optional. It’s better to do it in the php.ini file */
 date_default_timezone_set('Europe/Amsterdam');
 
-$app = new \Cilex\Application('Cilex');
-$app->command(new \WsdlToClass\Command\GenerateCommand());
+$app = new \Symfony\Component\Console\Application();
+$app->add(new \WsdlToClass\Command\GenerateCommand());
 $app->run();
