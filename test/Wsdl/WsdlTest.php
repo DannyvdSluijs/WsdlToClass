@@ -2,6 +2,7 @@
 
 namespace WsdlToClassTest\Wsdl;
 
+use PHPUnit\Framework\TestCase;
 use WsdlToClass\Wsdl\Method;
 use WsdlToClass\Wsdl\Struct;
 use WsdlToClass\Wsdl\Wsdl;
@@ -9,7 +10,7 @@ use WsdlToClass\Wsdl\Wsdl;
 /**
  *
  */
-class WsdlTest extends \PHPUnit_Framework_TestCase
+class WsdlTest extends TestCase
 {
     /**
      * @var Wsdl

@@ -11,9 +11,10 @@
 
 namespace WsdlToClassTest\Command;
 
+use PHPUnit\Framework\TestCase;
 use WsdlToClass\Command\GenerateCommand;
 
-class GenerateCommandTest extends \PHPUnit_Framework_TestCase
+class GenerateCommandTest extends TestCase
 {
     /**
      * @covers \WsdlToClass\Command\GenerateCommand::configure()

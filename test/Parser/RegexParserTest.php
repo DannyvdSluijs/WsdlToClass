@@ -2,12 +2,13 @@
 
 namespace WsdlToClassTest\Parser;
 
+use PHPUnit\Framework\TestCase;
 use WsdlToClass\Parser\RegexParser;
 
 /**
  *
  */
-class RegexParserTest extends \PHPUnit_Framework_TestCase
+class RegexParserTest extends TestCase
 {
     /**
      * @var RegexParser

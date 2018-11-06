@@ -11,11 +11,12 @@
 
 namespace WsdlToClassTest\Wsdl;
 
+use PHPUnit\Framework\TestCase;
 use WsdlToClass\Wsdl\ArrayCollection;
 use WsdlToClass\Wsdl\Struct;
 use WsdlToClass\Wsdl\StructCollection;
 
-class ArrayCollectionTest extends \PHPUnit_Framework_TestCase
+class ArrayCollectionTest extends TestCase
 {
     /**
      * @var StructCollection

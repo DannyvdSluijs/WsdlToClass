@@ -11,13 +11,14 @@
 
 namespace WsdlToClassTest\Wsdl;
 
+use PHPUnit\Framework\TestCase;
 use WsdlToClass\Wsdl\Request;
 use WsdlToClass\Wsdl\RequestCollection;
 
 /**
  * Unit test for the request collection class
  */
-class RequestCollectionTest extends \PHPUnit_Framework_TestCase
+class RequestCollectionTest extends TestCase
 {
     /**
      * Test the constructor

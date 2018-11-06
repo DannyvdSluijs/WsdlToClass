@@ -11,13 +11,14 @@
 
 namespace WsdlToClassTest\Wsdl;
 
+use PHPUnit\Framework\TestCase;
 use WsdlToClass\Wsdl\Property;
 use WsdlToClass\Wsdl\PropertyCollection;
 
 /**
  * Unit test for the property collection class
  */
-class PropertyCollectionTest extends \PHPUnit_Framework_TestCase
+class PropertyCollectionTest extends TestCase
 {
     /**
      * Test the constructor

@@ -1,13 +1,14 @@
 <?php
 namespace WsdlToClassTest\Generator;
 
+use PHPUnit\Framework\TestCase;
 use WsdlToClass\Generator\TwigGenerator;
 use WsdlToClass\Wsdl\Wsdl;
 
 /**
  *
  */
-class TwigGeneratorTest extends \PHPUnit_Framework_TestCase
+class TwigGeneratorTest extends TestCase
 {
     /**
      * @var TwigGenerator

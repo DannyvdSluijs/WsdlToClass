@@ -2,12 +2,13 @@
 
 namespace WsdlToClassTest\Writer;
 
+use PHPUnit\Framework\TestCase;
 use WsdlToClass\Writer\ResourceWriter;
 
 /**
  *
  */
-class ResourceWriterTest extends \PHPUnit_Framework_TestCase
+class ResourceWriterTest extends TestCase
 {
     /**
      * @var ResourceWriter

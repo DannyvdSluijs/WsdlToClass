@@ -3,6 +3,7 @@
 namespace WsdlToClassTest;
 
 use org\bovigo\vfs\vfsStream;
+use PHPUnit\Framework\TestCase;
 use WsdlToClass\Generator\TwigGenerator;
 use WsdlToClass\Parser\RegexParser;
 use WsdlToClass\Util\Printer;
@@ -13,7 +14,7 @@ use WsdlToClass\WsdlToClass;
 /**
  *
  */
-class WsdlToClassTest extends \PHPUnit_Framework_TestCase
+class WsdlToClassTest extends TestCase
 {
     /**
      * @var WsdlToClass

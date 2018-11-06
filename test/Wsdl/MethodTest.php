@@ -2,13 +2,14 @@
 
 namespace WsdlToClassTest\Wsdl;
 
+use PHPUnit\Framework\TestCase;
 use WsdlToClass\Generator\IMethodGenerator;
 use WsdlToClass\Wsdl\Method;
 
 /**
  *
  */
-class MethodTest extends \PHPUnit_Framework_TestCase
+class MethodTest extends TestCase
 {
     /**
      * @var Method

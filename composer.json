@@ -12,15 +12,14 @@
     "require": {
         "php": "^7.0",
         "nikic/php-parser": "^3.1",
-        "phpunit/phpunit": "^5.7",
         "symfony/console": "^4.1",
-        "twig/twig": "~1.24",
-        "zendframework/zend-cache": "^2.7"
+        "twig/twig": "~1.24"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "^2.8",
         "phpstan/phpstan": "^0.9.1",
-        "mikey179/vfsStream": "^1.6"
+        "mikey179/vfsStream": "^1.6",
+        "phpunit/phpunit": "^7.4"
     },
     "bin": [
         "wsdltoclass"

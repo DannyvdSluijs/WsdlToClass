@@ -2,12 +2,13 @@
 
 namespace WsdlToClassTest\Wsdl;
 
+use PHPUnit\Framework\TestCase;
 use WsdlToClass\Wsdl\Struct;
 
 /**
  *
  */
-class StructTest extends \PHPUnit_Framework_TestCase
+class StructTest extends TestCase
 {
     /**
      * @var Struct

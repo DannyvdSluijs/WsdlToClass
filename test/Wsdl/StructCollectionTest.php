@@ -11,13 +11,14 @@
 
 namespace WsdlToClassTest\Wsdl;
 
+use PHPUnit\Framework\TestCase;
 use WsdlToClass\Wsdl\Struct;
 use WsdlToClass\Wsdl\StructCollection;
 
 /**
  * Unit test for the struct collection class
  */
-class StructCollectionTest extends \PHPUnit_Framework_TestCase
+class StructCollectionTest extends TestCase
 {
     /**
      * Test the constructor
