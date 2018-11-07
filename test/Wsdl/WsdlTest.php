@@ -132,7 +132,7 @@ class WsdlTest extends TestCase
     /**
      * @covers \WsdlToClass\Wsdl\Wsdl::__toString
      */
-    public function test__toString()
+    public function testToString()
     {
         $this->assertSame('http://www.w3schools.com/webservices/tempconvert.asmx?WSDL', (string) $this->object);
     }

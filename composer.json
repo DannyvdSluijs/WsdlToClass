@@ -29,6 +29,11 @@
             "WsdlToClassTest\\": "test"
         }
     },
+    "scripts": {
+        "cs-check": "phpcs --standard=PSR2 src test",
+        "cs-fix": "phpcbf --standard=PSR2 src test",
+        "test": "phpunit "
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "1.1-dev"
