@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace WsdlToClassTest\Writer;
 
 use PHPUnit\Framework\TestCase;

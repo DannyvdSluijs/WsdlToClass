@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace WsdlToClassTest;
 
 use org\bovigo\vfs\vfsStream;
@@ -182,7 +184,6 @@ class WsdlToClassTest extends TestCase
 
     /**
      * @covers \WsdlToClass\WsdlToClass::execute
-     * @covers \WsdlToClass\WsdlToClass::setupDirectoryStructure
      * @covers \WsdlToClass\WsdlToClass::parseWsdl
      * @covers \WsdlToClass\WsdlToClass::generateStructures
      * @covers \WsdlToClass\WsdlToClass::generateRequests

@@ -1,13 +1,15 @@
 <?php
 /**
- * Simulation
+ * WsdlToClass
  *
- * PHP Version 5.5
+ * PHP Version 7.0
  *
- * @link      https://github.com/DannyvdSluijs/Simulation/
- * @copyright Copyright (c) 2016-2017
- * @license
+ * @copyright 2015-2017 Danny van der Sluijs <danny.vandersluijs@icloud.com>
+ * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU-GPL
+ * @link      http://dannyvandersluijs.nl
  */
+
+declare(strict_types=1);
 
 namespace WsdlToClass\Generator;
 

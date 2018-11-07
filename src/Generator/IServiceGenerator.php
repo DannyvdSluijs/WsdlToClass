@@ -9,6 +9,8 @@
  * @link      http://dannyvandersluijs.nl
  */
 
+declare(strict_types=1);
+
 namespace WsdlToClass\Generator;
 
 use WsdlToClass\Wsdl\Wsdl;

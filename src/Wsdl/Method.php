@@ -8,6 +8,9 @@
  * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU-GPL
  * @link      http://dannyvandersluijs.nl
  */
+
+declare(strict_types=1);
+
 namespace WsdlToClass\Wsdl;
 
 use WsdlToClass\Generator\IMethodGenerator;
