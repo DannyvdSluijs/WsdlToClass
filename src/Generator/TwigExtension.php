@@ -2,7 +2,7 @@
 /**
  * WsdlToClass
  *
- * PHP Version 7.0
+ * PHP Version 7.1
  *
  * @copyright 2015-2017 Danny van der Sluijs <danny.vandersluijs@icloud.com>
  * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU-GPL
@@ -34,7 +34,7 @@ class TwigExtension extends \Twig_Extension
 
     /**
      * Get the filters for the extension
-     * @return Twig_SimpleFilter[]
+     * @return array
      */
     public function getFilters(): array
     {
@@ -47,6 +47,9 @@ class TwigExtension extends \Twig_Extension
         ];
     }
 
+    /**
+     * @return array
+     */
     public function getTests()
     {
         return [

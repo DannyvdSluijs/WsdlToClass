@@ -2,7 +2,7 @@
 /**
  * WsdlToClass
  *
- * PHP Version 7.0
+ * PHP Version 7.1
  *
  * @copyright 2015-2017 Danny van der Sluijs <danny.vandersluijs@icloud.com>
  * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU-GPL
@@ -62,18 +62,18 @@ EOT
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $destination = $input->getOption('destination');
+        $destination = (string) $input->getOption('destination');
 
         if (!is_readable(dirname($destination))
             || !is_readable($destination) && !mkdir($destination, 0755, true)
         ) {
-            throw new \Exception(sprintf('Unable to read output directory [%s]', $input->getOption('destination')));
+            throw new \Exception(sprintf('Unable to read output directory [%s]', $destination));
         }
 
         $wsdlToClass = new WsdlToClass(
-            new Wsdl($input->getArgument('wsdl')),
-            $input->getOption('destination'),
-            $input->getOption('namespace'),
+            new Wsdl((string) $input->getArgument('wsdl')),
+            $destination,
+            (string) $input->getOption('namespace'),
             new RegexParser(),
             new TwigGenerator($input->getOption('template')),
             new ResourceWriter(),

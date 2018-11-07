@@ -2,7 +2,7 @@
 /**
  * WsdlToClass
  *
- * PHP Version 7.0
+ * PHP Version 7.1
  *
  * @copyright 2015-2017 Danny van der Sluijs <danny.vandersluijs@icloud.com>
  * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU-GPL
@@ -407,6 +407,10 @@ class WsdlToClass
         return $this;
     }
 
+    /**
+     * @param Struct $struct
+     * @throws Exception
+     */
     private function generate(Struct $struct)
     {
         $code = $struct->visit($this->generator);
@@ -418,8 +422,9 @@ class WsdlToClass
     }
 
     /**
-     * @param $code
+     * @param string $code
      * @return string
+     * @throws Exception
      */
     private function findClassName($code): string
     {
@@ -428,14 +433,13 @@ class WsdlToClass
             $ast = $parser->parse($code);
         } catch (\Exception $e) {
             throw new Exception('Error "' . $e->getMessage() . '" in ' . $code);
-            die();
         }
 
-        $traverser = new NodeTraverser();
+        $nodeTraverser = new NodeTraverser();
         $classNameFinder = new ClassNameFinder();
-        $traverser->addVisitor($classNameFinder);
+        $nodeTraverser->addVisitor($classNameFinder);
 
-        $traverser->traverse($ast);
+        $nodeTraverser->traverse($ast);
 
         return (string) $classNameFinder;
     }
