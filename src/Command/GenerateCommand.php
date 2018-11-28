@@ -33,11 +33,10 @@ class GenerateCommand extends Command
 {
     /**
      * Configure the generate command
-     * @return void
      */
-    protected function configure()
+    protected function configure(): void
     {
-        $this->setName("wsdltoclass:generate")
+        $this->setName('wsdltoclass:generate')
              ->setDescription("Transform a WSDL to PHP classes")
              ->setDefinition([
                 new InputArgument('wsdl', InputArgument::REQUIRED, 'The wsdl to generate, filepath or url', null),
@@ -57,10 +56,9 @@ EOT
      * Execute the generate command
      * @param  InputInterface $input
      * @param  OutputInterface $output
-     * @return void
      * @throws \Exception
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): void
     {
         $destination = (string) $input->getOption('destination');
 

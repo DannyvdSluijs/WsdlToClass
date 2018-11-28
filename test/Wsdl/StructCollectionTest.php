@@ -28,7 +28,7 @@ class StructCollectionTest extends TestCase
      */
     public function testConstructor()
     {
-        $collection = new StructCollection((new Struct())->setName('One'), (new Struct())->setName('Two'));
+        $collection = new StructCollection(new Struct('One'), new Struct('Two'));
         $this->assertCount(2, $collection);
         $this->assertContainsOnly(Struct::class, $collection->toArray());
 
@@ -44,7 +44,7 @@ class StructCollectionTest extends TestCase
     public function testAdd(StructCollection $collection)
     {
         $count = count($collection);
-        $collection->add((new Struct())->setName('Three'));
+        $collection->add(new Struct('Three'));
 
         $this->assertCount($count + 1, $collection);
     }

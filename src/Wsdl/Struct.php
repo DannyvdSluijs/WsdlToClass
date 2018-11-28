@@ -33,6 +33,17 @@ class Struct implements IWsdlNode
     private $properties = [];
 
     /**
+     * Struct constructor.
+     * @param string $name
+     * @param array $properties
+     */
+    public function __construct(string $name = '', array $properties = [])
+    {
+        $this->name = $name;
+        $this->properties = $properties;
+    }
+
+    /**
      * Get the name of the Struct
      * @return string
      */
@@ -44,20 +55,17 @@ class Struct implements IWsdlNode
     /**
      * Set the name of the struct
      * @param  string $name
-     * @return \WsdlToClass\Wsdl\Struct
      */
-    public function setName(string $name)
+    public function setName(string $name): void
     {
         $this->name = $name;
-
-        return $this;
     }
 
     /**
      * Get the properties fo the Struct
      * @return \WsdlToClass\Wsdl\Property[]
      */
-    public function getProperties()
+    public function getProperties(): array
     {
         return $this->properties;
     }
@@ -65,37 +73,33 @@ class Struct implements IWsdlNode
     /**
      * Set the properties of the Struct
      * @param  \WsdlToClass\Wsdl\Property[] $properties
-     * @return \WsdlToClass\Wsdl\Struct
      */
-    public function setProperties(array $properties)
+    public function setProperties(array $properties): void
     {
         $this->properties = $properties;
-
-        return $this;
     }
 
     /**
      * Add a single Property to the Struct
      * @param  \WsdlToClass\Wsdl\Property $property
-     * @return \WsdlToClass\Wsdl\Struct
      */
-    public function addProperty(Property $property)
+    public function addProperty(Property $property): void
     {
         $this->properties[$property->getName()] = $property;
-
-        return $this;
     }
 
     /**
      * Get a single property of the Struct
      * @param  string $name
-     * @return Property
+     * @return Property|null
      */
-    public function getProperty($name)
+    public function getProperty($name): ?Property
     {
         if ($this->hasProperty($name)) {
             return $this->properties[$name];
         }
+
+        return null;
     }
 
     /**
@@ -103,7 +107,7 @@ class Struct implements IWsdlNode
      * @param  string $name
      * @return boolean
      */
-    public function hasProperty($name)
+    public function hasProperty($name): bool
     {
         return array_key_exists($name, $this->properties);
     }
@@ -113,7 +117,7 @@ class Struct implements IWsdlNode
      * @param  IStructureGenerator $generator
      * @return string
      */
-    public function visit(IStructureGenerator $generator)
+    public function visit(IStructureGenerator $generator): string
     {
         return $generator->generateStruct($this);
     }

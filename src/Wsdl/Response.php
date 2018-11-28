@@ -27,10 +27,6 @@ class Response extends Struct
      */
     public static function createFromStruct(Struct $struct): Response
     {
-        $response = new static;
-        $response->setName($struct->getName())
-            ->setProperties($struct->getProperties());
-
-        return $response;
+        return new static($struct->getName(), $struct->getProperties());
     }
 }

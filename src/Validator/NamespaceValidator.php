@@ -18,6 +18,9 @@ namespace WsdlToClass\Validator;
  */
 class NamespaceValidator implements ValidatorInterface
 {
+    /**
+     * @var array
+     */
     private $keywords = [
         'abstract',
         'and',

@@ -18,11 +18,20 @@ use PhpParser\NodeVisitorAbstract;
 
 class ClassNameFinder extends NodeVisitorAbstract
 {
+    /**
+     * @var string
+     */
     private $namespace;
 
+    /**
+     * @var string
+     */
     private $className;
 
-    public function enterNode(Node $node)
+    /**
+     * @param Node $node
+     */
+    public function enterNode(Node $node): void
     {
         if ($node instanceof Node\Stmt\Namespace_) {
             $this->namespace = (string) $node->name;

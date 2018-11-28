@@ -29,7 +29,7 @@ class StructTest extends TestCase
     /**
      * @covers \WsdlToClass\Wsdl\Struct::getName
      */
-    public function testGetName()
+    public function testName()
     {
         $this->assertEmpty($this->object->getName());
         $this->object->setName('identifier');
@@ -37,33 +37,15 @@ class StructTest extends TestCase
     }
 
     /**
-     * @covers \WsdlToClass\Wsdl\Struct::setName
-     */
-    public function testSetName()
-    {
-        $this->assertSame($this->object, $this->object->setName('address'));
-        $this->assertAttributeSame('address', 'name', $this->object);
-    }
-
-    /**
      * @covers \WsdlToClass\Wsdl\Struct::getProperties
      */
-    public function testGetProperties()
+    public function testProperties()
     {
         $property = $this->createMock('WsdlToClass\Wsdl\Property');
         $this->assertEmpty($this->object->getName());
         $this->object->setProperties(['identifier' => $property]);
         $this->assertContains($property, $this->object->getProperties());
         $this->assertArrayHasKey('identifier', $this->object->getProperties());
-    }
-
-    /**
-     * @covers \WsdlToClass\Wsdl\Struct::setProperties
-     */
-    public function testSetProperties()
-    {
-        $property = $this->createMock('WsdlToClass\Wsdl\Property');
-        $this->assertSame($this->object, $this->object->setProperties(['identifier' => $property]));
     }
 
     /**
@@ -75,7 +57,7 @@ class StructTest extends TestCase
         $property->expects($this->once())
             ->method('getName')
             ->willReturn('type');
-        $this->assertSame($this->object, $this->object->addProperty($property));
+        $this->object->addProperty($property);
         $this->assertContains($property, $this->object->getProperties());
         $this->assertArrayHasKey('type', $this->object->getProperties());
     }

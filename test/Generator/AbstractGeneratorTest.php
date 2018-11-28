@@ -42,7 +42,7 @@ class AbstractGeneratorTest extends TestCase
      */
     public function testSetNamespace()
     {
-        $this->assertSame($this->object, $this->object->setNamespace('\Soap\Method'));
+        $this->object->setNamespace('\Soap\Method');
         $this->assertAttributeSame('\Soap\Method', 'namespace', $this->object);
     }
 
@@ -61,7 +61,7 @@ class AbstractGeneratorTest extends TestCase
      */
     public function testSetChildNamespace()
     {
-        $this->assertSame($this->object, $this->object->setChildNamespace('request'));
+        $this->object->setChildNamespace('request');
         $this->assertAttributeSame('request', 'childNamespace', $this->object);
     }
 

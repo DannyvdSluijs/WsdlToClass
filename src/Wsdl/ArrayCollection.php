@@ -32,7 +32,7 @@ abstract class ArrayCollection implements IteratorAggregate, Countable
      * @param string $key
      * @param mixed $item
      */
-    protected function addItem(string $key, $item)
+    protected function addItem(string $key, $item): void
     {
         $this->items[$key] = $item;
     }
@@ -80,7 +80,7 @@ abstract class ArrayCollection implements IteratorAggregate, Countable
     /**
      * @return \ArrayIterator
      */
-    public function getIterator()
+    public function getIterator(): \ArrayIterator
     {
         return new \ArrayIterator($this->items);
     }
@@ -96,7 +96,7 @@ abstract class ArrayCollection implements IteratorAggregate, Countable
     /**
      * @return int
      */
-    public function count()
+    public function count(): int
     {
         return count($this->items);
     }

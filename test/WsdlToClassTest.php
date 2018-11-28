@@ -12,6 +12,8 @@ use WsdlToClass\Util\Printer;
 use WsdlToClass\Writer\ResourceWriter;
 use WsdlToClass\Wsdl\Wsdl;
 use WsdlToClass\WsdlToClass;
+use WsdlToClass\Parser\IParser;
+use WsdlToClass\Generator\ICompositeGenerator;
 
 /**
  *
@@ -74,17 +76,17 @@ class WsdlToClassTest extends TestCase
     /**
      * @covers \WsdlToClass\WsdlToClass::setWsdl
      */
-    public function testSetWsdl()
+    public function testSetWsdl(): void
     {
-        $wsdl = $this->getMockBuilder('WsdlToClass\Wsdl\Wsdl')->disableOriginalConstructor()->getMock();
-        $this->assertSame($this->object, $this->object->setWsdl($wsdl));
+        $wsdl = $this->createMock(Wsdl::class);
+        $this->object->setWsdl($wsdl);
         $this->assertAttributeSame($wsdl, 'wsdl', $this->object);
     }
 
     /**
      * @covers \WsdlToClass\WsdlToClass::getDestination
      */
-    public function testGetDestination()
+    public function testGetDestination(): void
     {
         $this->assertSame('', $this->object->getDestination());
         $this->object->setDestination('/tmp');
@@ -94,16 +96,16 @@ class WsdlToClassTest extends TestCase
     /**
      * @covers \WsdlToClass\WsdlToClass::setDestination
      */
-    public function testSetDestination()
+    public function testSetDestination(): void
     {
-        $this->assertSame($this->object, $this->object->setDestination('/dev/null'));
+        $this->object->setDestination('/dev/null');
         $this->assertAttributeSame('/dev/null', 'destination', $this->object);
     }
 
     /**
      * @covers \WsdlToClass\WsdlToClass::getNamespace
      */
-    public function testGetNamespacePrefix()
+    public function testGetNamespacePrefix(): void
     {
         $this->assertSame('Foo\Bar', $this->object->getNamespace());
         $this->object->setNamespace('Soap\Test');
@@ -113,18 +115,17 @@ class WsdlToClassTest extends TestCase
     /**
      * @covers \WsdlToClass\WsdlToClass::setNamespace
      */
-    public function testSetNamespacePrefix()
+    public function testSetNamespacePrefix(): void
     {
-        $this->assertSame($this->object, $this->object->setNamespace('Impl\Soap'));
+        $this->object->setNamespace('Impl\Soap');
         $this->assertAttributeSame('Impl\Soap', 'namespace', $this->object);
     }
 
     /**
      * @covers \WsdlToClass\WsdlToClass::getPrinter
      */
-    public function testGetOutput()
+    public function testGetOutput(): void
     {
-        $this->assertInstanceOf(Printer::class, $this->object->getPrinter());
         $printer = $this->createMock(Printer::class);
         $this->object->setPrinter($printer);
         $this->assertSame($printer, $this->object->getPrinter());
@@ -133,20 +134,19 @@ class WsdlToClassTest extends TestCase
     /**
      * @covers \WsdlToClass\WsdlToClass::setPrinter
      */
-    public function testSetOutput()
+    public function testSetOutput(): void
     {
         $printer = $this->createMock(Printer::class);
-        $this->assertSame($this->object, $this->object->setPrinter($printer));
+        $this->object->setPrinter($printer);
         $this->assertAttributeSame($printer, 'printer', $this->object);
     }
 
     /**
      * @covers \WsdlToClass\WsdlToClass::getParser
      */
-    public function testGetParser()
+    public function testGetParser(): void
     {
-        $this->assertInstanceOf('WsdlToClass\Parser\IParser', $this->object->getParser());
-        $parser = $this->createMock('WsdlToClass\Parser\IParser');
+        $parser = $this->createMock(IParser::class);
         $this->object->setParser($parser);
         $this->assertSame($parser, $this->object->getParser());
     }
@@ -154,20 +154,19 @@ class WsdlToClassTest extends TestCase
     /**
      * @covers \WsdlToClass\WsdlToClass::setParser
      */
-    public function testSetParser()
+    public function testSetParser(): void
     {
-        $parser = $this->createMock('WsdlToClass\Parser\IParser');
-        $this->assertSame($this->object, $this->object->setParser($parser));
+        $parser = $this->createMock(IParser::class);
+        $this->object->setParser($parser);
         $this->assertAttributeSame($parser, 'parser', $this->object);
     }
 
     /**
      * @covers \WsdlToClass\WsdlToClass::getGenerator
      */
-    public function testGetGenerator()
+    public function testGetGenerator(): void
     {
-        $this->assertInstanceOf('WsdlToClass\Generator\ICompositeGenerator', $this->object->getGenerator());
-        $generator = $this->createMock('WsdlToClass\Generator\ICompositeGenerator');
+        $generator = $this->createMock(ICompositeGenerator::class);
         $this->object->setGenerator($generator);
         $this->assertSame($generator, $this->object->getGenerator());
     }
@@ -175,25 +174,17 @@ class WsdlToClassTest extends TestCase
     /**
      * @covers \WsdlToClass\WsdlToClass::setGenerator
      */
-    public function testSetGenerator()
+    public function testSetGenerator(): void
     {
-        $generator = $this->createMock('WsdlToClass\Generator\ICompositeGenerator');
-        $this->assertSame($this->object, $this->object->setGenerator($generator));
+        $generator = $this->createMock(ICompositeGenerator::class);
+        $this->object->setGenerator($generator);
         $this->assertAttributeSame($generator, 'generator', $this->object);
     }
 
     /**
-     * @covers \WsdlToClass\WsdlToClass::execute
-     * @covers \WsdlToClass\WsdlToClass::parseWsdl
-     * @covers \WsdlToClass\WsdlToClass::generateStructures
-     * @covers \WsdlToClass\WsdlToClass::generateRequests
-     * @covers \WsdlToClass\WsdlToClass::generateResponses
-     * @covers \WsdlToClass\WsdlToClass::generateMethods
-     * @covers \WsdlToClass\WsdlToClass::generateService
-     * @covers \WsdlToClass\WsdlToClass::generateClient
-     * @covers \WsdlToClass\WsdlToClass::generateClassMap
+     * @covers \WsdlToClass\WsdlToClass
      */
-    public function testExecute()
+    public function testExecute(): void
     {
         $root = vfsStream::setup('wsdltoclass', null, ['Output' => []]);
 
@@ -203,7 +194,15 @@ class WsdlToClassTest extends TestCase
         $writer = new ResourceWriter();
         $printer = $this->createMock(Printer::class);
 
-        $object = new WsdlToClass($wsdl, vfsStream::url('wsdltoclass'), 'Output', $parser, $generator, $writer, $printer);
+        $object = new WsdlToClass(
+            $wsdl,
+            vfsStream::url('wsdltoclass'),
+            'Output',
+            $parser,
+            $generator,
+            $writer,
+            $printer
+        );
 
         $object->execute();
 

@@ -82,13 +82,10 @@ class Wsdl
     /**
      * Add a struct to the internal stack
      * @param Struct $struct
-     * @return Wsdl
      */
-    public function addStruct(Struct $struct): self
+    public function addStruct(Struct $struct): void
     {
         $this->structures->add($struct);
-
-        return $this;
     }
 
     /**
@@ -103,9 +100,8 @@ class Wsdl
     /**
      * Add a named method.
      * @param \WsdlToClass\Wsdl\Method $method
-     * @return Wsdl
      */
-    public function addMethod(Method $method): self
+    public function addMethod(Method $method): void
     {
         if (!$this->responses->has($method->getResponse()) && $this->structures->has($method->getResponse())) {
             $struct = $this->structures->get($method->getResponse());
@@ -122,8 +118,6 @@ class Wsdl
         }
 
         $this->methods->add($method);
-
-        return $this;
     }
 
     /**
@@ -166,13 +160,10 @@ class Wsdl
     /**
      * Add a simple type.
      * @param Property $property
-     * @return Wsdl
      */
-    public function addSimpleType(Property $property): self
+    public function addSimpleType(Property $property): void
     {
         $this->simpleTypes->add($property);
-
-        return $this;
     }
 
     /**

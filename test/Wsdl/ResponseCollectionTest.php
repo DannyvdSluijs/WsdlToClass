@@ -28,7 +28,7 @@ class ResponseCollectionTest extends TestCase
      */
     public function testConstructor()
     {
-        $collection = new ResponseCollection((new Response())->setName('One'), (new Response())->setName('Two'));
+        $collection = new ResponseCollection(new Response('One'), new Response('Two'));
         $this->assertCount(2, $collection);
         $this->assertContainsOnly(Response::class, $collection->toArray());
 
@@ -44,7 +44,7 @@ class ResponseCollectionTest extends TestCase
     public function testAdd(ResponseCollection $collection)
     {
         $count = count($collection);
-        $collection->add((new Response())->setName('Three'));
+        $collection->add(new Response('Three'));
 
         $this->assertCount($count + 1, $collection);
     }

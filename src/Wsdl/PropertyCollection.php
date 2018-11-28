@@ -32,7 +32,7 @@ class PropertyCollection extends ArrayCollection
     /**
      * @param Property $property
      */
-    public function add(Property $property)
+    public function add(Property $property): void
     {
         $this->addItem($property->getName(), $property);
     }

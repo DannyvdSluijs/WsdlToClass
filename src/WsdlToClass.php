@@ -117,13 +117,10 @@ class WsdlToClass
     /**
      * Set the Wsdl
      * @param Wsdl $wsdl
-     * @return \WsdlToClass\WsdlToClass
      */
-    public function setWsdl(Wsdl $wsdl): WsdlToClass
+    public function setWsdl(Wsdl $wsdl): void
     {
         $this->wsdl = $wsdl;
-
-        return $this;
     }
 
     /**
@@ -138,12 +135,10 @@ class WsdlToClass
     /**
      * Set the destination folder
      * @param string $destination
-     * @return \WsdlToClass\WsdlToClass
      */
-    public function setDestination($destination): WsdlToClass
+    public function setDestination($destination): void
     {
         $this->destination = (substr($destination, -1) == '/') ? substr($destination, 0, -1) : $destination;
-        return $this;
     }
 
     /**
@@ -158,10 +153,9 @@ class WsdlToClass
     /**
      * Set the namespace prefix
      * @param string $namespace
-     * @return WsdlToClass
      * @throws InvalidArgumentException
      */
-    public function setNamespace($namespace): WsdlToClass
+    public function setNamespace($namespace): void
     {
         $validator = new NamespaceValidator();
         if (!$validator->isValid($namespace)) {
@@ -169,8 +163,6 @@ class WsdlToClass
         }
 
         $this->namespace = $namespace;
-
-        return $this;
     }
 
     /**
@@ -185,12 +177,10 @@ class WsdlToClass
     /**
      * Set the output interface
      * @param Printer $printer
-     * @return \WsdlToClass\WsdlToClass
      */
-    public function setPrinter(Printer $printer): WsdlToClass
+    public function setPrinter(Printer $printer): void
     {
         $this->printer = $printer;
-        return $this;
     }
 
     /**
@@ -203,12 +193,10 @@ class WsdlToClass
 
     /**
      * @param IParser $parser
-     * @return WsdlToClass
      */
-    public function setParser(IParser $parser): WsdlToClass
+    public function setParser(IParser $parser): void
     {
         $this->parser = $parser;
-        return $this;
     }
 
     /**
@@ -221,38 +209,35 @@ class WsdlToClass
 
     /**
      * @param ICompositeGenerator $generator
-     * @return WsdlToClass
      */
-    public function setGenerator(ICompositeGenerator $generator): WsdlToClass
+    public function setGenerator(ICompositeGenerator $generator): void
     {
         $this->generator = $generator;
-        return $this;
     }
 
     /**
-     * Execte the wsdl to class
-     * @return void
+     * Execute the wsdl to class
      */
-    public function execute()
+    public function execute(): void
     {
         $this->generator->setNamespace($this->getNamespace());
-        $this->parseWsdl()
-            ->generateStructures()
-            ->generateRequests()
-            ->generateResponses()
-            ->generateMethods()
-            ->generateService()
-            ->generateClient()
-            ->generateClassMap();
+        $this->parseWsdl();
+        $this->generateStructures();
+        $this->generateRequests();
+        $this->generateResponses();
+        $this->generateMethods();
+        $this->generateService();
+        $this->generateClient();
+        $this->generateClassMap();
+        ;
     }
 
     /**
      * Parse a  wsdl to the WsdlToClass internals
-     * @return \WsdlToClass\WsdlToClass
      */
-    private function parseWsdl(): WsdlToClass
+    private function parseWsdl(): void
     {
-        $this->printer->writeln("Parsing WSDL.");
+        $this->printer->writeln('Parsing WSDL.');
         $client = new \SoapClient((string) $this->wsdl);
 
         foreach ($client->__getTypes() as $rawType) {
@@ -269,17 +254,14 @@ class WsdlToClass
             $method = $this->parser->parseFunction($rawFunction);
             $this->wsdl->addMethod($method);
         }
-
-        return $this;
     }
 
     /**
      * Generate the structure classes
-     * @return WsdlToClass
      */
-    private function generateStructures(): WsdlToClass
+    private function generateStructures(): void
     {
-        $this->printer->writeln("Generating structures.");
+        $this->printer->writeln('Generating structures.');
         $this->generator->setChildNamespace('Structure');
 
         /** @var Struct $structure */
@@ -287,17 +269,14 @@ class WsdlToClass
             $this->printer->writeln(" |\-Generating structure $name");
             $this->generate($structure);
         }
-
-        return $this;
     }
 
     /**
      * Generate the request classes
-     * @return WsdlToClass
      */
-    private function generateRequests(): WsdlToClass
+    private function generateRequests(): void
     {
-        $this->printer->writeln("Generating requests.");
+        $this->printer->writeln('Generating requests.');
         $this->generator->setChildNamespace('Request');
 
         /** @var Request $request */
@@ -305,17 +284,14 @@ class WsdlToClass
             $this->printer->writeln(" |\-Generating request $name");
             $this->generate($request);
         }
-
-        return $this;
     }
 
     /**
      * Generate the response classes
-     * @return WsdlToClass
      */
-    private function generateResponses(): WsdlToClass
+    private function generateResponses(): void
     {
-        $this->printer->writeln("Generating responses.");
+        $this->printer->writeln('Generating responses.');
         $this->generator->setChildNamespace('Response');
 
         /** @var Response $response */
@@ -323,17 +299,14 @@ class WsdlToClass
             $this->printer->writeln(" |\-Generating response $name");
             $this->generate($response);
         }
-
-        return $this;
     }
 
     /**
      * Generate the method classes
-     * @return WsdlToClass
      */
-    private function generateMethods(): WsdlToClass
+    private function generateMethods(): void
     {
-        $this->printer->writeln("Generating methods.");
+        $this->printer->writeln('Generating methods.');
         $this->generator->setChildNamespace('Method');
 
         /** @var Method $method */
@@ -346,17 +319,14 @@ class WsdlToClass
             $this->writer->writeFile($filename, $code);
             $this->printer->writeln("  |- Wrote $className to $filename");
         }
-
-        return $this;
     }
 
     /**
      * Generate the service class
-     * @return WsdlToClass
      */
-    private function generateService(): WsdlToClass
+    private function generateService(): void
     {
-        $this->printer->writeln("Generating service.");
+        $this->printer->writeln('Generating service.');
         $this->generator->setNamespace($this->getNamespace());
 
         $code = $this->wsdl->visit($this->generator);
@@ -365,17 +335,14 @@ class WsdlToClass
 
         $this->writer->writeFile($filename, $code);
         $this->printer->writeln("  |- Wrote $className to $filename");
-
-        return $this;
     }
 
     /**
      * Generate the client class
-     * @return WsdlToClass
      */
-    private function generateClient(): WsdlToClass
+    private function generateClient(): void
     {
-        $this->printer->writeln("Generating client.");
+        $this->printer->writeln('Generating client.');
         $this->generator->setNamespace($this->getNamespace());
 
         $code = $this->generator->generateClient($this->wsdl);
@@ -384,17 +351,14 @@ class WsdlToClass
 
         $this->writer->writeFile($filename, $code);
         $this->printer->writeln("  |- Wrote $className to $filename");
-
-        return $this;
     }
 
     /**
      * Generate the class map class
-     * @return WsdlToClass
      */
-    private function generateClassMap(): WsdlToClass
+    private function generateClassMap(): void
     {
-        $this->printer->writeln("Generating class map.");
+        $this->printer->writeln('Generating class map.');
         $this->generator->setNamespace($this->getNamespace());
 
         $code = $this->generator->generateClassMap($this->wsdl);
@@ -403,15 +367,13 @@ class WsdlToClass
 
         $this->writer->writeFile($filename, $code);
         $this->printer->writeln("  |- Wrote $className to $filename");
-
-        return $this;
     }
 
     /**
      * @param Struct $struct
      * @throws Exception
      */
-    private function generate(Struct $struct)
+    private function generate(Struct $struct): void
     {
         $code = $struct->visit($this->generator);
         $className = $this->findClassName($code);
@@ -426,7 +388,7 @@ class WsdlToClass
      * @return string
      * @throws Exception
      */
-    private function findClassName($code): string
+    private function findClassName(string $code): string
     {
         $parser = (new ParserFactory)->create(ParserFactory::PREFER_PHP7);
         try {

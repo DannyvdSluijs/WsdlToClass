@@ -38,7 +38,7 @@ class SymfonyOutputBridge implements PrinterOutputInterface
      * Write a buffer to the symfony output
      * @param string $buffer
      */
-    public function write(string $buffer)
+    public function write(string $buffer): void
     {
         $this->output->write($buffer);
     }
@@ -47,7 +47,7 @@ class SymfonyOutputBridge implements PrinterOutputInterface
      * Write a buffer and a newline to the symfony output
      * @param string $buffer
      */
-    public function writeln(string $buffer)
+    public function writeln(string $buffer): void
     {
         $this->output->writeln($buffer);
     }

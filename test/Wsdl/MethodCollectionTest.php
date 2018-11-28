@@ -26,9 +26,12 @@ class MethodCollectionTest extends TestCase
      * Test the constructor
      * @covers \WsdlToClass\Wsdl\MethodCollection::__construct()
      */
-    public function testConstructor()
+    public function testConstructor(): MethodCollection
     {
-        $collection = new MethodCollection((new Method())->setName('One'), (new Method())->setName('Two'));
+        $collection = new MethodCollection(
+            new Method('register', 'RegisterRequest', 'RegisterResponse'),
+            new Method('unregister', 'UnregisterRequest', 'UnregisterResponse')
+        );
         $this->assertCount(2, $collection);
         $this->assertContainsOnly(Method::class, $collection->toArray());
 
@@ -41,10 +44,10 @@ class MethodCollectionTest extends TestCase
      * @covers \WsdlToClass\Wsdl\MethodCollection::add()
      * @param MethodCollection $collection
      */
-    public function testAdd(MethodCollection $collection)
+    public function testAdd(MethodCollection $collection): void
     {
         $count = count($collection);
-        $collection->add((new Method())->setName('Three'));
+        $collection->add(new Method('resetPassword', 'ResetPasswordRequest', 'ResetPasswordResponse'));
 
         $this->assertCount($count + 1, $collection);
     }

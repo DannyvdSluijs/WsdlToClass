@@ -28,7 +28,7 @@ class PropertyCollectionTest extends TestCase
      */
     public function testConstructor()
     {
-        $collection = new PropertyCollection((new Property())->setName('One'), (new Property())->setName('Two'));
+        $collection = new PropertyCollection(new Property('One'), new Property('Two'));
         $this->assertCount(2, $collection);
         $this->assertContainsOnly(Property::class, $collection->toArray());
 
@@ -44,7 +44,7 @@ class PropertyCollectionTest extends TestCase
     public function testAdd(PropertyCollection $collection)
     {
         $count = count($collection);
-        $collection->add((new Property())->setName('Three'));
+        $collection->add(new Property('Three'));
 
         $this->assertCount($count + 1, $collection);
     }

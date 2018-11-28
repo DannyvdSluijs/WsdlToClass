@@ -32,7 +32,7 @@ class InvalidArgumentException extends Exception
      * @param mixed $value
      * @return static
      */
-    public static function forArgument(string $name, $value)
+    public static function forArgument(string $name, $value): self
     {
         $exception = new static("Invalid argument provided. Value $value is not valid for $name argument");
         $exception->name = $name;

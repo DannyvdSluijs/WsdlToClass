@@ -32,10 +32,9 @@ class ResponseTest extends TestCase
      */
     public function testCreateFromStruct()
     {
-        $struct = (new Struct())->setName('ExampleResponse');
+        $struct = new Struct('ExampleResponse');
         $request = Response::createFromStruct($struct);
 
-        $this->assertInstanceOf(\WsdlToClass\Wsdl\Response::class, $request);
         $this->assertSame($request->getName(), 'ExampleResponse');
         $this->assertSame($request->getProperties(), []);
     }

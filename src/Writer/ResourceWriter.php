@@ -25,7 +25,7 @@ class ResourceWriter implements IWriter
      * @param string $content
      * @throws Exception
      */
-    public function writeFile(string $filename, string $content = '')
+    public function writeFile(string $filename, string $content = ''): void
     {
         if (!is_dir(dirname($filename))) {
             mkdir(dirname($filename), 0777, true);

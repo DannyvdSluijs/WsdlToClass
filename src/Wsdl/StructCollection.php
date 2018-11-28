@@ -32,7 +32,7 @@ class StructCollection extends ArrayCollection
     /**
      * @param Struct $struct
      */
-    public function add(Struct $struct)
+    public function add(Struct $struct): void
     {
         $this->addItem($struct->getName(), $struct);
     }

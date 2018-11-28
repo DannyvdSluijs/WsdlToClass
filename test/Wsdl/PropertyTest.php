@@ -39,7 +39,7 @@ class PropertyTest extends TestCase
     /**
      * @covers \WsdlToClass\Wsdl\Property::getName
      */
-    public function testGetName()
+    public function testName()
     {
         $this->assertEmpty($this->object->getName());
         $this->object->setName('identifier');
@@ -47,30 +47,12 @@ class PropertyTest extends TestCase
     }
 
     /**
-     * @covers \WsdlToClass\Wsdl\Property::setName
-     */
-    public function testSetName()
-    {
-        $this->assertSame($this->object, $this->object->setName('address'));
-        $this->assertAttributeSame('address', 'name', $this->object);
-    }
-
-    /**
      * @covers \WsdlToClass\Wsdl\Property::getType
      */
-    public function testGetType()
+    public function testType()
     {
         $this->assertEmpty($this->object->getType());
         $this->object->setType('string');
         $this->assertSame('string', $this->object->getType());
-    }
-
-    /**
-     * @covers \WsdlToClass\Wsdl\Property::setType
-     */
-    public function testSetType()
-    {
-        $this->assertSame($this->object, $this->object->setType('integer'));
-        $this->assertAttributeSame('integer', 'type', $this->object);
     }
 }

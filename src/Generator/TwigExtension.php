@@ -50,7 +50,7 @@ class TwigExtension extends \Twig_Extension
     /**
      * @return array
      */
-    public function getTests()
+    public function getTests(): array
     {
         return [
             new \Twig_SimpleTest('phpScalarType', [$this, 'isPhpScalarType']),
@@ -100,13 +100,13 @@ class TwigExtension extends \Twig_Extension
             return $type;
         }
 
-        if ($type == 'short') {
+        if ($type === 'short') {
             return 'float';
         }
-        if ($type == 'double') {
+        if ($type === 'double') {
             return 'float';
         }
-        if ($type == 'boolean') {
+        if ($type === 'boolean') {
             return 'bool';
         }
 

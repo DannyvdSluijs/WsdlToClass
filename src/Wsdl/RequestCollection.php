@@ -32,7 +32,7 @@ class RequestCollection extends ArrayCollection
     /**
      * @param Request $request
      */
-    public function add(Request $request)
+    public function add(Request $request): void
     {
         $this->addItem($request->getName(), $request);
     }

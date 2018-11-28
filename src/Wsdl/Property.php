@@ -53,13 +53,10 @@ class Property implements IWsdlNode
     /**
      * Set the name of the property
      * @param  string $name
-     * @return self
      */
-    public function setName(string $name)
+    public function setName(string $name): void
     {
         $this->name = $name;
-
-        return $this;
     }
 
     /**
@@ -74,12 +71,9 @@ class Property implements IWsdlNode
     /**
      * Set the type of the property
      * @param  string $type
-     * @return self
      */
-    public function setType(string $type)
+    public function setType(string $type): void
     {
         $this->type = $type;
-
-        return $this;
     }
 }

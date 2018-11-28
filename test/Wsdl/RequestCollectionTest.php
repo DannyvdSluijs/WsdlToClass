@@ -28,7 +28,7 @@ class RequestCollectionTest extends TestCase
      */
     public function testConstructor()
     {
-        $collection = new RequestCollection((new Request())->setName('One'), (new Request())->setName('Two'));
+        $collection = new RequestCollection(new Request('One'), new Request('Two'));
         $this->assertCount(2, $collection);
         $this->assertContainsOnly(Request::class, $collection->toArray());
 
@@ -44,7 +44,7 @@ class RequestCollectionTest extends TestCase
     public function testAdd(RequestCollection $collection)
     {
         $count = count($collection);
-        $collection->add((new Request())->setName('Three'));
+        $collection->add(new Request('Three'));
 
         $this->assertCount($count + 1, $collection);
     }

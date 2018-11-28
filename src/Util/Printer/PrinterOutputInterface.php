@@ -22,7 +22,7 @@ interface PrinterOutputInterface
      * Write a buffer to the output
      * @param string $buffer
      */
-    public function write(string $buffer);
+    public function write(string $buffer): void;
 
-    public function writeln(string $buffer);
+    public function writeln(string $buffer): void;
 }

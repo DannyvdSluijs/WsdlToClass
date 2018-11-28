@@ -32,7 +32,7 @@ class ResponseCollection extends ArrayCollection
     /**
      * @param Response $response
      */
-    public function add(Response $response)
+    public function add(Response $response): void
     {
         $this->addItem($response->getName(), $response);
     }

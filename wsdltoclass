@@ -13,7 +13,7 @@ if (PHP_SAPI !== 'cli') {
  */
 chdir(__DIR__);
 
-$autoLoaderFiles = array('vendor/autoload.php', '../autoload.php', '../../autoload.php');
+$autoLoaderFiles = ['vendor/autoload.php', '../autoload.php', '../../autoload.php'];
 
 foreach ($autoLoaderFiles as $autoLoaderFile) {
     if (is_readable($autoLoaderFile)) {

@@ -43,7 +43,7 @@ class RegexParser implements IParser
      */
     public function parseType(string $input)
     {
-        $matches = $properties = array();
+        $matches = $properties = [];
         if (\preg_match(self::STRUCT, trim($input), $matches)) {
             /* Optional parse properties of the struct, could be empty complex types */
             \preg_match_all(self::PROPERTY, $matches['properties'], $properties);
@@ -78,17 +78,11 @@ class RegexParser implements IParser
      */
     public function parseFunction(string $input): Method
     {
-        $matches = array();
-        if (\preg_match(self::_FUNCTION, trim($input), $matches)) {
-            $method = new Method();
-            $method->setName($matches['name'])
-                ->setRequest($matches['in'])
-                ->setResponse($matches['out']);
-
-            return $method;
-        } else {
+        if (! \preg_match(self::_FUNCTION, trim($input), $matches)) {
             throw new \Exception(sprintf('Unable to parse input [%s]', $input));
         }
+
+        return new Method($matches['name'], $matches['in'], $matches['out']);
     }
 
     /**

@@ -18,5 +18,9 @@ namespace WsdlToClass\Writer;
  */
 interface IWriter
 {
-    public function writeFile(string $filename, string $content = '');
+    /**
+     * @param string $filename
+     * @param string $content
+     */
+    public function writeFile(string $filename, string $content = ''):void;
 }

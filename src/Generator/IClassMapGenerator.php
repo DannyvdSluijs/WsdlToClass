@@ -36,7 +36,6 @@ interface IClassMapGenerator
     /**
      * Set the namespace
      * @param string $namespace
-     * @return self
      */
-    public function setNamespace(string $namespace);
+    public function setNamespace(string $namespace): void;
 }

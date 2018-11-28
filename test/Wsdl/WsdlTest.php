@@ -47,10 +47,10 @@ class WsdlTest extends TestCase
     /**
      * @covers \WsdlToClass\Wsdl\Wsdl::addStruct
      */
-    public function testAddStruct()
+    public function testAddStruct(): Wsdl
     {
         $struct = $this->createMock(Struct::class);
-        $this->assertSame($this->object, $this->object->addStruct($struct));
+        $this->object->addStruct($struct);
         $this->assertAttributeContains($struct, 'structures', $this->object);
 
         return $this->object;
@@ -59,10 +59,10 @@ class WsdlTest extends TestCase
     /**
      * @covers \WsdlToClass\Wsdl\Wsdl::getStructures
      */
-    public function testGetStructures()
+    public function testGetStructures(): void
     {
         $this->assertEmpty($this->object->getStructures());
-        $struct = (new Struct())->setName('mock');
+        $struct = new Struct('mock');
         $this->object->addStruct($struct);
         $this->assertContainsOnly(Struct::class, $this->object->getStructures()->toArray());
         $this->assertContains($struct, $this->object->getStructures());
@@ -72,23 +72,19 @@ class WsdlTest extends TestCase
     /**
      * @covers \WsdlToClass\Wsdl\Wsdl::addMethod
      */
-    public function testAddMethod()
+    public function testAddMethod(): void
     {
         $request = $this->createMock(\WsdlToClass\Wsdl\Request::class);
         $response = $this->createMock(\WsdlToClass\Wsdl\Response::class);
-        $method = (new Method())->setName('test')
-            ->setRequest('request')
-            ->setResponse('response');
+        $method = new Method('test', 'request', 'response');
 
-        $request->expects($this->any())
-            ->method('getProperties')
-            ->willReturn(array());
-        $response->expects($this->any())
-            ->method('getProperties')
-            ->willReturn(array());
+        $request->method('getProperties')
+            ->willReturn([]);
+        $response->method('getProperties')
+            ->willReturn([]);
         $this->object->addStruct($response);
         $this->object->addStruct($request);
-        $this->assertSame($this->object, $this->object->addMethod($method));
+        $this->object->addMethod($method);
 
         $this->assertContains($method, $this->object->getMethods());
     }
@@ -96,7 +92,7 @@ class WsdlTest extends TestCase
     /**
      * @covers \WsdlToClass\Wsdl\Wsdl::getMethods
      */
-    public function testGetMethods()
+    public function testGetMethods(): void
     {
         $this->assertEmpty($this->object->getMethods());
         $method = $this->createMock(\WsdlToClass\Wsdl\Method::class);
@@ -108,7 +104,7 @@ class WsdlTest extends TestCase
     /**
      * @covers \WsdlToClass\Wsdl\Wsdl::getRequests
      */
-    public function testGetRequests()
+    public function testGetRequests(): void
     {
         $this->assertEmpty($this->object->getRequests());
         $request = $this->createMock(\WsdlToClass\Wsdl\Request::class);
@@ -120,7 +116,7 @@ class WsdlTest extends TestCase
     /**
      * @covers \WsdlToClass\Wsdl\Wsdl::getResponses
      */
-    public function testGetResponses()
+    public function testGetResponses(): void
     {
         $this->assertEmpty($this->object->getResponses());
         $response = $this->createMock(\WsdlToClass\Wsdl\Response::class);
@@ -132,7 +128,7 @@ class WsdlTest extends TestCase
     /**
      * @covers \WsdlToClass\Wsdl\Wsdl::__toString
      */
-    public function testToString()
+    public function testToString(): void
     {
         $this->assertSame('http://www.w3schools.com/webservices/tempconvert.asmx?WSDL', (string) $this->object);
     }
@@ -140,7 +136,7 @@ class WsdlTest extends TestCase
     /**
      * @covers \WsdlToClass\Wsdl\Wsdl::visit
      */
-    public function testVisit()
+    public function testVisit(): void
     {
         $mock = $this->createMock('WsdlToClass\Generator\IServiceGenerator');
         $mock->expects($this->once())

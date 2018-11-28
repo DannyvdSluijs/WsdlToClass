@@ -31,34 +31,35 @@ class ArrayCollectionTest extends TestCase
     protected function setUp()
     {
         $this->object = new StructCollection(
-            (new Struct())->setName('One'),
-            (new Struct())->setName('Two'),
-            (new Struct())->setName('Three')
+            new Struct('One'),
+            new Struct('Two'),
+            new Struct('Three')
         );
     }
 
     /**
      * @covers \WsdlToClass\Wsdl\ArrayCollection::addItem()
      */
-    public function testAddItem()
+    public function testAddItem(): StructCollection
     {
         $this->assertAttributeCount(3, 'items', $this->object);
-        $this->object->add((new Struct())->setName('Four'));
+        $this->object->add(new Struct('Four'));
         $this->assertAttributeCount(4, 'items', $this->object);
 
         return $this->object;
     }
 
     /**
-     * @covers \WsdlToClass\Wsdl\ArrayCollection::addItem()
+     * @covers  \WsdlToClass\Wsdl\ArrayCollection::addItem()
      * @depends testAddItem
+     * @param ArrayCollection $collection
      */
     public function testRemoveItem(ArrayCollection $collection)
     {
         $this->object = $collection;
 
         $this->assertAttributeCount(4, 'items', $this->object);
-        $this->object->remove((new Struct())->setName('Four'));
+        $this->object->remove(new Struct('Four'));
         $this->assertAttributeCount(3, 'items', $this->object);
     }
 

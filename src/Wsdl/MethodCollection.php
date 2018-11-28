@@ -32,7 +32,7 @@ class MethodCollection extends ArrayCollection
     /**
      * @param Method $method
      */
-    public function add(Method $method)
+    public function add(Method $method): void
     {
         parent::addItem($method->getName(), $method);
     }

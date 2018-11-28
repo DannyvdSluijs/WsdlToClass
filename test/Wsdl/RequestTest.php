@@ -30,13 +30,11 @@ class RequestTest extends TestCase
     /**
      * @covers \WsdlToClass\Wsdl\Request::createFromStruct
      */
-    public function testCreateFromStruct()
+    public function testCreateFromStruct(): void
     {
-        $struct = (new Struct())->setName('ExampleRequest')
-            ->setProperties([]);
+        $struct = new Struct('ExampleRequest');
         $request = Request::createFromStruct($struct);
 
-        $this->assertInstanceOf(\WsdlToClass\Wsdl\Request::class, $request);
         $this->assertSame($request->getName(), 'ExampleRequest');
         $this->assertSame($request->getProperties(), []);
     }

@@ -24,64 +24,37 @@ class MethodTest extends TestCase
      */
     protected function setUp()
     {
-        $this->object = new Method;
+        $this->object = new Method('CreateBankAccount', 'CreateBankAccountRequest', 'CreateBankAccountResponse');
     }
 
     /**
      * @covers \WsdlToClass\Wsdl\Method::getName
      */
-    public function testGetName()
+    public function testName(): void
     {
-        $this->assertEmpty($this->object->getName());
+        $this->assertSame('CreateBankAccount', $this->object->getName());
         $this->object->setName('save');
         $this->assertSame('save', $this->object->getName());
     }
 
     /**
-     * @covers \WsdlToClass\Wsdl\Method::setName
-     */
-    public function testSetName()
-    {
-        $this->assertSame($this->object, $this->object->setName('save'));
-        $this->assertAttributeSame('save', 'name', $this->object);
-    }
-
-    /**
      * @covers \WsdlToClass\Wsdl\Method::getRequest
      */
-    public function testGetRequest()
+    public function testRequest()
     {
-        $this->assertEmpty($this->object->getRequest());
+        $this->assertSame('CreateBankAccountRequest', $this->object->getRequest());
         $this->object->setRequest('request');
         $this->assertSame('request', $this->object->getRequest());
     }
 
     /**
-     * @covers \WsdlToClass\Wsdl\Method::setRequest
-     */
-    public function testSetRequest()
-    {
-        $this->assertSame($this->object, $this->object->setRequest('request'));
-        $this->assertAttributeSame('request', 'request', $this->object);
-    }
-
-    /**
      * @covers \WsdlToClass\Wsdl\Method::getResponse
      */
-    public function testGetResponse()
+    public function testResponse()
     {
-        $this->assertEmpty($this->object->getResponse());
+        $this->assertSame('CreateBankAccountResponse', $this->object->getResponse());
         $this->object->setResponse('response');
         $this->assertSame('response', $this->object->getResponse());
-    }
-
-    /**
-     * @covers \WsdlToClass\Wsdl\Method::setResponse
-     */
-    public function testSetResponse()
-    {
-        $this->assertSame($this->object, $this->object->setResponse('response'));
-        $this->assertAttributeSame('response', 'response', $this->object);
     }
 
     /**

@@ -39,6 +39,19 @@ class Method implements IWsdlNode
     private $response = '';
 
     /**
+     * Method constructor.
+     * @param string $name
+     * @param string $request
+     * @param string $response
+     */
+    public function __construct(string $name, string $request, string $response)
+    {
+        $this->name = $name;
+        $this->request = $request;
+        $this->response = $response;
+    }
+
+    /**
      * Get the name of the method.
      * @return string
      */
@@ -50,13 +63,10 @@ class Method implements IWsdlNode
     /**
      * Set the name of the method.
      * @param  string $name
-     * @return Method
      */
-    public function setName(string $name)
+    public function setName(string $name): void
     {
         $this->name = $name;
-
-        return $this;
     }
 
     /**
@@ -71,13 +81,10 @@ class Method implements IWsdlNode
     /**
      * Set the name of the request belonging to the method
      * @param  string $request
-     * @return Method
      */
-    public function setRequest(string $request): Method
+    public function setRequest(string $request): void
     {
         $this->request = $request;
-
-        return $this;
     }
 
     /**
@@ -92,13 +99,10 @@ class Method implements IWsdlNode
     /**
      * Set the name of the response belonging to the method
      * @param string $response
-     * @return Method
      */
-    public function setResponse(string $response): self
+    public function setResponse(string $response): void
     {
         $this->response = $response;
-
-        return $this;
     }
 
     /**
