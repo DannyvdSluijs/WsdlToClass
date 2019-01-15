@@ -33,7 +33,12 @@
     "scripts": {
         "cs-check": "phpcs --standard=PSR2 src test",
         "cs-fix": "phpcbf --standard=PSR2 src test",
-        "test": "phpunit "
+        "test": [
+            "curl -L https://phar.phpunit.de/phpunit-7.phar -o tools/phpunit.phar",
+            "chmod +x tools/phpunit.phar",
+            "./tools/phpunit.phar --dump-xdebug-filter build/xdebug-filter.php",
+            "./tools/phpunit.phar --prepend build/xdebug-filter.php --coverage-clover=coverage.clover"
+        ]
     },
     "extra": {
         "branch-alias": {
