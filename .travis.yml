@@ -18,7 +18,7 @@ cache:
     - $HOME/.composer/cache
 
 script:
-    - ./travis-tests.sh
+    - ./travis.sh
  
 after_script:
     - ./travis-after.sh
