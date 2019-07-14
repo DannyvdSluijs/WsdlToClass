@@ -19,7 +19,7 @@
     "require-dev": {
         "squizlabs/php_codesniffer": "^3.3",
         "mikey179/vfsStream": "^1.6",
-        "phpunit/phpunit": "^7.4"
+        "phpunit/phpunit": "^8.2"
     },
     "bin": [
         "wsdltoclass"
