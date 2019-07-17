@@ -23,7 +23,7 @@ class TwigExtension extends \Twig_Extension
         'float',
         'int',
         'bool',
-        \DateTime::class,
+        '\DateTime',
     ];
 
     private const WSDL_SCALAR_TYPES = [
