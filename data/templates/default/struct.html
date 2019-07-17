@@ -6,7 +6,7 @@
 
 namespace {{ full_namespace }};
 
-{% for property in properties %}{% if property.type not in ['string', 'float', 'integer', 'double', 'boolean', 'short'] %}
+{% for property in properties %}{% if property.type is not scalarType %}
 use {{ namespace}}\Structure\{{property.type}};
 {% endif %}{% endfor %}
 
