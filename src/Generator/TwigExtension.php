@@ -18,15 +18,15 @@ namespace WsdlToClass\Generator;
  */
 class TwigExtension extends \Twig_Extension
 {
-    const PHP_SCALAR_TYPES = [
+    private const PHP_SCALAR_TYPES = [
         'string',
         'float',
         'int',
         'bool',
-        'DateTime',
+        \DateTime::class,
     ];
 
-    const WSDL_SCALAR_TYPES = [
+    private const WSDL_SCALAR_TYPES = [
         'boolean',
         'double',
         'short'
@@ -128,7 +128,7 @@ class TwigExtension extends \Twig_Extension
      */
     public function isScalarType(string $type): bool
     {
-        return in_array($type, array_merge(self::PHP_SCALAR_TYPES, self::WSDL_SCALAR_TYPES));
+        return in_array($type, array_merge(self::PHP_SCALAR_TYPES, self::WSDL_SCALAR_TYPES), true);
     }
 
     /**
