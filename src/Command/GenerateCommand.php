@@ -37,7 +37,7 @@ class GenerateCommand extends Command
     protected function configure(): void
     {
         $this->setName('wsdltoclass:generate')
-             ->setDescription("Transform a WSDL to PHP classes")
+             ->setDescription('Transform a WSDL to PHP classes')
              ->setDefinition([
                 new InputArgument('wsdl', InputArgument::REQUIRED, 'The wsdl to generate, filepath or url', null),
                 new InputOption('destination', 'd', InputOption::VALUE_REQUIRED, 'The destination directory', getcwd()),

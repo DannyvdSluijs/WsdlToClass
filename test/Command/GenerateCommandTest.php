@@ -15,18 +15,19 @@ namespace WsdlToClassTest\Command;
 
 use PHPUnit\Framework\TestCase;
 use WsdlToClass\Command\GenerateCommand;
+use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Input\InputInterface;
 
 class GenerateCommandTest extends TestCase
 {
     /**
-     * @covers \WsdlToClass\Command\GenerateCommand::configure()
-     * @covers \WsdlToClass\Command\GenerateCommand::execute()
+     * @covers \WsdlToClass\Command\GenerateCommand
      */
     public function testExecute()
     {
         $command = new GenerateCommand();
-        $input = $this->createMock('Symfony\Component\Console\Input\InputInterface');
-        $output = $this->createMock('Symfony\Component\Console\Output\OutputInterface');
+        $input = $this->createMock(InputInterface::class);
+        $output = $this->createMock(OutputInterface::class);
 
         $input->expects($this->atLeastOnce())
             ->method('getOption')
