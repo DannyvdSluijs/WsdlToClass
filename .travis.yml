@@ -13,9 +13,8 @@ php:
 
 matrix:
   allow_failures:
-    - php:
-      - 7.4snapshot
-      - nightly
+    - php: 7.4snapshot
+    - php: nightly
 
 cache:
   directories:
