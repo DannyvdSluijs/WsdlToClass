@@ -41,7 +41,7 @@
         "phpcs": "phpcs src tests",
         "phpcbf": "phpcbf src tests",
         "phpstan": "phpstan analyse",
-        "unit-tests": "phpunit --testsuite unit --testdox --coverage-clover=build/logs/clover-unit-tests.xml"
+        "unit-tests": "phpunit --testsuite unit --testdox"
     },
     "extra": {
         "branch-alias": {
