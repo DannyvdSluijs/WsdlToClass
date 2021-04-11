@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace WsdlToClassTest;
+namespace WsdlToClassTest\Unit;
 
 use org\bovigo\vfs\vfsStream;
 use PHPUnit\Framework\TestCase;

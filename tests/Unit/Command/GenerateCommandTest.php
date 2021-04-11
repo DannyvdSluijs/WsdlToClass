@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace WsdlToClassTest\Command;
+namespace WsdlToClassTest\Unit\Command;
 
 use PHPUnit\Framework\TestCase;
 use WsdlToClass\Command\GenerateCommand;

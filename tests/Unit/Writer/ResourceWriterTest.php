@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace WsdlToClassTest\Writer;
+namespace WsdlToClassTest\Unit\Writer;
 
 use PHPUnit\Framework\TestCase;
 use WsdlToClass\Writer\ResourceWriter;

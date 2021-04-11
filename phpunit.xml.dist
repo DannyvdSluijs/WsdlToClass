@@ -8,11 +8,11 @@
          convertWarningsToExceptions="true"
          processIsolation="false"
          stopOnFailure="true"
-         bootstrap="./test/bootstrap.php"
+         bootstrap="./tests/bootstrap.php"
 >
     <testsuites>
-        <testsuite name="WsdlToClass Test Suite">
-            <directory>./test/</directory>
+        <testsuite name="unit">
+            <directory>./tests/unit/</directory>
         </testsuite>
     </testsuites>
     <filter>

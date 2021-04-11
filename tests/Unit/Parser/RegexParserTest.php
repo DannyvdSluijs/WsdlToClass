@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace WsdlToClassTest\Parser;
+namespace WsdlToClassTest\Unit\Parser;
 
 use PHPUnit\Framework\TestCase;
 use WsdlToClass\Parser\RegexParser;
