@@ -34,11 +34,11 @@ jobs:
             composer_update_flags: '--prefer-lowest --prefer-stable'
             name: 'PHP 7.4 with lowest stable deps'
           - php: 8.0
-            allow_fail: false
+            allow_fail: true
             php_ini: 'xdebug.coverage_enable=On'
             name: 'PHP 8.0 with latest deps'
           - php: 8.0
-            allow_fail: false
+            allow_fail: true
             composer_update_flags: '--prefer-lowest --prefer-stable'
             php_ini: 'xdebug.coverage_enable=On'
             name: 'PHP 8.0 with lowest stable deps'
