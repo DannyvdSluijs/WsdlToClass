@@ -1,8 +1,8 @@
-[![Build Status](https://travis-ci.org/DannyvdSluijs/WsdlToClass.svg?branch=master)](https://travis-ci.org/DannyvdSluijs/WsdlToClass)
-[![Latest Stable Version](https://poser.pugx.org/dvandersluijs/wsdl-to-class/v/stable)](https://packagist.org/packages/dvandersluijs/wsdl-to-class)
-[![Latest Unstable Version](https://poser.pugx.org/dvandersluijs/wsdl-to-class/v/unstable)](https://packagist.org/packages/dvandersluijs/wsdl-to-class)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/DannyvdSluijs/WsdlToClass/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/DannyvdSluijs/WsdlToClass/?branch=master)
-[![Code Coverage](https://scrutinizer-ci.com/g/DannyvdSluijs/WsdlToClass/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/DannyvdSluijs/WsdlToClass/?branch=master)
+[![GitHub](https://img.shields.io/github/license/DannyvdSluijs/WsdlToClass)](https://choosealicense.com/licenses/mit/)
+[![Packagist Version](https://img.shields.io/packagist/v/dvandersluijs/wsdl-to-class)](https://packagist.org/packages/json-mapper/json-mapper)
+[![PHP from Packagist](https://img.shields.io/packagist/php-v/dvandersluijs/wsdl-to-class)](#)
+![Build](https://github.com/DannyvdSluijs/WsdlToClass/workflows/Build/badge.svg?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/DannyvdSluijs/WsdlToClass/badge.svg?branch=develop)](https://coveralls.io/github/JsonMapper/JsonMapper?branch=develop)
 
 # WsdlToClass - Import a WSDL to output classes
 WsdlToClass enables you to load an (external) WSDL an generate the classes needed for a implementation.
