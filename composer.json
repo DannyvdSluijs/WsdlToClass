@@ -28,7 +28,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "WsdlToClass\\": "src",
+            "WsdlToClass\\": "src"
         }
     },
     "autoload-dev": {
