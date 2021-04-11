@@ -29,7 +29,7 @@ class WsdlToClassTest extends TestCase
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $wsdl = $this->createMock(\WsdlToClass\Wsdl\Wsdl::class);
         $parser = $this->createMock(\WsdlToClass\Parser\IParser::class);
@@ -53,13 +53,12 @@ class WsdlToClassTest extends TestCase
 
         $object = new WsdlToClass($wsdl, '/tmp', 'Temporary\Unit\Test', $parser, $generator, $writer, $printer);
 
-        $this->assertAttributeEquals($wsdl, 'wsdl', $object);
-        $this->assertAttributeEquals('/tmp', 'destination', $object);
-        $this->assertAttributeEquals('Temporary\Unit\Test', 'namespace', $object);
-        $this->assertAttributeEquals($parser, 'parser', $object);
-        $this->assertAttributeEquals($generator, 'generator', $object);
-        $this->assertAttributeEquals($writer, 'writer', $object);
-        $this->assertAttributeEquals($printer, 'printer', $object);
+        $this->assertEquals($wsdl, $object->getWsdl());
+        $this->assertEquals('/tmp', $object->getDestination());
+        $this->assertEquals('Temporary\Unit\Test', $object->getNamespace());
+        $this->assertEquals($parser, $object->getParser());
+        $this->assertEquals($generator, $object->getGenerator());
+        $this->assertEquals($printer, $object->getPrinter());
     }
 
     /**
@@ -80,7 +79,7 @@ class WsdlToClassTest extends TestCase
     {
         $wsdl = $this->createMock(Wsdl::class);
         $this->object->setWsdl($wsdl);
-        $this->assertAttributeSame($wsdl, 'wsdl', $this->object);
+        $this->assertSame($wsdl, $this->object->getWsdl());
     }
 
     /**
@@ -99,7 +98,7 @@ class WsdlToClassTest extends TestCase
     public function testSetDestination(): void
     {
         $this->object->setDestination('/dev/null');
-        $this->assertAttributeSame('/dev/null', 'destination', $this->object);
+        $this->assertSame('/dev/null', $this->object->getDestination());
     }
 
     /**
@@ -118,7 +117,7 @@ class WsdlToClassTest extends TestCase
     public function testSetNamespacePrefix(): void
     {
         $this->object->setNamespace('Impl\Soap');
-        $this->assertAttributeSame('Impl\Soap', 'namespace', $this->object);
+        $this->assertSame('Impl\Soap', $this->object->getNamespace());
     }
 
     /**
@@ -138,7 +137,7 @@ class WsdlToClassTest extends TestCase
     {
         $printer = $this->createMock(Printer::class);
         $this->object->setPrinter($printer);
-        $this->assertAttributeSame($printer, 'printer', $this->object);
+        $this->assertSame($printer, $this->object->getPrinter());
     }
 
     /**
@@ -158,7 +157,7 @@ class WsdlToClassTest extends TestCase
     {
         $parser = $this->createMock(IParser::class);
         $this->object->setParser($parser);
-        $this->assertAttributeSame($parser, 'parser', $this->object);
+        $this->assertSame($parser, $this->object->getParser());
     }
 
     /**
@@ -178,7 +177,7 @@ class WsdlToClassTest extends TestCase
     {
         $generator = $this->createMock(ICompositeGenerator::class);
         $this->object->setGenerator($generator);
-        $this->assertAttributeSame($generator, 'generator', $this->object);
+        $this->assertSame($generator, $this->object->getGenerator());
     }
 
     /**

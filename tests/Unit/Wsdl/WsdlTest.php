@@ -22,7 +22,7 @@ class WsdlTest extends TestCase
     /**
      * Setup the object
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->object = new Wsdl('http://www.w3schools.com/webservices/tempconvert.asmx?WSDL');
     }
@@ -51,7 +51,7 @@ class WsdlTest extends TestCase
     {
         $struct = $this->createMock(Struct::class);
         $this->object->addStruct($struct);
-        $this->assertAttributeContains($struct, 'structures', $this->object);
+        $this->assertContains($struct, $this->object->getStructures());
 
         return $this->object;
     }

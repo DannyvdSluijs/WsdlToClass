@@ -22,7 +22,7 @@ class AbstractGeneratorTest extends TestCase
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->object = new TwigGenerator('default');
     }
@@ -43,7 +43,7 @@ class AbstractGeneratorTest extends TestCase
     public function testSetNamespace()
     {
         $this->object->setNamespace('\Soap\Method');
-        $this->assertAttributeSame('\Soap\Method', 'namespace', $this->object);
+        $this->assertSame('\Soap\Method', $this->object->getNamespace());;
     }
 
     /**
@@ -62,7 +62,7 @@ class AbstractGeneratorTest extends TestCase
     public function testSetChildNamespace()
     {
         $this->object->setChildNamespace('request');
-        $this->assertAttributeSame('request', 'childNamespace', $this->object);
+        $this->assertSame('request', $this->object->getChildNamespace());
     }
 
     /**

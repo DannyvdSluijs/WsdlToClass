@@ -28,7 +28,7 @@ class ArrayCollectionTest extends TestCase
     /**
      *
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->object = new StructCollection(
             new Struct('One'),
@@ -42,9 +42,9 @@ class ArrayCollectionTest extends TestCase
      */
     public function testAddItem(): StructCollection
     {
-        $this->assertAttributeCount(3, 'items', $this->object);
+        $this->assertCount(3, $this->object);
         $this->object->add(new Struct('Four'));
-        $this->assertAttributeCount(4, 'items', $this->object);
+        $this->assertCount(4, $this->object);
 
         return $this->object;
     }
@@ -58,9 +58,9 @@ class ArrayCollectionTest extends TestCase
     {
         $this->object = $collection;
 
-        $this->assertAttributeCount(4, 'items', $this->object);
+        $this->assertCount(4, $this->object);
         $this->object->remove(new Struct('Four'));
-        $this->assertAttributeCount(3, 'items', $this->object);
+        $this->assertCount(3, $this->object);
     }
 
     /**
