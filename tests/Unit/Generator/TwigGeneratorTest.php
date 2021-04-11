@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace WsdlToClassTest\Generator;
+namespace WsdlToClassTest\Unit\Generator;
 
 use PHPUnit\Framework\TestCase;
 use WsdlToClass\Generator\TwigGenerator;
@@ -25,7 +25,7 @@ class TwigGeneratorTest extends TestCase
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->object = new TwigGenerator('default');
         $this->object->setNamespace('DannyvdSluijs\WsdlToClass\UnitTest');

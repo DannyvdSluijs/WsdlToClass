@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace WsdlToClassTest\Wsdl;
+namespace WsdlToClassTest\Unit\Wsdl;
 
 use PHPUnit\Framework\TestCase;
 use WsdlToClass\Generator\IMethodGenerator;
@@ -22,7 +22,7 @@ class MethodTest extends TestCase
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->object = new Method('CreateBankAccount', 'CreateBankAccountRequest', 'CreateBankAccountResponse');
     }

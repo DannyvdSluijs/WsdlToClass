@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace WsdlToClassTest\Wsdl;
+namespace WsdlToClassTest\Unit\Wsdl;
 
 use PHPUnit\Framework\TestCase;
 use WsdlToClass\Wsdl\Method;

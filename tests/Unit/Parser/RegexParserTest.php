@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace WsdlToClassTest\Parser;
+namespace WsdlToClassTest\Unit\Parser;
 
 use PHPUnit\Framework\TestCase;
 use WsdlToClass\Parser\RegexParser;
@@ -21,7 +21,7 @@ class RegexParserTest extends TestCase
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->object = new RegexParser();
     }
