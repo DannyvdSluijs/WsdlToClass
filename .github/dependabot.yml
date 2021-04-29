@@ -1,0 +1,20 @@
+version: 2
+updates:
+- package-ecosystem: composer
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "04:00"
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: squizlabs/php_codesniffer
+    versions:
+    - 3.6.0
+  - dependency-name: symfony/console
+    versions:
+    - 4.4.19
+    - 4.4.20
+    - 4.4.21
+  - dependency-name: nikic/php-parser
+    versions:
+    - 4.10.4
