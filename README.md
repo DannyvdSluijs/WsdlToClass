@@ -1,3 +1,7 @@
+# Archived
+:warning: With JSON being the go-to solutions for API's nowadays this package combined with the low number of installs on this packge it has been archived.
+
+
 [![GitHub](https://img.shields.io/github/license/DannyvdSluijs/WsdlToClass)](https://choosealicense.com/licenses/mit/)
 [![Packagist Version](https://img.shields.io/packagist/v/dvandersluijs/wsdl-to-class)](https://packagist.org/packages/json-mapper/json-mapper)
 [![PHP from Packagist](https://img.shields.io/packagist/php-v/dvandersluijs/wsdl-to-class)](#)
